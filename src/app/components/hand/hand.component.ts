@@ -7,11 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HandComponent implements OnInit {
 
-  scale:number = 4;
+  scale:number = 1;
+  cards:any = [{},{},{},{},{},{},{}]
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  addCard(){
+    this.cards.push({})
+  }
+
+  removeCard(){
+    this.cards.splice(0,1);
   }
 
 }

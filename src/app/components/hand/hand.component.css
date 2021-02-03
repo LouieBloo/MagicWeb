@@ -1,0 +1,11 @@
+#handRow{
+    background-color: bisque;
+}
+
+#handControl{
+    position: absolute;
+    bottom:0px;
+}
+#handControl .col{
+    background-color: white;
+}

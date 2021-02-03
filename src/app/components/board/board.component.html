@@ -1,6 +1,27 @@
-<h4>Board</h4>
+<div class="row min-vh-100">
+    <div class="col d-flex flex-column ">
+        <div class="row flex-grow-1" id="boardRow">
+            <div class="col">
+                <div class="row">
+                    <div class="col d-flex flex-row">
+                        <ng-template ngFor let-item [ngForOf]="battlefields" let-i="index">
+                            <div class="flex-grow-1">
+                                <app-battlefield></app-battlefield>
+                            </div>
+                        </ng-template>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <app-battlefield></app-battlefield>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="handRow">
+            <app-hand></app-hand>
+        </div>
 
-
-<div>
-    <app-hand></app-hand>
+    </div>
 </div>

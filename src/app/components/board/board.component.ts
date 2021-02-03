@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class BoardComponent implements OnInit {
 
   scale:number = 4.0;
+  battlefields:any = [{},{}]
 
   constructor() { }
 

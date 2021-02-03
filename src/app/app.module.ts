@@ -9,12 +9,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { FormsModule } from '@angular/forms';
 import { HandComponent } from './components/hand/hand.component';
+import { BattlefieldComponent } from './components/battlefield/battlefield.component';
 @NgModule({
   declarations: [
     AppComponent,
     BoardComponent,
     SingleCardComponent,
-    HandComponent
+    HandComponent,
+    BattlefieldComponent
   ],
   imports: [
     BrowserModule,
