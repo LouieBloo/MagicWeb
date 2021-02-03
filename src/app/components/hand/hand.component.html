@@ -1,0 +1,9 @@
+<div>
+    <h5>Hand Scale: {{scale}}</h5>
+    <mat-slider [(ngModel)]="scale" max="10" min="0.1" step="0.1"></mat-slider>
+
+    <app-single-card [(scale)]="scale"></app-single-card>
+    <app-single-card [(scale)]="scale"></app-single-card>
+    <app-single-card [(scale)]="scale"></app-single-card>
+    <app-single-card [(scale)]="scale"></app-single-card>
+</div>
