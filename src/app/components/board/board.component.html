@@ -4,19 +4,18 @@
             <div class="col">
                 <div class="row">
                     <div class="col d-flex flex-row">
-                        <ng-template ngFor let-item [ngForOf]="battlefields" let-i="index">
+                        <ng-template ngFor let-item [ngForOf]="opponentBattlefields" let-i="index">
                             <div class="flex-grow-1">
-                                <app-battlefield></app-battlefield>
+                                <app-battlefield [ownerType]="item.ownerType"></app-battlefield>
                             </div>
                         </ng-template>
                     </div>
-                    
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <app-battlefield></app-battlefield>
-                    </div>
-                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <app-battlefield [ownerType]="myBattlefield.ownerType"></app-battlefield>
             </div>
         </div>
         <div id="handRow">

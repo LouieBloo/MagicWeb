@@ -1,3 +1,14 @@
-<div id="outer" [ngStyle]="getOuterStyles()">
-    <img id="picture" src="https://media.wizards.com/2020/cmr/en_rE2oKqRdER.png">
+<div id="outer" [ngStyle]="getOuterStyles()" (click)="cardClicked()">
+    <img id="picture" src="https://media.wizards.com/2020/cmr/en_rE2oKqRdER.png" [ngClass]="{'rotated': cardRotated}">
+
+    <div *ngIf="selected" class="selectedView d-flex">
+        <div class="row flex-grow-1">
+            <div class="col d-flex justify-content-center flex-column">
+                <button mat-button color="primary">Play</button>
+                <button mat-button color="primary">Graveyard</button>
+                <button mat-button color="primary">Exile</button>
+            </div>
+        </div>
+    </div>
+
 </div>

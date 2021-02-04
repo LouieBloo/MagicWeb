@@ -5,3 +5,15 @@
     width: inherit;
     height: inherit;
 }
+
+.rotated{
+    transform:rotate(90deg);
+}
+
+.selectedView{
+    background-color: #000000d8;
+    height:inherit;
+    width:inherit;
+    position: relative;
+    top:-100%;
+}

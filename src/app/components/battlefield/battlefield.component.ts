@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ClickService } from 'src/app/services/game/click/click.service';
+import { BattlefieldRowType, BattlefieldOwnerType } from 'src/app/models/game';
 
 @Component({
   selector: 'app-battlefield',
@@ -7,17 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BattlefieldComponent implements OnInit {
 
-  creatureScale:number = 1;
-  nonCreatureScale:number = 1;
-  landScale:number = 1;
+  @Input() ownerType:BattlefieldOwnerType;
 
-  creatureRow:any = [{},{},{}]
-  nonCreatureRow:any = [{},{},{}]
-  landRow:any = [{},{},{}]
+  rows:any = [];
 
-  constructor() { }
+  constructor(public clickService:ClickService) { }
 
   ngOnInit(): void {
+    this.setRowTypes();
   }
 
+  setRowTypes(){
+    if(this.ownerType == BattlefieldOwnerType.Mine){
+      this.rows = [{rowType:BattlefieldRowType.Creature},{rowType:BattlefieldRowType.Noncreature},{rowType:BattlefieldRowType.Land}]
+    }else{
+      this.rows = [{rowType:BattlefieldRowType.Land},{rowType:BattlefieldRowType.Noncreature},{rowType:BattlefieldRowType.Creature}]
+    }
+  }
+
+  rowClicked(){
+    console.log("row clicked")
+  }
 }

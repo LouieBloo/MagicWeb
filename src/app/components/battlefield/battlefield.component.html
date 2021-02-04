@@ -1,36 +1,12 @@
 <div class="row" style="background-color: aquamarine;">
     <div class="col">
-        <div id="formatOptions" class="row flex-column">
+        <div class="row">
             <div class="col">
-                <h5>Creature Scale: {{creatureScale}}</h5>
-                <mat-slider [(ngModel)]="creatureScale" max="10" min="0.1" step="0.1"></mat-slider>
-            </div>
-            <div class="col">
-                <h5>Non Creature Scale: {{nonCreatureScale}}</h5>
-                <mat-slider [(ngModel)]="nonCreatureScale" max="10" min="0.1" step="0.1"></mat-slider>
-            </div>
-            <div class="col">
-                <h5>Land Scale: {{landScale}}</h5>
-                <mat-slider [(ngModel)]="landScale" max="10" min="0.1" step="0.1"></mat-slider>
+                <h5>{{ownerType}}</h5>
             </div>
         </div>
-
-        <div id="" class="row d-flex justify-content-center">
-            <ng-template ngFor let-item [ngForOf]="creatureRow" let-i="index">
-                <app-single-card [scale]="creatureScale"></app-single-card>
-            </ng-template>
-        </div>
-
-        <div id="" class="row d-flex justify-content-center">
-            <ng-template ngFor let-item [ngForOf]="nonCreatureRow" let-i="index">
-                <app-single-card [scale]="nonCreatureScale"></app-single-card>
-            </ng-template>
-        </div>
-
-        <div id="" class="row d-flex justify-content-center">
-            <ng-template ngFor let-item [ngForOf]="landRow" let-i="index">
-                <app-single-card [scale]="landScale"></app-single-card>
-            </ng-template>
-        </div>
+        <ng-template ngFor let-item [ngForOf]="rows" let-i="index">
+            <app-battlefield-row [rowType]="item.rowType"></app-battlefield-row>
+        </ng-template>
     </div>
 </div>

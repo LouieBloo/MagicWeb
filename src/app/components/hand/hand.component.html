@@ -12,7 +12,7 @@
     <div class="p-2">
         <div id="handRow" class="row d-flex justify-content-center">
             <ng-template ngFor let-item [ngForOf]="cards" let-i="index">
-                <app-single-card [scale]="scale"></app-single-card>
+                <app-single-card [scale]="scale" [location]="item.location"></app-single-card>
             </ng-template>
         </div>
     </div>

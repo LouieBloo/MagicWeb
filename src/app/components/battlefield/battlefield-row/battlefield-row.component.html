@@ -1,0 +1,17 @@
+<div class="row">
+    <div class="col">
+        <div id="formatOptions" class="row flex-column">
+            <div class="col">
+                <h5>{{rowType}} Scale: {{scale}}</h5>
+                <mat-slider [(ngModel)]="scale" max="3" min="0.1" step="0.25" (input)="scaleChanged($event)"></mat-slider>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col d-flex flex-row justify-content-center">
+                <ng-template ngFor let-item [ngForOf]="cards" let-i="index">
+                    <app-single-card [scale]="scale" [location]="item.location"></app-single-card>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>

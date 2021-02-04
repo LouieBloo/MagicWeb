@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CardLocation } from 'src/app/models/game';
 
 @Component({
   selector: 'app-hand',
@@ -7,16 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HandComponent implements OnInit {
 
-  scale:number = 1;
-  cards:any = [{},{},{},{},{},{},{}]
+  scale:number = 2.8;
+  cards:any = []
 
   constructor() { }
 
   ngOnInit() {
+    this.addCard();
+    this.addCard();
+    this.addCard();
+    this.addCard();
+    this.addCard();
+    this.addCard();
+    this.addCard();
   }
 
   addCard(){
-    this.cards.push({})
+    this.cards.push({location:CardLocation.Hand})
   }
 
   removeCard(){
