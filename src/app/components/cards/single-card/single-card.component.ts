@@ -1,7 +1,8 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { ClickService } from 'src/app/services/game/click/click.service';
-import { CardLocation } from 'src/app/models/game';
+import { CardLocation, Card } from 'src/app/models/game';
 import { Selectable } from 'src/app/interfaces/gameInterfaces';
+import { GameEventService } from 'src/app/services/game/game-event/game-event.service';
 
 @Component({
   selector: 'app-single-card',
@@ -11,8 +12,7 @@ import { Selectable } from 'src/app/interfaces/gameInterfaces';
 export class SingleCardComponent implements OnInit, Selectable {
 
   @Input() scale: number;
-  @Input() location: CardLocation;
-  @Output() 
+  @Input() card:Card;
 
   cardRealDimensions: any = {
     width: 63,
@@ -21,7 +21,7 @@ export class SingleCardComponent implements OnInit, Selectable {
   cardRotated: boolean = false;
   selected:boolean = false;
 
-  constructor(private clickService: ClickService) { }
+  constructor(private clickService: ClickService,private gameEvents: GameEventService) { }
 
   ngOnInit() {
   }
@@ -37,7 +37,7 @@ export class SingleCardComponent implements OnInit, Selectable {
   cardClicked() {
     if (!this.clickService.canCardRespondToClick()) { return; }
 
-    switch (this.location) {
+    switch (this.card.location) {
       case CardLocation.Battlefield:
         this.rotateCard();
         break;
@@ -56,8 +56,8 @@ export class SingleCardComponent implements OnInit, Selectable {
     this.selected = false;
   }
 
-  sendToGraveyard(){
-
+  sendToExile(){
+    this.gameEvents.exileCard(this.card);
   }
 
   rotateCard() {

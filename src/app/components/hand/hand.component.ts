@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { CardLocation } from 'src/app/models/game';
+import { Component, OnInit, Input } from '@angular/core';
+import { CardLocation, Card } from 'src/app/models/game';
+import { GameEventService } from 'src/app/services/game/game-event/game-event.service';
 
 @Component({
   selector: 'app-hand',
@@ -8,27 +9,24 @@ import { CardLocation } from 'src/app/models/game';
 })
 export class HandComponent implements OnInit {
 
-  scale:number = 2.8;
-  cards:any = []
+  scale: number = 2.8;
+  @Input() cards: Card[] = []
 
-  constructor() { }
+  constructor(private gameEvents: GameEventService) { }
 
   ngOnInit() {
-    this.addCard();
-    this.addCard();
-    this.addCard();
-    this.addCard();
-    this.addCard();
-    this.addCard();
-    this.addCard();
+
   }
 
-  addCard(){
-    this.cards.push({location:CardLocation.Hand})
+  addCard(card: Card) {
+    card.rotation = 0;
+    card.location = CardLocation.Hand;
+    this.cards.push(card);
   }
 
-  removeCard(){
-    this.cards.splice(0,1);
+  drawCard() {
+    this.gameEvents.drawCard();
   }
 
+ 
 }

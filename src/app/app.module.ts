@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
 import { HandComponent } from './components/hand/hand.component';
 import { BattlefieldComponent } from './components/battlefield/battlefield.component';
 import { BattlefieldRowComponent } from './components/battlefield/battlefield-row/battlefield-row.component';
+import { GameComponent } from './components/game/game.component';
+import { HomeComponent } from './components/pages/home/home.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { BattlefieldRowComponent } from './components/battlefield/battlefield-ro
     SingleCardComponent,
     HandComponent,
     BattlefieldComponent,
-    BattlefieldRowComponent
+    BattlefieldRowComponent,
+    GameComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

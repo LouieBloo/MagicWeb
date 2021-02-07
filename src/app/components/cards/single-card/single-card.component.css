@@ -10,10 +10,22 @@
     transform:rotate(90deg);
 }
 
+.offsetView{
+    
+}
+
 .selectedView{
     background-color: #000000d8;
-    height:inherit;
     width:inherit;
+    height:inherit;
+    position: relative;
+    top:-100%;
+}
+
+#nonSelectedView{
+    background-color: #000000d8;
+    width:inherit;
+    height:inherit;
     position: relative;
     top:-100%;
 }

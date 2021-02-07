@@ -1,3 +1,4 @@
+import { HandComponent } from '../components/hand/hand.component';
 
 export enum BattlefieldRowType {
     Creature="Creature",
@@ -16,4 +17,21 @@ export enum CardLocation {
     Graveyard="Graveyard",
     Exile="Exile",
     Stack="Stack"
+}
+
+export interface Card{
+    rotation?:number;
+    id?:string;
+    location?:CardLocation;
+    name?:string;
+}
+
+export interface Hand{
+    cards?:Card[];
+}
+
+export interface Player{
+    name?:string;
+    sessionId?:string;
+    hand?:Hand;
 }

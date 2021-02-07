@@ -25,9 +25,9 @@ export class BattlefieldRowComponent implements OnInit {
 
   ngOnInit(): void {
     this.setDefaultScale();
-    this.addCard();
-    this.addCard();
-    this.addCard();
+    // this.addCard();
+    // this.addCard();
+    // this.addCard();
   }
 
   addCard(){
