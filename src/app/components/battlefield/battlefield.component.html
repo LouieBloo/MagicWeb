@@ -8,5 +8,13 @@
         <ng-template ngFor let-item [ngForOf]="rows" let-i="index">
             <app-battlefield-row [rowType]="item.rowType"></app-battlefield-row>
         </ng-template>
+
+        <div class="row">
+            <div class="col d-flex flex-row">
+                <app-card-container  [ngStyle]="getOuterStyles()"  [cards]="" [name]="'Deck'"></app-card-container>
+                <app-card-container   [ngStyle]="getOuterStyles()" [cards]="battlefield?.graveyard?.cards" [name]="'Graveyard'"></app-card-container>
+                <app-card-container  [ngStyle]="getOuterStyles()" [cards]="battlefield?.exile?.cards" [name]="'Exile'"></app-card-container>
+            </div>
+        </div>
     </div>
 </div>

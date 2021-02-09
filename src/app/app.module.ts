@@ -14,6 +14,7 @@ import { BattlefieldComponent } from './components/battlefield/battlefield.compo
 import { BattlefieldRowComponent } from './components/battlefield/battlefield-row/battlefield-row.component';
 import { GameComponent } from './components/game/game.component';
 import { HomeComponent } from './components/pages/home/home.component';
+import { CardContainerComponent } from './components/battlefield/card-container/card-container.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { HomeComponent } from './components/pages/home/home.component';
     BattlefieldComponent,
     BattlefieldRowComponent,
     GameComponent,
-    HomeComponent
+    HomeComponent,
+    CardContainerComponent
   ],
   imports: [
     BrowserModule,

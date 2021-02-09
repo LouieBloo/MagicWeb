@@ -12,16 +12,16 @@ import { GameEventService } from 'src/app/services/game/game-event/game-event.se
 export class SingleCardComponent implements OnInit, Selectable {
 
   @Input() scale: number;
-  @Input() card:Card;
+  @Input() card: Card;
 
   cardRealDimensions: any = {
     width: 63,
     height: 88
   }
   cardRotated: boolean = false;
-  selected:boolean = false;
+  selected: boolean = false;
 
-  constructor(private clickService: ClickService,private gameEvents: GameEventService) { }
+  constructor(private clickService: ClickService, private gameEvents: GameEventService) { }
 
   ngOnInit() {
   }
@@ -44,20 +44,46 @@ export class SingleCardComponent implements OnInit, Selectable {
       case CardLocation.Hand:
         this.clickedInHand();
         break;
+      case CardLocation.Exile:
+        this.clickedInHand();
+        break;
+      case CardLocation.Graveyard:
+        this.clickedInHand();
+        break;
     }
   }
 
 
-  select(){
+  select() {
     this.selected = true;
   }
 
-  deselect(){
+  deselect() {
     this.selected = false;
   }
 
-  sendToExile(){
+  inHand() {
+    return this.card && this.card.location == CardLocation.Hand;
+  }
+
+  inGraveyard() {
+    return this.card && this.card.location == CardLocation.Graveyard;
+  }
+
+  inExile() {
+    return this.card && this.card.location == CardLocation.Exile;
+  }
+
+  sendToExile() {
     this.gameEvents.exileCard(this.card);
+  }
+
+  sendToHand() {
+    this.gameEvents.sendCardToHand(this.card);
+  }
+
+  sendToGraveyard() {
+    this.gameEvents.sendCardToGraveyard(this.card);
   }
 
   rotateCard() {
@@ -65,9 +91,9 @@ export class SingleCardComponent implements OnInit, Selectable {
   }
 
   clickedInHand() {
-    if(this.selected){
+    if (this.selected) {
       this.clickService.objectDeselected(this);
-    }else{
+    } else {
       this.clickService.objectSelected(this);
     }
   }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ClickService } from 'src/app/services/game/click/click.service';
-import { BattlefieldRowType, BattlefieldOwnerType } from 'src/app/models/game';
+import { BattlefieldRowType, BattlefieldOwnerType, Battlefield } from 'src/app/models/game';
 
 @Component({
   selector: 'app-battlefield',
@@ -10,6 +10,12 @@ import { BattlefieldRowType, BattlefieldOwnerType } from 'src/app/models/game';
 export class BattlefieldComponent implements OnInit {
 
   @Input() ownerType:BattlefieldOwnerType;
+  @Input() battlefield:Battlefield;
+
+  cardRealDimensions: any = {
+    width: 63,
+    height: 88
+  }
 
   rows:any = [];
 
@@ -29,5 +35,13 @@ export class BattlefieldComponent implements OnInit {
 
   rowClicked(){
     console.log("row clicked")
+  }
+
+
+  getOuterStyles() {
+    return {
+      width: this.cardRealDimensions.width * 2 + "px",
+      height: this.cardRealDimensions.height * 2 + "px"
+    }
   }
 }

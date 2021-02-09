@@ -1,9 +1,10 @@
 #handRow{
     background-color: bisque;
+    min-height: 200px;
 }
 
 #handControl{
-    position: absolute;
+    /* position: absolute; */
     bottom:0px;
 }
 #handControl .col{

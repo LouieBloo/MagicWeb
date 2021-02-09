@@ -1,0 +1,16 @@
+<div class="row h-100">
+    <div class="col">
+        <div class="row h-100" *ngIf="!cards || cards.length < 1">
+            <div class="col d-flex justify-content-center flex-column">
+                <h5 class="text-center">{{name}}</h5>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="cards && cards.length > 0">
+            <div class="col">
+                <app-single-card [scale]="scale" [card]="cards[cards.length-1]"></app-single-card>
+            </div>
+        </div>
+
+    </div>
+</div>

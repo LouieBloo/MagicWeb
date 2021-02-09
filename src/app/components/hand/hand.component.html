@@ -1,19 +1,20 @@
-<div>
-    <div class="row" id="handControl">
-        <div class="col">
-            <h5>Hand Scale: {{scale}}</h5>
-            <mat-slider [(ngModel)]="scale" max="10" min="0.1" step="0.1"></mat-slider>
-            <button (click)="drawCard()">Draw</button>
+<div class="row">
+    <div class="col">
+        <div class="row" id="handControl">
+            <div class="col">
+                <h5>Hand Scale: {{scale}}</h5>
+                <mat-slider [(ngModel)]="scale" max="10" min="0.1" step="0.1"></mat-slider>
+                <button (click)="drawCard()">Draw</button>
+            </div>
         </div>
-    </div>
-    
 
-    <div class="p-2">
-        <div id="handRow" class="row d-flex justify-content-center">
-            <ng-template ngFor let-item [ngForOf]="cards" let-i="index">
-                <app-single-card [scale]="scale" [card]="item"></app-single-card>
-            </ng-template>
+
+        <div class="p-2">
+            <div id="handRow" class="row d-flex justify-content-center">
+                <ng-template ngFor let-item [ngForOf]="cards" let-i="index">
+                    <app-single-card [scale]="scale" [card]="item"></app-single-card>
+                </ng-template>
+            </div>
         </div>
     </div>
-   
 </div>

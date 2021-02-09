@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { BattlefieldOwnerType, Player } from 'src/app/models/game';
+import { BattlefieldOwnerType, Player, Battlefield } from 'src/app/models/game';
 
 @Component({
   selector: 'app-board',
@@ -8,12 +8,11 @@ import { BattlefieldOwnerType, Player } from 'src/app/models/game';
 })
 export class BoardComponent implements OnInit {
 
+  @Input() opponents:Player[];
   @Input() me:Player;
   
   scale:number = 4.0;
-
-  opponentBattlefields:any = []
-  myBattlefield:any = {ownerType:BattlefieldOwnerType.Mine}
+  BattlefieldOwnerType = BattlefieldOwnerType;
 
   constructor() { }
 

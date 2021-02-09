@@ -22,6 +22,8 @@ export class GameComponent implements OnInit {
   ngOnInit(): void {
     this.gameEventService.drawCardEvent.subscribe(this.cardDrawEventFired);
     this.gameEventService.exileCardEvent.subscribe(this.exileCardEventFired);
+    this.gameEventService.sendCardToHandEvent.subscribe(this.sendCardToHandEvent);
+    this.gameEventService.sendCardToGraveyardEvent.subscribe(this.sendCardToGraveyardEvent);
   }
 
 
@@ -41,6 +43,8 @@ export class GameComponent implements OnInit {
         console.log("me loaded..");
         //this.me = JSON.parse(JSON.stringify(player));
         this.me = player;
+      }else{
+        this.opponents.push(player);
       }
       
       //  console.log("player: ", player)
@@ -59,6 +63,10 @@ export class GameComponent implements OnInit {
       player.hand.cards.onRemove = function (cardToRemove) {
         console.log("Card removed: ", player.sessionId, cardToRemove)
       };
+
+      player.battlefield.exile.cards.onAdd = (newCard)=>{
+        console.log("EXILEE: ADD", newCard);
+      }
     }
 
     // this.room.state.listen("players/:id/hand/cards", (change: DataChange) => {
@@ -90,6 +98,18 @@ export class GameComponent implements OnInit {
     console.log("exile card event: ",card)
     if (card) {
       this.room.send("exileCard",{card:card});
+    }
+  }
+
+  sendCardToHandEvent = (card)=>{
+    if(card){
+      this.room.send("sendCardToHand",{card:card});
+    }
+  }
+
+  sendCardToGraveyardEvent = (card)=>{
+    if(card){
+      this.room.send("sendCardToGraveyard",{card:card});
     }
   }
 

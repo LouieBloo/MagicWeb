@@ -4,9 +4,9 @@
             <div class="col">
                 <div class="row">
                     <div class="col d-flex flex-row">
-                        <ng-template ngFor let-item [ngForOf]="opponentBattlefields" let-i="index">
+                        <ng-template ngFor let-item [ngForOf]="opponents" let-i="index">
                             <div class="flex-grow-1">
-                                <app-battlefield [ownerType]="item.ownerType"></app-battlefield>
+                                <app-battlefield [battlefield]="item.battlefield" [ownerType]="BattlefieldOwnerType.Theirs"></app-battlefield>
                             </div>
                         </ng-template>
                     </div>
@@ -15,7 +15,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <app-battlefield [ownerType]="myBattlefield.ownerType"></app-battlefield>
+                <app-battlefield [battlefield]="me?.battlefield" [ownerType]="BattlefieldOwnerType.Mine"></app-battlefield>
             </div>
         </div>
         <div id="handRow">

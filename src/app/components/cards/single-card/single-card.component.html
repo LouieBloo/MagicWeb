@@ -14,8 +14,9 @@
         <div class="row flex-grow-1">
             <div class="col d-flex justify-content-center flex-column">
                 <button mat-button color="primary">Play</button>
-                <button mat-button color="primary">Graveyard</button>
-                <button mat-button color="primary"  (click)="sendToExile()">Exile</button>
+                <button mat-button color="primary" (click)="sendToGraveyard()" *ngIf="!inGraveyard()">Graveyard</button>
+                <button mat-button color="primary"  (click)="sendToExile()" *ngIf="!inExile()">Exile</button>
+                <button mat-button color="primary"  (click)="sendToHand()" *ngIf="!inHand()">Hand</button>
             </div>
         </div>
     </div>
