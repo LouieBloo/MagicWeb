@@ -43,6 +43,7 @@ export interface Card {
     location?: CardLocation;
     name?: string;
     owner?:string;
+    image_uris?:any;
 }
 
 export interface Hand {
