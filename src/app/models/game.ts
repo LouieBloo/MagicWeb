@@ -16,6 +16,10 @@ export enum CardLocation {
     Exile = "Exile",
     Stack = "Stack"
 }
+export enum SelectableObjectType {
+    Card = "Card",
+    BattlefieldRow = "BattlefieldRow",
+}
 
 
 export interface Battlefield {

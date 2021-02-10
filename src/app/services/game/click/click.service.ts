@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Selectable } from 'src/app/interfaces/gameInterfaces';
+import { SelectableObjectType, Battlefield, BattlefieldRowType, CardLocation } from 'src/app/models/game';
+import { GameEventService } from '../game-event/game-event.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,7 @@ export class ClickService {
   private cardsRespondingToClicks:boolean = true;
   private battlefieldRowsRespondingToClicks:boolean = false;
 
-  constructor() { }
+  constructor(private gameEventService:GameEventService) { }
 
   public generalClickReceived(){
     console.log("got it")
@@ -24,11 +26,15 @@ export class ClickService {
 
     this.selectedObject = selectedObject;
     this.selectedObject.select();
+
+    if(this.selectedObject.getType() == SelectableObjectType.Card){
+      this.battlefieldRowsRespondToClicks();
+    }
   }
 
   public objectDeselected(selectedObject:Selectable){
     if(this.selectedObject == selectedObject){
-      this.deselectObject();
+      this.resetToNormal();
     }else{
       console.error("deletect not the same")
     }
@@ -40,12 +46,12 @@ export class ClickService {
   }
 
   public resetToNormal(){
+    this.deselectObject();
     this.cardsRespondingToClicks = true;
     this.battlefieldRowsRespondingToClicks = false;
   }
 
   public battlefieldRowsRespondToClicks(){
-    this.cardsRespondingToClicks = false;
     this.battlefieldRowsRespondingToClicks = true;
   }
 
@@ -55,5 +61,12 @@ export class ClickService {
 
   public canBattlefieldRowsRespondToClicks():boolean{
     return this.battlefieldRowsRespondingToClicks;
+  }
+
+  public battlefieldRowClicked(battlefieldRowType:BattlefieldRowType){
+    if(this.selectedObject && this.selectedObject.getType() == SelectableObjectType.Card){
+      this.gameEventService.moveCard(this.selectedObject.getData(),CardLocation.Battlefield,battlefieldRowType);
+      this.resetToNormal();
+    }
   }
 }

@@ -1,5 +1,12 @@
-<div id="outer" [ngStyle]="getOuterStyles()" (click)="cardClicked()">
+<div id="outer" [ngStyle]="getOuterStyles()">
     <img id="picture" [src]="card?.image_uris?.normal" [ngClass]="{'rotated': cardRotated}">
+
+    <div *ngIf="!selected" id="nonSelectedView">
+        <div class="d-flex flex-column h-100">
+            <button class="flex-grow-1 invisButton" (click)="topHalfClicked()"></button>
+            <button class="flex-grow-1 d-flex justify-content-center align-items-center invisButton" (click)="bottomHalfClicked()"><p *ngIf="inBattlefield()" id="tapText">⭯</p></button>
+        </div>
+    </div>
 
     <!-- <div *ngIf="!selected" id="nonSelectedView">
         <div class="row h-100">
@@ -10,13 +17,13 @@
         </div>
     </div> -->
 
-    <div *ngIf="selected" class="selectedView d-flex">
+    <div *ngIf="selected" class="selectedView d-flex" (click)="cardClicked()">
         <div class="row flex-grow-1">
             <div class="col d-flex justify-content-center flex-column">
-                <button mat-button color="primary">Play</button>
-                <button mat-button color="primary" (click)="sendToGraveyard()" *ngIf="!inGraveyard()">Graveyard</button>
-                <button mat-button color="primary"  (click)="sendToExile()" *ngIf="!inExile()">Exile</button>
-                <button mat-button color="primary"  (click)="sendToHand()" *ngIf="!inHand()">Hand</button>
+                <!-- <button mat-button color="primary">Play</button> -->
+                <button mat-flat-button color="primary" (click)="sendToGraveyard()" *ngIf="!inGraveyard()">Graveyard</button>
+                <button mat-flat-button color="primary" (click)="sendToExile()" *ngIf="!inExile()">Exile</button>
+                <button mat-flat-button color="primary" (click)="sendToHand()" *ngIf="!inHand()">Hand</button>
             </div>
         </div>
     </div>

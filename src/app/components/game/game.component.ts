@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as Colyseus from "colyseus.js"; // not necessary if included via <script> tag.
 import { GameEventService } from 'src/app/services/game/game-event/game-event.service';
 import { DataChange } from 'colyseus.js';
-import { Player } from 'src/app/models/game';
+import { Player, Card, CardLocation } from 'src/app/models/game';
 
 @Component({
   selector: 'app-game',
@@ -21,9 +21,7 @@ export class GameComponent implements OnInit {
 
   ngOnInit(): void {
     this.gameEventService.drawCardEvent.subscribe(this.cardDrawEventFired);
-    this.gameEventService.exileCardEvent.subscribe(this.exileCardEventFired);
-    this.gameEventService.sendCardToHandEvent.subscribe(this.sendCardToHandEvent);
-    this.gameEventService.sendCardToGraveyardEvent.subscribe(this.sendCardToGraveyardEvent);
+    this.gameEventService.moveCardEvent.subscribe(this.moveCardEventFired);
   }
 
 
@@ -88,30 +86,19 @@ export class GameComponent implements OnInit {
   }
 
   cardDrawEventFired = () => {
-    console.log("card draw event fired");
     if (this.room) {
       this.room.send("cardDraw")
     }
   }
 
-  exileCardEventFired = (card)=>{
-    console.log("exile card event: ",card)
-    if (card) {
-      this.room.send("exileCard",{card:card});
+  moveCardEventFired = (payload)=>{
+    if(!payload){return;}
+    if (payload.card) {
+      this.room.send("cardChangeLocation",{card:payload.card,newLocation:payload.newLocation,battlefieldRowType:payload.battlefieldRowType});
     }
   }
 
-  sendCardToHandEvent = (card)=>{
-    if(card){
-      this.room.send("sendCardToHand",{card:card});
-    }
-  }
-
-  sendCardToGraveyardEvent = (card)=>{
-    if(card){
-      this.room.send("sendCardToGraveyard",{card:card});
-    }
-  }
+ 
 
   leaveRoom() {
     this.room.leave();

@@ -6,7 +6,7 @@
             </div>
         </div>
         <ng-template ngFor let-item [ngForOf]="rows" let-i="index">
-            <app-battlefield-row [rowType]="item.rowType"></app-battlefield-row>
+            <app-battlefield-row [rowType]="item.rowType" [cards]="getCards(item)"></app-battlefield-row>
         </ng-template>
 
         <div class="row">

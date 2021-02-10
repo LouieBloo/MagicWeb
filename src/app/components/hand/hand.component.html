@@ -16,7 +16,7 @@
             <div class="col">
                 <h5>Hand Scale: {{scale}}</h5>
                 <mat-slider [(ngModel)]="scale" max="10" min="0.1" step="0.1"></mat-slider>
-                <button (click)="drawCard()">Draw</button>
+                <button mat-raised-button color="primary" (click)="drawCard()">Draw</button>
             </div>
         </div>
     </div>

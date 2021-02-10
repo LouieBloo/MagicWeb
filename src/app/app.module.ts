@@ -1,6 +1,6 @@
 import { BrowserModule, HAMMER_GESTURE_CONFIG, HammerModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { GestureConfig } from '@angular/material';
+import { GestureConfig,MatButtonModule} from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,7 +15,6 @@ import { BattlefieldRowComponent } from './components/battlefield/battlefield-ro
 import { GameComponent } from './components/game/game.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { CardContainerComponent } from './components/battlefield/card-container/card-container.component';
-
 
 @NgModule({
   declarations: [
@@ -35,6 +34,7 @@ import { CardContainerComponent } from './components/battlefield/card-container/
     FormsModule,
     BrowserAnimationsModule,
     MatSliderModule,
+    MatButtonModule,
     HammerModule
   ],
   providers: [

@@ -1,4 +1,5 @@
 #outer{
+    
 }
 
 #picture{
@@ -10,8 +11,10 @@
     transform:rotate(90deg);
 }
 
-.offsetView{
-    
+#tapText{
+    color:black;
+    margin-bottom:0px;
+    font-size:25px;
 }
 
 .selectedView{
@@ -20,12 +23,19 @@
     height:inherit;
     position: relative;
     top:-100%;
+
+    z-index: 1;
 }
 
 #nonSelectedView{
-    background-color: #000000d8;
     width:inherit;
     height:inherit;
     position: relative;
     top:-100%;
 }
+
+.invisButton{
+    border:none;
+    background: none;
+}
+

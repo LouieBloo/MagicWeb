@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { ClickService } from 'src/app/services/game/click/click.service';
-import { CardLocation, Card } from 'src/app/models/game';
+import { CardLocation, Card, SelectableObjectType } from 'src/app/models/game';
 import { Selectable } from 'src/app/interfaces/gameInterfaces';
 import { GameEventService } from 'src/app/services/game/game-event/game-event.service';
 
@@ -39,7 +39,7 @@ export class SingleCardComponent implements OnInit, Selectable {
 
     switch (this.card.location) {
       case CardLocation.Battlefield:
-        this.rotateCard();
+        this.clickedInHand();
         break;
       case CardLocation.Hand:
         this.clickedInHand();
@@ -62,6 +62,14 @@ export class SingleCardComponent implements OnInit, Selectable {
     this.selected = false;
   }
 
+  getType(): SelectableObjectType {
+    return SelectableObjectType.Card;
+  }
+
+  getData() {
+    return this.card;
+  }
+
   inHand() {
     return this.card && this.card.location == CardLocation.Hand;
   }
@@ -74,16 +82,20 @@ export class SingleCardComponent implements OnInit, Selectable {
     return this.card && this.card.location == CardLocation.Exile;
   }
 
+  inBattlefield() {
+    return this.card && this.card.location == CardLocation.Battlefield;
+  }
+
   sendToExile() {
-    this.gameEvents.exileCard(this.card);
+    this.gameEvents.moveCard(this.card, CardLocation.Exile);
   }
 
   sendToHand() {
-    this.gameEvents.sendCardToHand(this.card);
+    this.gameEvents.moveCard(this.card, CardLocation.Hand);
   }
 
   sendToGraveyard() {
-    this.gameEvents.sendCardToGraveyard(this.card);
+    this.gameEvents.moveCard(this.card, CardLocation.Graveyard);
   }
 
   rotateCard() {
@@ -98,4 +110,22 @@ export class SingleCardComponent implements OnInit, Selectable {
     }
   }
 
+  topHalfClicked() {
+    if (!this.clickService.canCardRespondToClick()) { return; }
+
+    if (this.card && this.card.location == CardLocation.Battlefield) {
+      this.cardClicked();
+    } else {
+      this.cardClicked();
+    }
+  }
+  bottomHalfClicked() {
+    if (!this.clickService.canCardRespondToClick()) { return; }
+
+    if (this.card && this.card.location == CardLocation.Battlefield) {
+      this.rotateCard();
+    } else {
+      this.cardClicked();
+    }
+  }
 }

@@ -1,17 +1,20 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { BattlefieldRowType, CardLocation } from 'src/app/models/game';
+import { BattlefieldRowType, CardLocation, SelectableObjectType } from 'src/app/models/game';
+import { ClickService } from 'src/app/services/game/click/click.service';
+import { Selectable } from 'src/app/interfaces/gameInterfaces';
 
 @Component({
   selector: 'app-battlefield-row',
   templateUrl: './battlefield-row.component.html',
   styleUrls: ['./battlefield-row.component.css']
 })
-export class BattlefieldRowComponent implements OnInit {
+export class BattlefieldRowComponent implements OnInit,Selectable {
 
-  cards: any = []
+  @Input() cards: any = []
 
   @Input() rowType: BattlefieldRowType;
   @Input() scale: number = 1;
+  selectable:boolean = false;
 
   private defaultScales: any = {
     creature: 2,
@@ -19,23 +22,37 @@ export class BattlefieldRowComponent implements OnInit {
     land: 1
   }
 
-  constructor() { }
+  constructor(private clickService:ClickService) { }
 
   
 
   ngOnInit(): void {
     this.setDefaultScale();
-    // this.addCard();
-    // this.addCard();
-    // this.addCard();
   }
 
-  addCard(){
-    this.cards.push({location:CardLocation.Battlefield})
+  select() {
   }
 
-  removeCard(){
-    this.cards.splice(0,1);
+  deselect() {
+  }
+
+  getType():SelectableObjectType{
+    return SelectableObjectType.BattlefieldRow;
+  }
+
+  getData(){
+    return this.rowType;
+  }
+
+  isSelectable(){
+    return this.clickService.canBattlefieldRowsRespondToClicks();
+  }
+
+  rowClicked(){
+    console.log("pop")
+    if(this.isSelectable()){
+      this.clickService.battlefieldRowClicked(this.rowType);
+    }
   }
 
   setDefaultScale() {

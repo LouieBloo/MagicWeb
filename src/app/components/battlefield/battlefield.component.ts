@@ -9,34 +9,43 @@ import { BattlefieldRowType, BattlefieldOwnerType, Battlefield } from 'src/app/m
 })
 export class BattlefieldComponent implements OnInit {
 
-  @Input() ownerType:BattlefieldOwnerType;
-  @Input() battlefield:Battlefield;
+  @Input() ownerType: BattlefieldOwnerType;
+  @Input() battlefield: Battlefield;
 
   cardRealDimensions: any = {
     width: 63,
     height: 88
   }
 
-  rows:any = [];
+  rows: any = [];
 
-  constructor(public clickService:ClickService) { }
+  constructor(public clickService: ClickService) { }
 
   ngOnInit(): void {
     this.setRowTypes();
   }
 
-  setRowTypes(){
-    if(this.ownerType == BattlefieldOwnerType.Mine){
-      this.rows = [{rowType:BattlefieldRowType.Creature},{rowType:BattlefieldRowType.Noncreature},{rowType:BattlefieldRowType.Land}]
-    }else{
-      this.rows = [{rowType:BattlefieldRowType.Land},{rowType:BattlefieldRowType.Noncreature},{rowType:BattlefieldRowType.Creature}]
+  setRowTypes() {
+    if (this.ownerType == BattlefieldOwnerType.Mine) {
+      this.rows = [{ rowType: BattlefieldRowType.Creature }, { rowType: BattlefieldRowType.Noncreature }, { rowType: BattlefieldRowType.Land }]
+    } else {
+      this.rows = [{ rowType: BattlefieldRowType.Land }, { rowType: BattlefieldRowType.Noncreature }, { rowType: BattlefieldRowType.Creature }]
     }
   }
 
-  rowClicked(){
-    console.log("row clicked")
-  }
+  getCards(row) {
+    if (!row || !this.battlefield) { return; }
 
+    if (row.rowType == BattlefieldRowType.Creature) {
+      return this.battlefield.battlefieldRows.Creature.cards;
+    }
+    if (row.rowType == BattlefieldRowType.Land) {
+      return this.battlefield.battlefieldRows.Land.cards;
+    }
+    if (row.rowType == BattlefieldRowType.Noncreature) {
+      return this.battlefield.battlefieldRows.Noncreature.cards;
+    }
+  }
 
   getOuterStyles() {
     return {

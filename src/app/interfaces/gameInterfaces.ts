@@ -1,3 +1,5 @@
+import { SelectableObjectType } from '../models/game';
+
 export interface HoldsCards {
     name: string;
     email: string;
@@ -25,4 +27,6 @@ export interface HoldsCards {
 export interface Selectable {
     select();
     deselect();
+    getType():SelectableObjectType;
+    getData():any;
 }
