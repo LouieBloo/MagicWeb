@@ -1,0 +1,21 @@
+#selectableMouseClick{
+    width:100%;
+    height:100%;
+    position: absolute;
+    /* top:-100%; */
+    cursor: pointer;
+    z-index:2;
+}
+
+
+#titleView{
+    width:inherit;
+    height:inherit;
+    position: absolute;
+    top:0px;
+}
+
+#name{
+    color:white;
+    background-color: rgba(0, 0, 0, 0.397);
+}

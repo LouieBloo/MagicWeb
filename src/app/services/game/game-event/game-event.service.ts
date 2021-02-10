@@ -9,6 +9,7 @@ export class GameEventService {
 
   drawCardEvent = new BehaviorSubject<any>(null);
   moveCardEvent = new BehaviorSubject<any>(null);
+  rotateCardEvent = new BehaviorSubject<Card>(null);
 
   constructor() { }
 
@@ -21,5 +22,8 @@ export class GameEventService {
     this.moveCardEvent.next({ card: card, newLocation: newLocation, battlefieldRowType: battlefieldRowType });
   }
 
+  rotateCard(card:Card){
+    this.rotateCardEvent.next(card);
+  }
 
 }

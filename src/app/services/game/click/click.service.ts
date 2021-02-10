@@ -8,65 +8,85 @@ import { GameEventService } from '../game-event/game-event.service';
 })
 export class ClickService {
 
-  private selectedObject:Selectable;
+  private selectedObject: Selectable;
 
-  private cardsRespondingToClicks:boolean = true;
-  private battlefieldRowsRespondingToClicks:boolean = false;
+  private cardsRespondingToClicks: boolean = true;
+  private selectingTargetObject: boolean = false;
 
-  constructor(private gameEventService:GameEventService) { }
+  private resettingOnClick = { resetting: false, skipOne: false };
 
-  public generalClickReceived(){
-    console.log("got it")
+  constructor(private gameEventService: GameEventService) { }
+
+  public topLevelClickRecieved() {
+    if (this.resettingOnClick.skipOne) {
+      this.resettingOnClick.skipOne = false;
+    }
+    else if (this.resettingOnClick.resetting) {
+      this.resetToNormal();
+      this.resettingOnClick.resetting = false;
+    }
   }
 
-  public objectSelected(selectedObject:Selectable ){
-    if(this.selectedObject){
-      this.deselectObject();
-    }
+  public objectSelected(selectedObject: Selectable) {
+    this.deselectObject();
 
     this.selectedObject = selectedObject;
     this.selectedObject.select();
 
-    if(this.selectedObject.getType() == SelectableObjectType.Card){
-      this.battlefieldRowsRespondToClicks();
+    if (this.selectedObject.getType() == SelectableObjectType.Card) {
+      this.resettingOnClick = { resetting: true, skipOne: true };
+      this.selectingTargetObject = true;
     }
   }
 
-  public objectDeselected(selectedObject:Selectable){
-    if(this.selectedObject == selectedObject){
-      this.resetToNormal();
-    }else{
+  public objectDeselected(selectedObject: Selectable) {
+    if (this.selectedObject == selectedObject) {
+      //this.resetToNormal();
+    } else {
       console.error("deletect not the same")
     }
   }
 
-  private deselectObject(){
-    this.selectedObject.deselect();
+  private deselectObject() {
+    if (this.selectedObject) {
+      this.selectedObject.deselect();
+    }
     this.selectedObject = null;
   }
 
-  public resetToNormal(){
+  public resetToNormal() {
     this.deselectObject();
     this.cardsRespondingToClicks = true;
-    this.battlefieldRowsRespondingToClicks = false;
+    this.selectingTargetObject = false;
   }
 
-  public battlefieldRowsRespondToClicks(){
-    this.battlefieldRowsRespondingToClicks = true;
-  }
+  // public battlefieldRowsRespondToClicks() {
+    
+  // }
 
-  public canCardRespondToClick():boolean{
+  public canCardRespondToClick(): boolean {
     return this.cardsRespondingToClicks;
   }
 
-  public canBattlefieldRowsRespondToClicks():boolean{
-    return this.battlefieldRowsRespondingToClicks;
+  public isSelectingTargetObject(): boolean {
+    return this.selectingTargetObject;
   }
 
-  public battlefieldRowClicked(battlefieldRowType:BattlefieldRowType){
-    if(this.selectedObject && this.selectedObject.getType() == SelectableObjectType.Card){
-      this.gameEventService.moveCard(this.selectedObject.getData(),CardLocation.Battlefield,battlefieldRowType);
-      this.resetToNormal();
+  public battlefieldRowClicked(battlefieldRowType: BattlefieldRowType) {
+    if (this.selectedObject && this.selectedObject.getType() == SelectableObjectType.Card) {
+      this.gameEventService.moveCard(this.selectedObject.getData(), CardLocation.Battlefield, battlefieldRowType);
+    }
+  }
+
+  public graveyardSelected(){
+    if (this.selectedObject && this.selectedObject.getType() == SelectableObjectType.Card) {
+      this.gameEventService.moveCard(this.selectedObject.getData(), CardLocation.Graveyard);
+    }
+  }
+
+  public exileSelected(){
+    if (this.selectedObject && this.selectedObject.getType() == SelectableObjectType.Card) {
+      this.gameEventService.moveCard(this.selectedObject.getData(), CardLocation.Exile);
     }
   }
 }

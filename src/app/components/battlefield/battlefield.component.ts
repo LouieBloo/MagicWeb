@@ -53,4 +53,16 @@ export class BattlefieldComponent implements OnInit {
       height: this.cardRealDimensions.height * 2 + "px"
     }
   }
+
+  graveyardClicked(){
+    if(this.clickService.isSelectingTargetObject()){
+      this.clickService.graveyardSelected();
+    }
+  }
+
+  exileClicked(){
+    if(this.clickService.isSelectingTargetObject()){
+      this.clickService.exileSelected();
+    }
+  }
 }

@@ -11,7 +11,7 @@
 
 
             <div class="col d-flex flex-row justify-content-center">
-                <div *ngIf="isSelectable()" id="selectableMouseClick" class="row" (click)="rowClicked()" [ngClass]="{'selectable': isSelectable()}">
+                <div *ngIf="isSelectable()" id="selectableMouseClick" class="row pointer" (click)="rowClicked()" [ngClass]="{'selectable': isSelectable()}">
 
                 </div>
                 <ng-template ngFor let-item [ngForOf]="cards" let-i="index">

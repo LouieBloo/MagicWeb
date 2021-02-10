@@ -1,14 +1,23 @@
-<div class="row h-100">
+<div class="row h-100 pointer" (click)="clicked()">
     <div class="col">
-        <div class="row h-100" *ngIf="!cards || cards.length < 1">
-            <div class="col d-flex justify-content-center flex-column">
-                <h5 class="text-center">{{name}}</h5>
+
+        <div *ngIf="isSelectable()" id="selectableMouseClick" class="row">
+            <div class="col">
+                <div class="h-100" [ngClass]="{'selectable': isSelectable()}"></div>
             </div>
         </div>
 
         <div class="row" *ngIf="cards && cards.length > 0">
             <div class="col">
-                <app-single-card [scale]="scale" [card]="cards[cards.length-1]"></app-single-card>
+                <app-single-card [scale]="scale" [card]="cards[cards.length-1]" [clickable]="false"></app-single-card>
+            </div>
+        </div>
+
+
+
+        <div class="row h-100 " id="titleView">
+            <div class="col d-flex justify-content-center flex-column">
+                <h5 class="text-center" id="name">{{name}} ({{cards?.length}})</h5>
             </div>
         </div>
 

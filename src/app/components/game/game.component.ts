@@ -3,6 +3,7 @@ import * as Colyseus from "colyseus.js"; // not necessary if included via <scrip
 import { GameEventService } from 'src/app/services/game/game-event/game-event.service';
 import { DataChange } from 'colyseus.js';
 import { Player, Card, CardLocation } from 'src/app/models/game';
+import { ClickService } from 'src/app/services/game/click/click.service';
 
 @Component({
   selector: 'app-game',
@@ -17,11 +18,12 @@ export class GameComponent implements OnInit {
   me:Player;
   opponents: Player[] = [];
 
-  constructor(private gameEventService: GameEventService) { }
+  constructor(private gameEventService: GameEventService,public clickService:ClickService) { }
 
   ngOnInit(): void {
     this.gameEventService.drawCardEvent.subscribe(this.cardDrawEventFired);
     this.gameEventService.moveCardEvent.subscribe(this.moveCardEventFired);
+    this.gameEventService.rotateCardEvent.subscribe(this.rotateCardEventFired);
   }
 
 
@@ -98,7 +100,11 @@ export class GameComponent implements OnInit {
     }
   }
 
- 
+  rotateCardEventFired = (card:Card) => {
+    if (this.room) {
+      this.room.send("cardRotated",{card:card})
+    }
+  }
 
   leaveRoom() {
     this.room.leave();

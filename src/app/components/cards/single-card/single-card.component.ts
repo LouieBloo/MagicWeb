@@ -13,12 +13,12 @@ export class SingleCardComponent implements OnInit, Selectable {
 
   @Input() scale: number;
   @Input() card: Card;
+  @Input() clickable: boolean = true;
 
   cardRealDimensions: any = {
     width: 63,
     height: 88
   }
-  cardRotated: boolean = false;
   selected: boolean = false;
 
   constructor(private clickService: ClickService, private gameEvents: GameEventService) { }
@@ -35,7 +35,7 @@ export class SingleCardComponent implements OnInit, Selectable {
   }
 
   cardClicked() {
-    if (!this.clickService.canCardRespondToClick()) { return; }
+    if (!this.clickService.canCardRespondToClick() || !this.clickable) { return; }
 
     switch (this.card.location) {
       case CardLocation.Battlefield:
@@ -99,7 +99,7 @@ export class SingleCardComponent implements OnInit, Selectable {
   }
 
   rotateCard() {
-    this.cardRotated = !this.cardRotated;
+    this.gameEvents.rotateCard(this.card);
   }
 
   clickedInHand() {
@@ -126,6 +126,15 @@ export class SingleCardComponent implements OnInit, Selectable {
       this.rotateCard();
     } else {
       this.cardClicked();
+    }
+  }
+
+
+  getPictureRotationCSS(){
+    if(!this.card){return;}
+
+    return {
+      transform:"rotate(" + this.card.rotation + "deg)"
     }
   }
 }

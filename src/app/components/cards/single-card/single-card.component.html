@@ -1,5 +1,5 @@
 <div id="outer" [ngStyle]="getOuterStyles()">
-    <img id="picture" [src]="card?.image_uris?.normal" [ngClass]="{'rotated': cardRotated}">
+    <img id="picture" [src]="card?.image_uris?.normal" [ngStyle]="getPictureRotationCSS()">
 
     <div *ngIf="!selected" id="nonSelectedView">
         <div class="d-flex flex-column h-100">

@@ -1,4 +1,4 @@
-<div class="row" *ngIf="room">
+<div class="row" *ngIf="room" (click)="clickService.topLevelClickRecieved()">
     <div class="col">
         <app-board [me]="me" [opponents]="opponents"></app-board>
     </div>
