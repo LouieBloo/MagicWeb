@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Card } from 'src/app/models/game';
+import { Card, BattlefieldOwnerType, CardLocation } from 'src/app/models/game';
 import { ClickService } from 'src/app/services/game/click/click.service';
 
 @Component({
@@ -9,10 +9,12 @@ import { ClickService } from 'src/app/services/game/click/click.service';
 })
 export class CardContainerComponent implements OnInit {
 
-  scale:number = 2;
+  scale:number = 1.8;
   @Input() name:string;
   @Input() cards:Card[];
   @Input() clickCallback:any;
+  @Input() ownerType: BattlefieldOwnerType;
+  @Input() cardLocation: CardLocation;
 
   constructor(private clickService:ClickService) { }
 
@@ -20,11 +22,11 @@ export class CardContainerComponent implements OnInit {
   }
 
   isSelectable(){
-    return this.clickService.isSelectingTargetObject();
+    return this.clickService.isSelectingTargetObject() && this.ownerType == BattlefieldOwnerType.Mine;
   }
 
   clicked(){
-    if(this.clickCallback){
+    if(this.clickCallback && this.isSelectable()){
       this.clickCallback(this.cards);
     }
   }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Selectable } from 'src/app/interfaces/gameInterfaces';
-import { SelectableObjectType, Battlefield, BattlefieldRowType, CardLocation } from 'src/app/models/game';
+import { SelectableObjectType, Battlefield, BattlefieldRowType, CardLocation, BattlefieldOwnerType, Player } from 'src/app/models/game';
 import { GameEventService } from '../game-event/game-event.service';
 
 @Injectable({
@@ -41,7 +41,7 @@ export class ClickService {
 
   public objectDeselected(selectedObject: Selectable) {
     if (this.selectedObject == selectedObject) {
-      //this.resetToNormal();
+      this.resetToNormal();
     } else {
       console.error("deletect not the same")
     }
@@ -58,11 +58,15 @@ export class ClickService {
     this.deselectObject();
     this.cardsRespondingToClicks = true;
     this.selectingTargetObject = false;
+    this.resettingOnClick = { resetting: false, skipOne: false };
   }
 
-  // public battlefieldRowsRespondToClicks() {
-    
-  // }
+  private isSelectedObjectACard() {
+    if (this.selectedObject && this.selectedObject.getType() == SelectableObjectType.Card) {
+      return true;
+    }
+    return false;
+  }
 
   public canCardRespondToClick(): boolean {
     return this.cardsRespondingToClicks;
@@ -72,21 +76,31 @@ export class ClickService {
     return this.selectingTargetObject;
   }
 
-  public battlefieldRowClicked(battlefieldRowType: BattlefieldRowType) {
-    if (this.selectedObject && this.selectedObject.getType() == SelectableObjectType.Card) {
-      this.gameEventService.moveCard(this.selectedObject.getData(), CardLocation.Battlefield, battlefieldRowType);
+  public battlefieldRowClicked(battlefieldRowType: BattlefieldRowType,player: Player) {
+    if (this.isSelectedObjectACard()) {
+      this.gameEventService.moveCard(this.selectedObject.getData(), CardLocation.Battlefield,battlefieldRowType, player);
+      this.resetToNormal();
     }
   }
 
-  public graveyardSelected(){
-    if (this.selectedObject && this.selectedObject.getType() == SelectableObjectType.Card) {
-      this.gameEventService.moveCard(this.selectedObject.getData(), CardLocation.Graveyard);
+  public handClicked() {
+    if (this.isSelectedObjectACard()) {
+      this.gameEventService.moveCard(this.selectedObject.getData(), CardLocation.Hand,null,null);
+      this.resetToNormal();
     }
   }
 
-  public exileSelected(){
-    if (this.selectedObject && this.selectedObject.getType() == SelectableObjectType.Card) {
-      this.gameEventService.moveCard(this.selectedObject.getData(), CardLocation.Exile);
+  public graveyardSelected() {
+    if (this.isSelectedObjectACard()) {
+      this.gameEventService.moveCard(this.selectedObject.getData(), CardLocation.Graveyard,null,null);
+      this.resetToNormal();
+    }
+  }
+
+  public exileSelected() {
+    if (this.isSelectedObjectACard()) {
+      this.gameEventService.moveCard(this.selectedObject.getData(), CardLocation.Exile,null,null);
+      this.resetToNormal();
     }
   }
 }

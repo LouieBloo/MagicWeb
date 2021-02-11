@@ -1,19 +1,20 @@
 <div class="row" style="background-color: aquamarine;">
-    <div class="col">
-        <div class="row">
-            <div class="col">
-                <h5>{{ownerType}}</h5>
-            </div>
+    <div class="col d-flex">
+        <div class="flex-grow-1">
+            <ng-template ngFor let-item [ngForOf]="rows" let-i="index">
+                <app-battlefield-row [owner]="owner" [ownerType]="ownerType" [rowType]="item.rowType" [cards]="getCards(item)"></app-battlefield-row>
+            </ng-template>
         </div>
-        <ng-template ngFor let-item [ngForOf]="rows" let-i="index">
-            <app-battlefield-row [rowType]="item.rowType" [cards]="getCards(item)"></app-battlefield-row>
-        </ng-template>
-
-        <div class="row">
-            <div class="col d-flex flex-row">
-                <app-card-container  [ngStyle]="getOuterStyles()"  [cards]="" [name]="'Deck'" [clickCallback]=""></app-card-container>
-                <app-card-container   [ngStyle]="getOuterStyles()" [cards]="battlefield?.graveyard?.cards" [name]="'Graveyard'" [clickCallback]="graveyardClicked"></app-card-container>
-                <app-card-container  [ngStyle]="getOuterStyles()" [cards]="battlefield?.exile?.cards" [name]="'Exile'" [clickCallback]="exileClicked"></app-card-container>
+        <div class="d-flex flex-column">
+            <div class="d-flex">
+                <app-card-container [ownerType]="ownerType" [ngStyle]="getOuterStyles()" [cards]="" [name]="'Deck'" [clickCallback]="" [cardLocation]="'Deck'"></app-card-container>
+                <app-card-container [ownerType]="ownerType" [ngStyle]="getOuterStyles()" [cards]="" [name]="'Health'" [clickCallback]=""></app-card-container>
+            </div>
+            <div class="d-flex">
+                <app-card-container [ownerType]="ownerType" [ngStyle]="getOuterStyles()" [cards]="battlefield?.graveyard?.cards" [name]="'Graveyard'"
+                    [clickCallback]="graveyardClicked" [cardLocation]="'Graveyard'"></app-card-container>
+                <app-card-container [ownerType]="ownerType" [ngStyle]="getOuterStyles()" [cards]="battlefield?.exile?.cards" [name]="'Exile'"
+                    [clickCallback]="exileClicked" [cardLocation]="'Exile'"></app-card-container>
             </div>
         </div>
     </div>

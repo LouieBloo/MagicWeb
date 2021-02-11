@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ClickService } from 'src/app/services/game/click/click.service';
-import { BattlefieldRowType, BattlefieldOwnerType, Battlefield } from 'src/app/models/game';
+import { BattlefieldRowType, BattlefieldOwnerType, Battlefield, CardLocation, Player } from 'src/app/models/game';
 
 @Component({
   selector: 'app-battlefield',
@@ -11,6 +11,7 @@ export class BattlefieldComponent implements OnInit {
 
   @Input() ownerType: BattlefieldOwnerType;
   @Input() battlefield: Battlefield;
+  @Input() owner:Player;
 
   cardRealDimensions: any = {
     width: 63,
@@ -49,8 +50,8 @@ export class BattlefieldComponent implements OnInit {
 
   getOuterStyles() {
     return {
-      width: this.cardRealDimensions.width * 2 + "px",
-      height: this.cardRealDimensions.height * 2 + "px"
+      width: this.cardRealDimensions.width * 1.8 + "px",
+      height: this.cardRealDimensions.height * 1.8 + "px"
     }
   }
 

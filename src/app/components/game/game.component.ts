@@ -96,7 +96,7 @@ export class GameComponent implements OnInit {
   moveCardEventFired = (payload)=>{
     if(!payload){return;}
     if (payload.card) {
-      this.room.send("cardChangeLocation",{card:payload.card,newLocation:payload.newLocation,battlefieldRowType:payload.battlefieldRowType});
+      this.room.send("cardChangeLocation",{card:payload.card,newLocation:payload.newLocation,battlefieldRowType:payload.battlefieldRowType,owner:payload.player});
     }
   }
 

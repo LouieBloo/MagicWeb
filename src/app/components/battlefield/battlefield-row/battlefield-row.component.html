@@ -6,17 +6,23 @@
                 <mat-slider [(ngModel)]="scale" max="3" min="0.1" step="0.25" (input)="scaleChanged($event)"></mat-slider>
             </div>
         </div>
-        <div class="row" id="cardRow">
+        <div class="row" id="cardRow"  (click)="rowClicked()">
 
 
 
             <div class="col d-flex flex-row justify-content-center">
-                <div *ngIf="isSelectable()" id="selectableMouseClick" class="row pointer" (click)="rowClicked()" [ngClass]="{'selectable': isSelectable()}">
+                <div *ngIf="isSelectable()" id="selectableMouseClick" class="row pointer"
+                    [ngClass]="{'selectable': isSelectable()}">
 
                 </div>
-                <ng-template ngFor let-item [ngForOf]="cards" let-i="index">
-                    <app-single-card [scale]="scale" [card]="item"></app-single-card>
-                </ng-template>
+                <div class="row justify-content-center">
+                    <ng-template ngFor let-item [ngForOf]="cards" let-i="index">
+                        <div class="col p-0">
+                            <app-single-card [scale]="scale" [card]="item" [clickable]="areCardsClickable()"></app-single-card>
+                        </div>
+                    </ng-template>
+                </div>
+
             </div>
 
 

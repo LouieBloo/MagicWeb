@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { BattlefieldRowType, CardLocation, SelectableObjectType } from 'src/app/models/game';
+import { BattlefieldRowType, CardLocation, SelectableObjectType, BattlefieldOwnerType, Player } from 'src/app/models/game';
 import { ClickService } from 'src/app/services/game/click/click.service';
 import { Selectable } from 'src/app/interfaces/gameInterfaces';
 
@@ -11,9 +11,12 @@ import { Selectable } from 'src/app/interfaces/gameInterfaces';
 export class BattlefieldRowComponent implements OnInit,Selectable {
 
   @Input() cards: any = []
+  @Input() owner:Player;
 
   @Input() rowType: BattlefieldRowType;
   @Input() scale: number = 1;
+  @Input() ownerType: BattlefieldOwnerType;
+  
   selectable:boolean = false;
 
   private defaultScales: any = {
@@ -48,10 +51,14 @@ export class BattlefieldRowComponent implements OnInit,Selectable {
     return this.clickService.isSelectingTargetObject();
   }
 
+  areCardsClickable(){
+    return this.ownerType && this.ownerType == BattlefieldOwnerType.Mine;
+  }
+
   rowClicked(){
-    console.log("pop")
+    console.log("YES")
     if(this.isSelectable()){
-      this.clickService.battlefieldRowClicked(this.rowType);
+      this.clickService.battlefieldRowClicked(this.rowType,this.owner);
     }
   }
 

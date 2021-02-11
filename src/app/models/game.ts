@@ -14,7 +14,8 @@ export enum CardLocation {
     Battlefield = "Battlefield",
     Graveyard = "Graveyard",
     Exile = "Exile",
-    Stack = "Stack"
+    Stack = "Stack",
+    Deck = "Deck"
 }
 export enum SelectableObjectType {
     Card = "Card",

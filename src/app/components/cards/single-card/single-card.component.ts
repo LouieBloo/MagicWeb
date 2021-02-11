@@ -13,7 +13,10 @@ export class SingleCardComponent implements OnInit, Selectable {
 
   @Input() scale: number;
   @Input() card: Card;
+  //rows, card containers, etc can dictate if a card is clickable or not
   @Input() clickable: boolean = true;
+
+  backOfCardImgUrl: string = "https://i.redd.it/qnnotlcehu731.jpg"
 
   cardRealDimensions: any = {
     width: 63,
@@ -26,6 +29,21 @@ export class SingleCardComponent implements OnInit, Selectable {
   ngOnInit() {
   }
 
+  getImgSource() {
+    if (this.card) {
+      if (
+        this.card.location == CardLocation.Graveyard || 
+        this.card.location == CardLocation.Exile || 
+        this.card.location == CardLocation.Battlefield || 
+        this.card.location == CardLocation.Hand || 
+        this.card.location == CardLocation.Stack
+      ) {
+        return this.card.image_uris ? this.card.image_uris.normal : this.backOfCardImgUrl;
+      }
+    }
+    return this.backOfCardImgUrl;
+  }
+
   getOuterStyles() {
 
     return {
@@ -34,8 +52,13 @@ export class SingleCardComponent implements OnInit, Selectable {
     }
   }
 
+  canRespondToClicks() {
+    return this.clickService.canCardRespondToClick() && this.clickable;
+  }
+
   cardClicked() {
-    if (!this.clickService.canCardRespondToClick() || !this.clickable) { return; }
+    console.log("hand clicked")
+    if (!this.canRespondToClicks()) { return; }
 
     switch (this.card.location) {
       case CardLocation.Battlefield:
@@ -87,15 +110,15 @@ export class SingleCardComponent implements OnInit, Selectable {
   }
 
   sendToExile() {
-    this.gameEvents.moveCard(this.card, CardLocation.Exile);
+    this.gameEvents.moveCard(this.card, CardLocation.Exile,null,null);
   }
 
   sendToHand() {
-    this.gameEvents.moveCard(this.card, CardLocation.Hand);
+    this.gameEvents.moveCard(this.card, CardLocation.Hand,null,null);
   }
 
   sendToGraveyard() {
-    this.gameEvents.moveCard(this.card, CardLocation.Graveyard);
+    this.gameEvents.moveCard(this.card, CardLocation.Graveyard,null,null);
   }
 
   rotateCard() {
@@ -110,8 +133,11 @@ export class SingleCardComponent implements OnInit, Selectable {
     }
   }
 
-  topHalfClicked() {
+  topHalfClicked(event) {
+    console.log("event: ",event);
+    
     if (!this.clickService.canCardRespondToClick()) { return; }
+    event.stopPropagation();
 
     if (this.card && this.card.location == CardLocation.Battlefield) {
       this.cardClicked();
@@ -119,8 +145,9 @@ export class SingleCardComponent implements OnInit, Selectable {
       this.cardClicked();
     }
   }
-  bottomHalfClicked() {
+  bottomHalfClicked(event) {
     if (!this.clickService.canCardRespondToClick()) { return; }
+    event.stopPropagation();
 
     if (this.card && this.card.location == CardLocation.Battlefield) {
       this.rotateCard();
@@ -130,11 +157,11 @@ export class SingleCardComponent implements OnInit, Selectable {
   }
 
 
-  getPictureRotationCSS(){
-    if(!this.card){return;}
+  getPictureRotationCSS() {
+    if (!this.card) { return; }
 
     return {
-      transform:"rotate(" + this.card.rotation + "deg)"
+      transform: "rotate(" + this.card.rotation + "deg)"
     }
   }
 }

@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col">
 
-
+        <div *ngIf="isSelectable()" id="selectableMouseClick" class="row pointer" (click)="rowClicked()" [ngClass]="{'selectable': isSelectable()}"></div>
 
         <div class="p-2">
             <div id="handRow" class="row d-flex justify-content-center">
