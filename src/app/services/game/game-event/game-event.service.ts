@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Card, CardLocation, BattlefieldRowType, Player } from 'src/app/models/game';
+import { Card, CardLocation, BattlefieldRowType, Player, AttachCardEvent } from 'src/app/models/game';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,7 @@ export class GameEventService {
   drawCardEvent = new BehaviorSubject<any>(null);
   moveCardEvent = new BehaviorSubject<any>(null);
   rotateCardEvent = new BehaviorSubject<Card>(null);
+  attachCardEvent = new BehaviorSubject<AttachCardEvent>(null);
 
   constructor() { }
 
@@ -24,6 +25,10 @@ export class GameEventService {
 
   rotateCard(card:Card){
     this.rotateCardEvent.next(card);
+  }
+
+  attachCard(targetCard:Card,sourceCard:Card){
+    this.attachCardEvent.next({targetCard:targetCard,sourceCard:sourceCard});
   }
 
 }

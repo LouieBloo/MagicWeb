@@ -29,14 +29,16 @@ export class SingleCardComponent implements OnInit, Selectable {
   ngOnInit() {
   }
 
+  //what image should we be showing
   getImgSource() {
     if (this.card) {
       if (
-        this.card.location == CardLocation.Graveyard || 
-        this.card.location == CardLocation.Exile || 
-        this.card.location == CardLocation.Battlefield || 
-        this.card.location == CardLocation.Hand || 
-        this.card.location == CardLocation.Stack
+        this.card.location == CardLocation.Graveyard ||
+        this.card.location == CardLocation.Exile ||
+        this.card.location == CardLocation.Battlefield ||
+        this.card.location == CardLocation.Hand ||
+        this.card.location == CardLocation.Stack ||
+        this.card.location == CardLocation.AttachedToCard
       ) {
         return this.card.image_uris ? this.card.image_uris.normal : this.backOfCardImgUrl;
       }
@@ -44,12 +46,31 @@ export class SingleCardComponent implements OnInit, Selectable {
     return this.backOfCardImgUrl;
   }
 
-  getOuterStyles() {
+  getMainCardScaleCSS() {
+    let attachmentAddition = this.card && this.card.attachedCards && this.card.attachedCards.length > 0 ? this.getAttachmentHeightOffset(this.card.attachedCards.length) : 0;
+    return {
+      width: this.cardRealDimensions.width * this.scale + "px",
+      height: (this.cardRealDimensions.height * this.scale) + attachmentAddition  + "px"
+    }
+  }
 
+  getInnerCardScaleCSS() {
     return {
       width: this.cardRealDimensions.width * this.scale + "px",
       height: this.cardRealDimensions.height * this.scale + "px"
     }
+  }
+
+  getAttachmentCSS(step:number) {
+    if(!this.card){return;}
+
+    return {
+      paddingTop: this.getAttachmentHeightOffset(this.card.attachedCards.length - step) + "px",
+    }
+  }
+
+  getAttachmentHeightOffset(step:number) {
+    return ( (step) * (this.cardRealDimensions.height * 0.45)) * this.scale;
   }
 
   canRespondToClicks() {
@@ -73,6 +94,9 @@ export class SingleCardComponent implements OnInit, Selectable {
       case CardLocation.Graveyard:
         this.clickedInHand();
         break;
+      case CardLocation.AttachedToCard:
+        this.clickedInHand();
+        break;
     }
   }
 
@@ -93,6 +117,10 @@ export class SingleCardComponent implements OnInit, Selectable {
     return this.card;
   }
 
+  getCard() {
+    return this.card;
+  }
+
   inHand() {
     return this.card && this.card.location == CardLocation.Hand;
   }
@@ -110,15 +138,15 @@ export class SingleCardComponent implements OnInit, Selectable {
   }
 
   sendToExile() {
-    this.gameEvents.moveCard(this.card, CardLocation.Exile,null,null);
+    this.gameEvents.moveCard(this.card, CardLocation.Exile, null, null);
   }
 
   sendToHand() {
-    this.gameEvents.moveCard(this.card, CardLocation.Hand,null,null);
+    this.gameEvents.moveCard(this.card, CardLocation.Hand, null, null);
   }
 
   sendToGraveyard() {
-    this.gameEvents.moveCard(this.card, CardLocation.Graveyard,null,null);
+    this.gameEvents.moveCard(this.card, CardLocation.Graveyard, null, null);
   }
 
   rotateCard() {
@@ -134,8 +162,7 @@ export class SingleCardComponent implements OnInit, Selectable {
   }
 
   topHalfClicked(event) {
-    console.log("event: ",event);
-    
+    console.log("top half clicked")
     if (!this.clickService.canCardRespondToClick()) { return; }
     event.stopPropagation();
 
@@ -156,6 +183,11 @@ export class SingleCardComponent implements OnInit, Selectable {
     }
   }
 
+  shouldShowBottomButton() {
+    if (this.card && this.card.location != CardLocation.AttachedToCard) {
+      return true;
+    }
+  }
 
   getPictureRotationCSS() {
     if (!this.card) { return; }

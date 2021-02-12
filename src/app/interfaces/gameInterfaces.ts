@@ -1,4 +1,4 @@
-import { SelectableObjectType } from '../models/game';
+import { SelectableObjectType, Card } from '../models/game';
 
 export interface HoldsCards {
     name: string;
@@ -29,4 +29,5 @@ export interface Selectable {
     deselect();
     getType():SelectableObjectType;
     getData():any;
+    getCard():Card;
 }

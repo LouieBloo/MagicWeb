@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as Colyseus from "colyseus.js"; // not necessary if included via <script> tag.
 import { GameEventService } from 'src/app/services/game/game-event/game-event.service';
 import { DataChange } from 'colyseus.js';
-import { Player, Card, CardLocation } from 'src/app/models/game';
+import { Player, Card, CardLocation, AttachCardEvent } from 'src/app/models/game';
 import { ClickService } from 'src/app/services/game/click/click.service';
 
 @Component({
@@ -24,6 +24,7 @@ export class GameComponent implements OnInit {
     this.gameEventService.drawCardEvent.subscribe(this.cardDrawEventFired);
     this.gameEventService.moveCardEvent.subscribe(this.moveCardEventFired);
     this.gameEventService.rotateCardEvent.subscribe(this.rotateCardEventFired);
+    this.gameEventService.attachCardEvent.subscribe(this.attachCardEventFired);
   }
 
 
@@ -103,6 +104,13 @@ export class GameComponent implements OnInit {
   rotateCardEventFired = (card:Card) => {
     if (this.room) {
       this.room.send("cardRotated",{card:card})
+    }
+  }
+
+  attachCardEventFired = (event:AttachCardEvent) => {
+    if (this.room) {
+      console.log("ATTACH: ",event)
+      this.room.send("cardAttached",event);
     }
   }
 

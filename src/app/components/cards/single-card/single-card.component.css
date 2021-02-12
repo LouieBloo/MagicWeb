@@ -2,6 +2,10 @@
     
 }
 
+.attachments{
+    position: absolute;
+}
+
 #picture{
     width: inherit;
     height: inherit;

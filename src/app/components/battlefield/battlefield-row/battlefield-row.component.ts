@@ -47,6 +47,10 @@ export class BattlefieldRowComponent implements OnInit,Selectable {
     return this.rowType;
   }
 
+  getCard(){
+    return null;
+  }
+
   isSelectable(){
     return this.clickService.isSelectingTargetObject();
   }

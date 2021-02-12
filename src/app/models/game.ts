@@ -15,7 +15,8 @@ export enum CardLocation {
     Graveyard = "Graveyard",
     Exile = "Exile",
     Stack = "Stack",
-    Deck = "Deck"
+    Deck = "Deck",
+    AttachedToCard="AttachedToCard"
 }
 export enum SelectableObjectType {
     Card = "Card",
@@ -49,6 +50,8 @@ export interface Card {
     name?: string;
     owner?:string;
     image_uris?:any;
+    attachedCards?:Card[];
+    attachedToCardId?: string;
 }
 
 export interface Hand {
@@ -60,4 +63,9 @@ export interface Player {
     sessionId?: string;
     hand?: Hand;
     battlefield?:Battlefield;
+}
+
+export interface AttachCardEvent {
+    targetCard:Card;
+    sourceCard:Card;
 }

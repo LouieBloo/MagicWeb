@@ -1,29 +1,47 @@
-<div id="outer" [ngStyle]="getOuterStyles()">
-    <img id="picture" [src]="getImgSource()" [ngStyle]="getPictureRotationCSS()">
+<div id="outer" [ngStyle]="getMainCardScaleCSS()">
 
-    <div *ngIf="!selected && canRespondToClicks()" id="nonSelectedView">
-        <div class="d-flex flex-column h-100">
-            <button class="flex-grow-1 invisButton" (click)="topHalfClicked($event)"></button>
-            <button class="flex-grow-1 d-flex justify-content-center align-items-center invisButton" (click)="bottomHalfClicked($event)"><p *ngIf="inBattlefield()" id="tapText">⭯</p></button>
-        </div>
+    <!-- <h5 *ngIf="card.attachedCards.length > 0">-{{card.attachedCards.length}}</h5> -->
+    <div *ngIf="card?.attachedCards && card?.attachedCards?.length > 0" class="d-flex justify-content-center" >
+        <ng-template ngFor let-item [ngForOf]="card?.attachedCards" let-i="index">
+            <div [ngStyle]="getAttachmentCSS(i)" class="attachments">
+                <app-single-card [scale]="scale" [card]="item" [clickable]="clickable"></app-single-card>
+            </div>
+        </ng-template>
     </div>
 
-    <!-- <div *ngIf="!selected" id="nonSelectedView">
-        <div class="row h-100">
-            <div class="col ">
-                <h4 style="color:red;" class="text-center">{{card?.name}}</h4>
-                <p style="color:green;font-size: 26px" class="text-center">{{card?.id}}</p>
+
+    <div class="" [ngStyle]="getInnerCardScaleCSS()">
+        <img id="picture" [src]="getImgSource()" [ngStyle]="getPictureRotationCSS()">
+
+        <div *ngIf="!selected && canRespondToClicks()" id="nonSelectedView">
+            <div class="d-flex flex-column h-100">
+                <button class="flex-grow-1 invisButton" (click)="topHalfClicked($event)"></button>
+                <button *ngIf="shouldShowBottomButton()" class="flex-grow-1 d-flex justify-content-center align-items-center invisButton"
+                    (click)="bottomHalfClicked($event)">
+                    <p *ngIf="inBattlefield()" id="tapText">⭯</p>
+                </button>
+
             </div>
         </div>
-    </div> -->
+        <!-- {{canRespondToClicks() ? 'yes' : 'no'}} -->
 
-    <div *ngIf="selected" class="selectedView d-flex" (click)="cardClicked()">
-        <div class="row flex-grow-1">
-            <div class="col d-flex justify-content-center flex-column">
-                <!-- <button mat-button color="primary">Play</button> -->
-                <!-- <button mat-flat-button color="primary" (click)="sendToGraveyard()" *ngIf="!inGraveyard()">Graveyard</button>
-                <button mat-flat-button color="primary" (click)="sendToExile()" *ngIf="!inExile()">Exile</button>
-                <button mat-flat-button color="primary" (click)="sendToHand()" *ngIf="!inHand()">Hand</button> -->
+        <!-- <div *ngIf="!selected" id="nonSelectedView">
+                    <div class="row h-100">
+                        <div class="col ">
+                            <h4 style="color:red;" class="text-center">{{card?.name}}</h4>
+                            <p style="color:green;font-size: 26px" class="text-center">{{card?.id}}</p>
+                        </div>
+                    </div>
+                </div> -->
+
+        <div *ngIf="selected" class="selectedView d-flex" (click)="cardClicked()">
+            <div class="row flex-grow-1">
+                <div class="col d-flex justify-content-center flex-column">
+                    <!-- <button mat-button color="primary">Play</button> -->
+                    <!-- <button mat-flat-button color="primary" (click)="sendToGraveyard()" *ngIf="!inGraveyard()">Graveyard</button>
+                            <button mat-flat-button color="primary" (click)="sendToExile()" *ngIf="!inExile()">Exile</button>
+                            <button mat-flat-button color="primary" (click)="sendToHand()" *ngIf="!inHand()">Hand</button> -->
+                </div>
             </div>
         </div>
     </div>
