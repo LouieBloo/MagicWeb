@@ -1,12 +1,16 @@
 #formatOptions{
     position: absolute;
     top:0px;
+    left:0px;
 }
 
 #cardRow{
-    min-height: 100px;
+    min-height: 68px;
 }
 
+#rowTypeText{
+    color:#0000004f;
+}
 
 #selectableMouseClick{
     width:100%;

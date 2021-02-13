@@ -110,4 +110,11 @@ export class ClickService {
       this.resetToNormal();
     }
   }
+
+  public stackSelected() {
+    if (this.isSelectedObjectACard()) {
+      this.gameEventService.moveCard(this.selectedObject.getData(), CardLocation.Stack, null, null);
+      this.resetToNormal();
+    }
+  }
 }

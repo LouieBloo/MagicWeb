@@ -15,6 +15,8 @@ import { BattlefieldRowComponent } from './components/battlefield/battlefield-ro
 import { GameComponent } from './components/game/game.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { CardContainerComponent } from './components/battlefield/card-container/card-container.component';
+import { CounterModifierComponent } from './components/counter-modifier/counter-modifier.component';
+import { StackComponent } from './components/battlefield/stack/stack.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { CardContainerComponent } from './components/battlefield/card-container/
     BattlefieldRowComponent,
     GameComponent,
     HomeComponent,
-    CardContainerComponent
+    CardContainerComponent,
+    CounterModifierComponent,
+    StackComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Card, CardLocation, BattlefieldRowType, Player, AttachCardEvent } from 'src/app/models/game';
+import { Card, CardLocation, BattlefieldRowType, Player, AttachCardEvent, ModifyCounterEvent, Counter, CounterTypes } from 'src/app/models/game';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,7 @@ export class GameEventService {
   moveCardEvent = new BehaviorSubject<any>(null);
   rotateCardEvent = new BehaviorSubject<Card>(null);
   attachCardEvent = new BehaviorSubject<AttachCardEvent>(null);
+  modifyCounterEvent = new BehaviorSubject<ModifyCounterEvent>(null);
 
   constructor() { }
 
@@ -29,6 +30,10 @@ export class GameEventService {
 
   attachCard(targetCard:Card,sourceCard:Card){
     this.attachCardEvent.next({targetCard:targetCard,sourceCard:sourceCard});
+  }
+
+  modifyCounter(targetCard:Card,counterType:CounterTypes,amount:number){
+    this.modifyCounterEvent.next({targetCard:targetCard,counterType:counterType,amount:amount});
   }
 
 }

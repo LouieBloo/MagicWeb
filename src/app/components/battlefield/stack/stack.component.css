@@ -1,0 +1,24 @@
+#main{
+    /* min-height:50px; */
+    padding-right:226px;
+}
+
+#selectableMouseClick{
+    width:100%;
+    height:100%;
+    position: absolute;
+    /* top:-100%; */
+    cursor: pointer;
+    z-index:2;
+}
+
+#handRow{
+    /* height:40px; */
+}
+
+
+.attachments{
+    position: relative;
+    z-index: 2;
+    top:-35px;
+}

@@ -1,0 +1,7 @@
+/* :host {
+    display: flex;
+  } */
+
+  .counterButtons{
+    min-width:auto;
+}

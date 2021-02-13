@@ -22,7 +22,20 @@ export enum SelectableObjectType {
     Card = "Card",
     BattlefieldRow = "BattlefieldRow",
 }
-
+export enum CounterTypes {
+    OneOne = "OneOne",
+    Poison = "Poison",
+    Health = "Health",
+    CommanderDamage = "CommanderDamage",
+    General = "General"
+}
+export enum KEY_CODES {
+    UP_ARROW = 38,
+    DOWN_ARROW = 40,
+    RIGHT_ARROW = 39,
+    LEFT_ARROW = 37,
+    D=68
+}
 
 export interface Battlefield {
     battlefieldRows?: any;
@@ -42,6 +55,9 @@ export interface Graveyard {
 export interface Exile {
     cards?: Card[];
 }
+export interface Stack {
+    cards?: Card[];
+}
 
 export interface Card {
     rotation?: number;
@@ -52,6 +68,7 @@ export interface Card {
     image_uris?:any;
     attachedCards?:Card[];
     attachedToCardId?: string;
+    counter?:Counter;
 }
 
 export interface Hand {
@@ -68,4 +85,14 @@ export interface Player {
 export interface AttachCardEvent {
     targetCard:Card;
     sourceCard:Card;
+}
+export interface ModifyCounterEvent {
+    targetCard:Card;
+    counterType:CounterTypes;
+    amount:number;
+}
+
+export interface Counter {
+    type?: CounterTypes;
+    amount?: number;
 }

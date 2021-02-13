@@ -1,0 +1,36 @@
+<div class="row" id="main" class="row pointer  yellowWarningBorder" (click)="clicked()">
+    <div class="col">
+
+        <div *ngIf="isSelectable()" id="selectableMouseClick" class="row">
+            <div class="col">
+                <div class="h-100" [ngClass]="{'selectable': isSelectable()}"></div>
+            </div>
+        </div>
+
+        <!--Attachments-->
+        <div *ngIf="stack && stack.cards && stack.cards.length > 0" id="handRow" class="row d-flex justify-content-center" [ngStyle]="getStackHeight()">
+            <ng-template ngFor let-item [ngForOf]="stack.cards" let-i="index">
+                <div [ngStyle]="getAttachmentCSS(i)" class="attachments">
+                    <app-single-card [scale]="scale" [card]="item" [clickable]="true" ></app-single-card>
+                </div>
+            </ng-template>
+        </div>
+
+        <div *ngIf="!stack || stack.cards.length < 1">
+
+            <div class="row">
+                <div class="col">
+                    <h3 class="text-center mb-0">Stack</h3>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- <div class="row" id="handControl">
+            <div class="col">
+                <h5>Stack Scale: {{scale}}</h5>
+                <mat-slider [(ngModel)]="scale" max="10" min="0.1" step="0.1"></mat-slider>
+            </div>
+        </div> -->
+    </div>
+</div>

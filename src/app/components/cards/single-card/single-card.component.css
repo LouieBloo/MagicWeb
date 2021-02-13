@@ -6,7 +6,7 @@
     position: absolute;
 }
 
-#picture{
+.picture{
     width: inherit;
     height: inherit;
 }
@@ -41,5 +41,19 @@
 .invisButton{
     border:none;
     background: none;
+}
+
+
+#counterDiv{
+    position: absolute;
+    top:0px;
+    width:100%;
+    
+    
+}
+
+#counterDiv h5{
+    background-color: #000000d8;
+    color:white;
 }
 

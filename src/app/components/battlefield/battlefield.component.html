@@ -1,8 +1,8 @@
-<div class="row" style="background-color: aquamarine;">
+<div class="row h-100" style="background-color: aquamarine;">
     <div class="col d-flex">
-        <div class="flex-grow-1">
+        <div class="flex-grow-1 d-flex flex-column">
             <ng-template ngFor let-item [ngForOf]="rows" let-i="index">
-                <app-battlefield-row [owner]="owner" [ownerType]="ownerType" [rowType]="item.rowType" [cards]="getCards(item)"></app-battlefield-row>
+                <app-battlefield-row class="flex-grow-1" [owner]="owner" [ownerType]="ownerType" [rowType]="item.rowType" [cards]="getCards(item)"></app-battlefield-row>
             </ng-template>
         </div>
         <div class="d-flex flex-column">

@@ -12,8 +12,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .selectable{
     background-color: rgba(255, 255, 0, 0.459);
     border: 1px #0000003d solid;
+    cursor: pointer;
 }
 
 .pointer{
     cursor: pointer;
+}
+
+.yellowWarningBorder{
+    border: 5px dashed #7D7D7D;
 }
