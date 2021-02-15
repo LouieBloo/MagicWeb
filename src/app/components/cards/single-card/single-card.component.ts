@@ -42,7 +42,12 @@ export class SingleCardComponent implements OnInit, Selectable {
         this.card.location == CardLocation.Stack ||
         this.card.location == CardLocation.AttachedToCard
       ) {
-        return this.card.image_uris ? this.card.image_uris.normal : this.backOfCardImgUrl;
+        if (this.card.cardFaces && this.card.cardFaces.length > 0) {
+          let index = this.card.flipped ? 1 : 0;
+          return this.card.cardFaces[index].image_uris ? this.card.cardFaces[index].image_uris.normal : this.backOfCardImgUrl;
+        } else {
+          return this.card.image_uris && !this.card.flipped ? this.card.image_uris.normal : this.backOfCardImgUrl;
+        }
       }
     }
     return this.backOfCardImgUrl;
@@ -80,9 +85,7 @@ export class SingleCardComponent implements OnInit, Selectable {
   }
 
   cardClicked() {
-    console.log("CLICKED")
     if (!this.canRespondToClicks()) { return; }
-    console.log("ANSWER")
     switch (this.card.location) {
       case CardLocation.Battlefield:
         this.clickedInHand();
@@ -105,6 +108,9 @@ export class SingleCardComponent implements OnInit, Selectable {
     }
   }
 
+  flip(){
+    this.gameEvents.flipCard(this.card);
+  }
 
   select() {
     this.selected = true;

@@ -13,6 +13,8 @@ export class ClickService {
   private cardsRespondingToClicks: boolean = true;
   private selectingTargetObject: boolean = false;
 
+  private respondingToKeyboardPresses: boolean = true;
+
   // private resettingOnClick = { resetting: false, skipOne: false };
 
   constructor(private gameEventService: GameEventService) { }
@@ -52,6 +54,18 @@ export class ClickService {
     } else {
       console.error("deletect not the same")
     }
+  }
+
+  public modalOpened(){
+    this.respondingToKeyboardPresses = false;
+  }
+
+  public modalClosed(){
+    this.respondingToKeyboardPresses = true;
+  }
+
+  public isRespondingToKeyboardPresses():boolean{
+    return this.respondingToKeyboardPresses;
   }
 
   private deselectObject() {
@@ -107,6 +121,13 @@ export class ClickService {
   public exileSelected() {
     if (this.isSelectedObjectACard()) {
       this.gameEventService.moveCard(this.selectedObject.getData(), CardLocation.Exile, null, null);
+      this.resetToNormal();
+    }
+  }
+
+  public deckSelected() {
+    if (this.isSelectedObjectACard()) {
+      this.gameEventService.moveCard(this.selectedObject.getData(), CardLocation.Deck, null, null);
       this.resetToNormal();
     }
   }

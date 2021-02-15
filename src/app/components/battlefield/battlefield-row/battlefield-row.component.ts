@@ -60,7 +60,6 @@ export class BattlefieldRowComponent implements OnInit,Selectable {
   }
 
   rowClicked(){
-    console.log("YES")
     if(this.isSelectable()){
       this.clickService.battlefieldRowClicked(this.rowType,this.owner);
     }

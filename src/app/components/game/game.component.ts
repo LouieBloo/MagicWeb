@@ -28,6 +28,7 @@ export class GameComponent implements OnInit {
     this.gameEventService.rotateCardEvent.subscribe(this.rotateCardEventFired);
     this.gameEventService.attachCardEvent.subscribe(this.attachCardEventFired);
     this.gameEventService.modifyCounterEvent.subscribe(this.modifyCounterEventFired);
+    this.gameEventService.flipCardEvent.subscribe(this.flipCardEventFired);
   }
 
 
@@ -99,6 +100,7 @@ export class GameComponent implements OnInit {
 
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
+    if(!this.clickService.isRespondingToKeyboardPresses()){return;}
     console.log(event.keyCode);
     if (event.keyCode == KEY_CODES.D) {
       this.cardDrawEventFired();
@@ -111,7 +113,7 @@ export class GameComponent implements OnInit {
 
   cardDrawEventFired = () => {
     if (this.room) {
-      this.room.send("cardDraw")
+      this.room.send("cardDraw",{amount:1})
     }
   }
 
@@ -125,6 +127,12 @@ export class GameComponent implements OnInit {
   rotateCardEventFired = (card: Card) => {
     if (this.room) {
       this.room.send("cardRotated", { card: card })
+    }
+  }
+
+  flipCardEventFired = (card: Card) => {
+    if (this.room) {
+      this.room.send("flipCard", { card: card })
     }
   }
 

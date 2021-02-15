@@ -66,4 +66,10 @@ export class BattlefieldComponent implements OnInit {
       this.clickService.exileSelected();
     }
   }
+
+  deckClicked(){
+    if(this.clickService.isSelectingTargetObject()){
+      this.clickService.deckSelected();
+    }
+  }
 }

@@ -9,14 +9,28 @@
 
 
 #titleView{
-    width:inherit;
-    height:inherit;
+    /* width:inherit;
+    height:inherit; */
     position: absolute;
     top:0px;
+}
+
+#main{
+    position: relative;
 }
 
 #name{
     color:white;
     background-color: rgba(0, 0, 0, 0.397);
     font-size: 1rem;
+}
+
+.selectedView{
+    background-color: #000000d8;
+    width:inherit;
+    height:inherit;
+    position: absolute;
+    top:0%;
+
+    z-index: 1;
 }

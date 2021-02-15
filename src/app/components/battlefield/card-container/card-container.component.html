@@ -1,25 +1,18 @@
-<div class="row h-100 pointer" (click)="clicked()">
-    <div class="col">
+<div class="pointer" id="main" (click)="clicked($event)" [ngStyle]="getScaleCSS()" [ngClass]="{'selectable': isSelectable()}">
 
-        <div *ngIf="isSelectable()" id="selectableMouseClick" class="row">
-            <div class="col">
-                <div class="h-100" [ngClass]="{'selectable': isSelectable()}"></div>
-            </div>
-        </div>
-
-        <div class="row" *ngIf="cards && cards.length > 0">
-            <div class="col">
-                <app-single-card [scale]="scale" [card]="cards[cards.length-1]" [clickable]="false"></app-single-card>
-            </div>
-        </div>
-
-
-
-        <div class="row h-100 " id="titleView">
-            <div class="col d-flex justify-content-center flex-column">
-                <h5 class="text-center" id="name">{{name}} ({{cards?.length}})</h5>
-            </div>
-        </div>
-
+    <div class="" *ngIf="cards && cards.length > 0">
+        <app-single-card [scale]="scale" [card]="cards[cards.length-1]" [clickable]="false"></app-single-card>
     </div>
+
+    <div class="d-flex flex-column justify-content-center h-100 w-100" id="titleView">
+        <h5 class="text-center" id="name">{{name}} ({{cards?.length}})</h5>
+    </div>
+
+    <!--Selected View-->
+    <div *ngIf="selected" class="selectedView d-flex flex-column justify-content-center">
+        <div>
+            <button mat-raised-button color="primary" class="p-0 counterButtons flex-grow-1" (click)="importClicked()">Import</button>
+        </div>
+    </div>
+
 </div>

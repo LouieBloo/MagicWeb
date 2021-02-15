@@ -21,6 +21,7 @@ export enum CardLocation {
 export enum SelectableObjectType {
     Card = "Card",
     BattlefieldRow = "BattlefieldRow",
+    Deck = "Deck",
 }
 export enum CounterTypes {
     OneOne = "OneOne",
@@ -69,15 +70,27 @@ export interface Card {
     attachedCards?:Card[];
     attachedToCardId?: string;
     counter?:Counter;
+    cardFaces?:CardFace[];
+    flipped?:boolean;
+}
+
+export interface CardFace{
+    name?: string;
+    image_uris?: any;
 }
 
 export interface Hand {
     cards?: Card[];
 }
 
+export interface Deck {
+    cards?: Card[];
+}
+
 export interface Player {
     name?: string;
     sessionId?: string;
+    deck?: Deck;
     hand?: Hand;
     battlefield?:Battlefield;
 }

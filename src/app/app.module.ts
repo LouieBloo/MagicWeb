@@ -1,6 +1,6 @@
 import { BrowserModule, HAMMER_GESTURE_CONFIG, HammerModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { GestureConfig,MatButtonModule} from '@angular/material';
+import { GestureConfig,MatButtonModule,MatDialogModule,MatFormFieldModule,MatInputModule} from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +17,8 @@ import { HomeComponent } from './components/pages/home/home.component';
 import { CardContainerComponent } from './components/battlefield/card-container/card-container.component';
 import { CounterModifierComponent } from './components/counter-modifier/counter-modifier.component';
 import { StackComponent } from './components/battlefield/stack/stack.component';
+import { ImportDeckModalComponent } from './components/modals/import-deck-modal/import-deck-modal.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { StackComponent } from './components/battlefield/stack/stack.component';
     HomeComponent,
     CardContainerComponent,
     CounterModifierComponent,
-    StackComponent
+    StackComponent,
+    ImportDeckModalComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,11 @@ import { StackComponent } from './components/battlefield/stack/stack.component';
     BrowserAnimationsModule,
     MatSliderModule,
     MatButtonModule,
-    HammerModule
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    HammerModule,
+    HttpClientModule
   ],
   providers: [
     { provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig }

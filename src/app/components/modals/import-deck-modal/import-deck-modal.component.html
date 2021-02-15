@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>Import Deck</h1>
+<div mat-dialog-content>
+    <div class="row">
+        <div class="col">
+            <mat-form-field appearance="fill" id="textArea">
+                <mat-label>1 Card Per Line</mat-label>
+                <textarea matInput [(ngModel)]="cardList" rows="15" [disabled]="loading"></textarea>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h5 *ngIf="loading">Loading...</h5>
+
+            <div *ngIf="validationErrors && validationErrors.length > 0">
+                <ng-template ngFor let-item [ngForOf]="validationErrors" let-i="index">
+                    <h6 class="text-danger">{{item}}</h6>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions class="justify-content-end">
+    <button *ngIf="validated" (click)="validate()" mat-raised-button color="primary">Submit</button>
+    <button (click)="validate()" mat-button [disabled]="loading">Validate</button>
+    <button mat-button mat-dialog-close>Close</button>
+</div>
