@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { ClickService } from 'src/app/services/game/click/click.service';
 import { AuthService } from 'src/app/services/auth-service/auth-service.service';
+import { GameEventService } from 'src/app/services/game/game-event/game-event.service';
 
 @Component({
   selector: 'app-import-deck-modal',
@@ -17,7 +18,9 @@ export class ImportDeckModalComponent implements OnInit, OnDestroy {
   validated:boolean = false;
   validatedDeck:any;
 
-  constructor(private clickService: ClickService, private authService: AuthService) { }
+  @ViewChild('closeButton') closeButton: any;
+
+  constructor(private clickService: ClickService, private authService: AuthService,private gameEventService:GameEventService) { }
 
   ngOnInit(): void {
     this.clickService.modalOpened();
@@ -47,5 +50,10 @@ export class ImportDeckModalComponent implements OnInit, OnDestroy {
       console.log("Error validting deck: ", error)
     })
     
+  }
+
+  submit(){
+    this.gameEventService.importDeck(this.validatedDeck);
+    this.closeButton._elementRef.nativeElement.click();
   }
 }

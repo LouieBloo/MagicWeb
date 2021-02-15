@@ -13,6 +13,7 @@ export class GameEventService {
   flipCardEvent = new BehaviorSubject<Card>(null);
   attachCardEvent = new BehaviorSubject<AttachCardEvent>(null);
   modifyCounterEvent = new BehaviorSubject<ModifyCounterEvent>(null);
+  importDeckEvent = new BehaviorSubject<any>(null);
 
   constructor() { }
 
@@ -41,5 +42,7 @@ export class GameEventService {
     this.flipCardEvent.next(card);
   }
 
-
+  importDeck(deck:any){
+    this.importDeckEvent.next(deck);
+  }
 }

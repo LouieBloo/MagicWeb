@@ -21,7 +21,7 @@
     </div>
 </div>
 <div mat-dialog-actions class="justify-content-end">
-    <button *ngIf="validated" (click)="validate()" mat-raised-button color="primary">Submit</button>
+    <button *ngIf="validated" (click)="submit()" mat-raised-button color="primary">Submit</button>
     <button (click)="validate()" mat-button [disabled]="loading">Validate</button>
-    <button mat-button mat-dialog-close>Close</button>
+    <button mat-button mat-dialog-close #closeButton>Close</button>
 </div>

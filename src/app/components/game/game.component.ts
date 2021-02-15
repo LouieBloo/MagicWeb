@@ -29,6 +29,7 @@ export class GameComponent implements OnInit {
     this.gameEventService.attachCardEvent.subscribe(this.attachCardEventFired);
     this.gameEventService.modifyCounterEvent.subscribe(this.modifyCounterEventFired);
     this.gameEventService.flipCardEvent.subscribe(this.flipCardEventFired);
+    this.gameEventService.importDeckEvent.subscribe(this.importDeckEventFired);
   }
 
 
@@ -146,6 +147,12 @@ export class GameComponent implements OnInit {
   modifyCounterEventFired = (event: ModifyCounterEvent) => {
     if (this.room) {
       this.room.send("createOrModifyCounterOnCard", event);
+    }
+  }
+
+  importDeckEventFired = (deck:any)=>{
+    if(this.room){
+      this.room.send("importDeck",{deck:deck});
     }
   }
 

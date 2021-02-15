@@ -110,6 +110,7 @@ export class SingleCardComponent implements OnInit, Selectable {
 
   flip(){
     this.gameEvents.flipCard(this.card);
+    console.log(this.card)
   }
 
   select() {
