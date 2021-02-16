@@ -1,0 +1,20 @@
+#handRow{
+    background-color: rgb(231, 231, 231);
+    min-height: 200px;
+}
+
+#handControl{
+    position: absolute;
+    bottom:0px;
+
+}
+#handControl .col{
+    background-color: white;
+}
+
+#selectableMouseClick{
+    width:100%;
+    height:100%;
+    position: absolute;
+    /* top:-100%; */
+}

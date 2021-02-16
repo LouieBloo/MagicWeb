@@ -24,6 +24,7 @@ export class SingleCardComponent implements OnInit, Selectable {
   }
   selected: boolean = false;
 
+
   CounterTypes = CounterTypes;
 
   constructor(private clickService: ClickService, private gameEvents: GameEventService) { }
@@ -42,15 +43,23 @@ export class SingleCardComponent implements OnInit, Selectable {
         this.card.location == CardLocation.Stack ||
         this.card.location == CardLocation.AttachedToCard
       ) {
-        if (this.card.cardFaces && this.card.cardFaces.length > 0) {
-          let index = this.card.flipped ? 1 : 0;
-          return this.card.cardFaces[index].image_uris ? this.card.cardFaces[index].image_uris.normal : this.backOfCardImgUrl;
-        } else {
-          return this.card.image_uris && !this.card.flipped ? this.card.image_uris.normal : this.backOfCardImgUrl;
+        return this.getRevealedCardBack();
+      } else if (this.card.location == CardLocation.Deck) {
+        if (this.card.temporarilyRevealed) {
+          return this.getRevealedCardBack();
         }
       }
     }
     return this.backOfCardImgUrl;
+  }
+
+  getRevealedCardBack() {
+    if (this.card.cardFaces && this.card.cardFaces.length > 0) {
+      let index = this.card.flipped ? 1 : 0;
+      return this.card.cardFaces[index].image_uris ? this.card.cardFaces[index].image_uris.normal : this.backOfCardImgUrl;
+    } else {
+      return this.card.image_uris && !this.card.flipped ? this.card.image_uris.normal : this.backOfCardImgUrl;
+    }
   }
 
   getMainCardScaleCSS() {
@@ -81,7 +90,7 @@ export class SingleCardComponent implements OnInit, Selectable {
   }
 
   canRespondToClicks() {
-    return this.clickService.canCardRespondToClick() && this.clickable;
+    return this.clickService.canCardRespondToClick() && (this.clickable || this.card.temporarilyRevealed);
   }
 
   cardClicked() {
@@ -105,10 +114,13 @@ export class SingleCardComponent implements OnInit, Selectable {
       case CardLocation.Stack:
         this.clickedInHand();
         break;
+      case CardLocation.Deck:
+        this.clickedInHand();
+        break;
     }
   }
 
-  flip(){
+  flip() {
     this.gameEvents.flipCard(this.card);
     console.log(this.card)
   }
@@ -150,15 +162,15 @@ export class SingleCardComponent implements OnInit, Selectable {
   }
 
   sendToExile() {
-    this.gameEvents.moveCard(this.card, CardLocation.Exile, null, null);
+    this.gameEvents.moveCard(this.card, CardLocation.Exile, null, null,null);
   }
 
   sendToHand() {
-    this.gameEvents.moveCard(this.card, CardLocation.Hand, null, null);
+    this.gameEvents.moveCard(this.card, CardLocation.Hand, null, null,null);
   }
 
   sendToGraveyard() {
-    this.gameEvents.moveCard(this.card, CardLocation.Graveyard, null, null);
+    this.gameEvents.moveCard(this.card, CardLocation.Graveyard, null, null,null);
   }
 
   rotateCard() {

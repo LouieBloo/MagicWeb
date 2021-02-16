@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ClickService } from 'src/app/services/game/click/click.service';
-import { BattlefieldRowType, BattlefieldOwnerType, Battlefield, CardLocation, Player } from 'src/app/models/game';
+import { BattlefieldRowType, BattlefieldOwnerType, Battlefield, CardLocation, Player, DeckFromLocation } from 'src/app/models/game';
 
 @Component({
   selector: 'app-battlefield',
@@ -67,9 +67,10 @@ export class BattlefieldComponent implements OnInit {
     }
   }
 
-  deckClicked(){
+  deckClicked(deckFromLocation:DeckFromLocation){
+    console.log("LLL: ",deckFromLocation)
     if(this.clickService.isSelectingTargetObject()){
-      this.clickService.deckSelected();
+      this.clickService.deckSelected(deckFromLocation);
     }
   }
 }

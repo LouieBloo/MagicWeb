@@ -53,6 +53,11 @@ export class GameComponent implements OnInit {
 
       if (player.sessionId == room.sessionId) {
         console.log("me loaded..");
+        player.deck.onChange = (changes) => {
+          console.log("deck changed", changes)
+          //hack since the card picker wont update on the broken deck reference
+          this.clickService.findCardsFinished();
+        };
         //this.me = JSON.parse(JSON.stringify(player));
         this.me = player;
       } else {
@@ -79,6 +84,8 @@ export class GameComponent implements OnInit {
       player.battlefield.exile.cards.onAdd = (newCard) => {
         console.log("EXILEE: ADD", newCard);
       }
+
+
     }
 
     // this.room.state.listen("players/:id/hand/cards", (change: DataChange) => {
@@ -101,7 +108,7 @@ export class GameComponent implements OnInit {
 
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
-    if(!this.clickService.isRespondingToKeyboardPresses()){return;}
+    if (!this.clickService.isRespondingToKeyboardPresses()) { return; }
     console.log(event.keyCode);
     if (event.keyCode == KEY_CODES.D) {
       this.cardDrawEventFired();
@@ -114,14 +121,14 @@ export class GameComponent implements OnInit {
 
   cardDrawEventFired = () => {
     if (this.room) {
-      this.room.send("cardDraw",{amount:1})
+      this.room.send("cardDraw", { amount: 1 })
     }
   }
 
   moveCardEventFired = (payload) => {
     if (!payload) { return; }
     if (payload.card) {
-      this.room.send("cardChangeLocation", { card: payload.card, newLocation: payload.newLocation, battlefieldRowType: payload.battlefieldRowType, owner: payload.player });
+      this.room.send("cardChangeLocation", { card: payload.card, newLocation: payload.newLocation, battlefieldRowType: payload.battlefieldRowType, owner: payload.player,deckFromLocation:payload.deckFromLocation });
     }
   }
 
@@ -150,9 +157,9 @@ export class GameComponent implements OnInit {
     }
   }
 
-  importDeckEventFired = (deck:any)=>{
-    if(this.room){
-      this.room.send("importDeck",{deck:deck});
+  importDeckEventFired = (deck: any) => {
+    if (this.room) {
+      this.room.send("importDeck", { deck: deck });
     }
   }
 

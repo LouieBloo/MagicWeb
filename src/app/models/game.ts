@@ -30,6 +30,13 @@ export enum CounterTypes {
     CommanderDamage = "CommanderDamage",
     General = "General"
 }
+export enum CardContainerManipulation {
+    Insert = "Insert",
+    Scry = "Scry",
+    Find = "Find",
+    RevealFind = "RevealFind"
+}
+
 export enum KEY_CODES {
     UP_ARROW = 38,
     DOWN_ARROW = 40,
@@ -72,6 +79,7 @@ export interface Card {
     counter?:Counter;
     cardFaces?:CardFace[];
     flipped?:boolean;
+    temporarilyRevealed?:boolean;
 }
 
 export interface CardFace{
@@ -85,6 +93,11 @@ export interface Hand {
 
 export interface Deck {
     cards?: Card[];
+}
+
+export interface DeckFromLocation {
+    amount:number;
+    fromTop:boolean;
 }
 
 export interface Player {
@@ -103,6 +116,11 @@ export interface ModifyCounterEvent {
     targetCard:Card;
     counterType:CounterTypes;
     amount:number;
+}
+export interface FindCardsEvent{
+    cards?:Card[];
+    cardLocation?:CardLocation;
+    cardContainerManipulation?:CardContainerManipulation;
 }
 
 export interface Counter {

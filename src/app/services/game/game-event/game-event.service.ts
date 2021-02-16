@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Card, CardLocation, BattlefieldRowType, Player, AttachCardEvent, ModifyCounterEvent, Counter, CounterTypes } from 'src/app/models/game';
+import { Card, CardLocation, BattlefieldRowType, Player, AttachCardEvent, ModifyCounterEvent, Counter, CounterTypes, FindCardsEvent, CardContainerManipulation, DeckFromLocation } from 'src/app/models/game';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,7 @@ export class GameEventService {
   attachCardEvent = new BehaviorSubject<AttachCardEvent>(null);
   modifyCounterEvent = new BehaviorSubject<ModifyCounterEvent>(null);
   importDeckEvent = new BehaviorSubject<any>(null);
+  findCardsEvent = new BehaviorSubject<FindCardsEvent>(null);
 
   constructor() { }
 
@@ -22,8 +23,8 @@ export class GameEventService {
     this.drawCardEvent.next(null);
   }
 
-  moveCard(card: Card, newLocation: CardLocation, battlefieldRowType: BattlefieldRowType = null, player: Player) {
-    this.moveCardEvent.next({ card: card, newLocation: newLocation, battlefieldRowType: battlefieldRowType, player: player });
+  moveCard(card: Card, newLocation: CardLocation, battlefieldRowType: BattlefieldRowType = null, player: Player,deckFromLocation:DeckFromLocation = null) {
+    this.moveCardEvent.next({ card: card, newLocation: newLocation, battlefieldRowType: battlefieldRowType, player: player,deckFromLocation:deckFromLocation });
   }
 
   rotateCard(card: Card) {
@@ -44,5 +45,9 @@ export class GameEventService {
 
   importDeck(deck:any){
     this.importDeckEvent.next(deck);
+  }
+
+  findCards(cards:Card[],cardLocation:CardLocation,cardContainerManipulation:CardContainerManipulation){
+    this.findCardsEvent.next({cards:cards,cardLocation:cardLocation,cardContainerManipulation:cardContainerManipulation});
   }
 }

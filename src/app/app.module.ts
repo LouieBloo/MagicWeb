@@ -19,6 +19,7 @@ import { CounterModifierComponent } from './components/counter-modifier/counter-
 import { StackComponent } from './components/battlefield/stack/stack.component';
 import { ImportDeckModalComponent } from './components/modals/import-deck-modal/import-deck-modal.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CardFinderComponent } from './components/card-finder/card-finder.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { HttpClientModule } from '@angular/common/http';
     CardContainerComponent,
     CounterModifierComponent,
     StackComponent,
-    ImportDeckModalComponent
+    ImportDeckModalComponent,
+    CardFinderComponent
   ],
   imports: [
     BrowserModule,

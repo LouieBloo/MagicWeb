@@ -1,0 +1,26 @@
+<div class="row" id="handRow" >
+    <div class="col">
+
+        <div class="row mt-2">
+            <div class="col d-flex justify-content-center">
+                <h5 class="text-center mb-0">Find in {{cardLocation}}</h5>
+            </div>
+        </div>
+
+        <div class="p-2">
+            <div class="row d-flex justify-content-center">
+                <ng-template ngFor let-item [ngForOf]="cards" let-i="index">
+                    <app-single-card [scale]="scale" [card]="item"></app-single-card>
+                </ng-template>
+            </div>
+        </div>
+
+
+        <div class="row mb-2">
+            <div class="col d-flex justify-content-center">
+                <button mat-raised-button  (click)="done()">Done</button>
+            </div>
+        </div>
+
+    </div>
+</div>

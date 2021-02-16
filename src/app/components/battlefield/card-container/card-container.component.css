@@ -34,3 +34,14 @@
 
     z-index: 1;
 }
+
+
+#topBottomButtons{
+    position: absolute;
+    top:0px;
+}
+
+.invisButton{
+    border:none;
+    background: none;
+}

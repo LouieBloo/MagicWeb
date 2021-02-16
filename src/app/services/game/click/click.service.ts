@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Selectable } from 'src/app/interfaces/gameInterfaces';
-import { SelectableObjectType, Battlefield, BattlefieldRowType, CardLocation, BattlefieldOwnerType, Player } from 'src/app/models/game';
+import { SelectableObjectType, Battlefield, BattlefieldRowType, CardLocation, BattlefieldOwnerType, Player, Card, CardContainerManipulation, DeckFromLocation } from 'src/app/models/game';
 import { GameEventService } from '../game-event/game-event.service';
 
 @Injectable({
@@ -33,7 +33,7 @@ export class ClickService {
 
     //2 cards are selected, attach
     if (this.isSelectedObjectACard() && this.selectedObject.getType() == SelectableObjectType.Card) {
-      this.gameEventService.attachCard(selectedObject.getCard(),this.selectedObject.getCard());
+      this.gameEventService.attachCard(selectedObject.getCard(), this.selectedObject.getCard());
       this.resetToNormal();
     } else {
       this.deselectObject();
@@ -56,15 +56,15 @@ export class ClickService {
     }
   }
 
-  public modalOpened(){
+  public modalOpened() {
     this.respondingToKeyboardPresses = false;
   }
 
-  public modalClosed(){
+  public modalClosed() {
     this.respondingToKeyboardPresses = true;
   }
 
-  public isRespondingToKeyboardPresses():boolean{
+  public isRespondingToKeyboardPresses(): boolean {
     return this.respondingToKeyboardPresses;
   }
 
@@ -125,9 +125,9 @@ export class ClickService {
     }
   }
 
-  public deckSelected() {
+  public deckSelected(deckFromLocation:DeckFromLocation) {
     if (this.isSelectedObjectACard()) {
-      this.gameEventService.moveCard(this.selectedObject.getData(), CardLocation.Deck, null, null);
+      this.gameEventService.moveCard(this.selectedObject.getData(), CardLocation.Deck, null, null,deckFromLocation);
       this.resetToNormal();
     }
   }
@@ -137,5 +137,15 @@ export class ClickService {
       this.gameEventService.moveCard(this.selectedObject.getData(), CardLocation.Stack, null, null);
       this.resetToNormal();
     }
+  }
+
+  findCards(cards: Card[], cardLocation: CardLocation,cardContainerManipulation:CardContainerManipulation) {
+    this.modalOpened();
+    this.gameEventService.findCards(cards, cardLocation,cardContainerManipulation);
+  }
+  
+  findCardsFinished() {
+    this.modalClosed();
+    this.gameEventService.findCards(null, null,null);
   }
 }
