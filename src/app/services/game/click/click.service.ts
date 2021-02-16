@@ -89,6 +89,13 @@ export class ClickService {
     return false;
   }
 
+  public getSelectedCard():Card{
+    if(this.isSelectedObjectACard()){
+      return this.selectedObject.getCard();
+    }
+    return null;
+  }
+
   public canCardRespondToClick(): boolean {
     return this.cardsRespondingToClicks;
   }

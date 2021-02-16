@@ -68,7 +68,6 @@ export class BattlefieldComponent implements OnInit {
   }
 
   deckClicked(deckFromLocation:DeckFromLocation){
-    console.log("LLL: ",deckFromLocation)
     if(this.clickService.isSelectingTargetObject()){
       this.clickService.deckSelected(deckFromLocation);
     }

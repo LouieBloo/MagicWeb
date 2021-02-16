@@ -56,7 +56,7 @@ export class GameComponent implements OnInit {
         player.deck.onChange = (changes) => {
           console.log("deck changed", changes)
           //hack since the card picker wont update on the broken deck reference
-          this.clickService.findCardsFinished();
+          //this.clickService.findCardsFinished();
         };
         //this.me = JSON.parse(JSON.stringify(player));
         this.me = player;

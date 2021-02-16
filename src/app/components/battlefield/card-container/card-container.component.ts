@@ -22,6 +22,7 @@ export class CardContainerComponent implements OnInit, Selectable {
   @Input() cardLocation: CardLocation;
 
   selected: boolean = false;
+  amountToPutCard:number = 1;
 
   cardRealDimensions: any = {
     width: 63,
@@ -38,9 +39,8 @@ export class CardContainerComponent implements OnInit, Selectable {
   }
 
   clicked(event,deckFromLocation:DeckFromLocation = null) {
-    console.log("HHH",deckFromLocation)
+    console.log("cLCIKED")
     if (this.clickCallback && this.isSelectable()) {
-      
       this.clickCallback(deckFromLocation);
     } else {
       event.stopPropagation();
@@ -93,18 +93,42 @@ export class CardContainerComponent implements OnInit, Selectable {
     this.clickService.findCards(this.cards, this.cardLocation,CardContainerManipulation.RevealFind);
   }
 
-  insertClicked(){
+  // insertClicked(){
+  //   if(!this.cards || this.cards.length < 1){return;}
+  //   this.clickService.findCards(this.cards, this.cardLocation,CardContainerManipulation.Insert);
+  // }
+
+  scryClicked = (event)=>{
+    event.stopPropagation();
     if(!this.cards || this.cards.length < 1){return;}
-    this.clickService.findCards(this.cards, this.cardLocation,CardContainerManipulation.Insert);
+    let scryCards:Card[] = [];
+    
+    for(let x = 0;x<this.amountToPutCard;x++){
+      if(x < this.cards.length){
+        scryCards.push(this.cards[x]);
+      }
+    }
+    this.clickService.findCards(scryCards, this.cardLocation,CardContainerManipulation.Scry);
+    this.amountToPutCard = 1;
   }
 
   topHalfClicked = (event)=> {
     event.stopPropagation();
-    this.clicked(event,{amount:1,fromTop:true})
+    this.clicked(event,{amount:this.amountToPutCard,fromTop:true})
+    this.amountToPutCard = 1;
   }
 
   bottomHalfClicked = (event) =>{
     event.stopPropagation();
-    this.clicked(event,{amount:1,fromTop:false})
+    this.clicked(event,{amount:this.amountToPutCard,fromTop:false})
+    this.amountToPutCard = 1;
+  }
+
+  modifyAmount = (event,amount)=>{
+    event.stopPropagation();
+    this.amountToPutCard += amount;
+    if(this.amountToPutCard <= 0){
+      this.amountToPutCard = 1;
+    }
   }
 }

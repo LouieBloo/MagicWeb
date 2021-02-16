@@ -1,16 +1,23 @@
-<div class="row" id="handRow" >
+<div class="row" id="handRow">
     <div class="col">
 
         <div class="row mt-2">
             <div class="col d-flex justify-content-center">
-                <h5 class="text-center mb-0">Find in {{cardLocation}}</h5>
+                <h5 class="text-center mb-0">{{cardContainerManipulation}} in {{cardLocation}}</h5>
             </div>
         </div>
 
         <div class="p-2">
             <div class="row d-flex justify-content-center">
+
                 <ng-template ngFor let-item [ngForOf]="cards" let-i="index">
-                    <app-single-card [scale]="scale" [card]="item"></app-single-card>
+                        <app-single-card [scale]="scale" [card]="item"></app-single-card>
+                    <!-- <div *ngIf="cardContainerManipulation == 'Scry' && item.location == 'Deck'"  >
+                        <app-single-card [scale]="scale" [card]="item"></app-single-card>
+                    </div>
+                    <div *ngIf="cardContainerManipulation != 'Scry'">
+                        <app-single-card [scale]="scale" [card]="item"></app-single-card>
+                    </div> -->
                 </ng-template>
             </div>
         </div>
@@ -18,7 +25,7 @@
 
         <div class="row mb-2">
             <div class="col d-flex justify-content-center">
-                <button mat-raised-button  (click)="done()">Done</button>
+                <button mat-raised-button (click)="done()">Done</button>
             </div>
         </div>
 

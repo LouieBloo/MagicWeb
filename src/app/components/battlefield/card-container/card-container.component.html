@@ -1,7 +1,7 @@
 <div class="pointer" id="main" (click)="clicked($event)" [ngStyle]="getScaleCSS()" [ngClass]="{'selectable': isSelectable()}">
 
     <div class="" *ngIf="cards && cards.length > 0">
-        <app-single-card [scale]="scale" [card]="cards[cards.length-1]" [clickable]="false"></app-single-card>
+        <app-single-card [scale]="scale" [card]="cards[0]" [clickable]="false"></app-single-card>
     </div>
 
     <div class="d-flex flex-column justify-content-center h-100 w-100" id="titleView">
@@ -10,16 +10,30 @@
 
     <!--Selected View-->
     <div *ngIf="selected" class="selectedView d-flex flex-column justify-content-center">
-        <div>
-            <button mat-raised-button color="primary" class="p-0 counterButtons flex-grow-1" (click)="importClicked()">Import</button>
-            <button mat-raised-button color="primary" class="p-0 counterButtons flex-grow-1" (click)="findInDeckClicked()">Find</button>
-            <button mat-raised-button color="primary" class="p-0 counterButtons flex-grow-1" (click)="insertClicked()">Insert</button>
+
+        <button mat-raised-button color="primary" class="p-0 counterButtons noBorderRadius" (click)="findInDeckClicked()">Find</button>
+        <div class="d-flex ">
+            <button mat-raised-button color="primary" class="p-0 counterButtons noBorderRadius" (click)="scryClicked($event)">Scry</button>
+            <p class="amountText mb-0">{{amountToPutCard}}</p>
+
+            <button class="invisButton smallButtons flex-grow-1 noBorderRadius" (click)="modifyAmount($event,1)" mat-flat-button>+</button>
+            <button class="invisButton smallButtons flex-grow-1 noBorderRadius" (click)="modifyAmount($event,-1)" mat-flat-button>-</button>
         </div>
+
+        <button mat-raised-button color="accent" class="p-0 counterButtons noBorderRadius" (click)="importClicked()">Import</button>
     </div>
 
     <div *ngIf="isSelectable() && this.cardLocation=='Deck'" id="topBottomButtons" class="h-100 w-100 d-flex flex-column">
-        <button class="flex-grow-1 invisButton" (click)="topHalfClicked($event)">Top</button>
-        <button class="flex-grow-1 invisButton" (click)="bottomHalfClicked($event)">Bottom</button>
+        <div class="flex-grow-1 d-flex ">
+            <p class="amountText mb-0">{{amountToPutCard}}</p>
+
+            <button class="flex-grow-1 invisButton noBorderRadius" (click)="modifyAmount($event,1)">+</button>
+            <button class="flex-grow-1 invisButton noBorderRadius" (click)="modifyAmount($event,-1)">-</button>
+        </div>
+        <p id="fromText" class="mb-0 flex-grow-1 text-center">from</p>
+        <button class="flex-grow-1 invisButton noBorderRadius" (click)="topHalfClicked($event)">Top</button>
+
+        <button class="flex-grow-1 invisButton noBorderRadius" (click)="bottomHalfClicked($event)">Bottom</button>
     </div>
 
 </div>

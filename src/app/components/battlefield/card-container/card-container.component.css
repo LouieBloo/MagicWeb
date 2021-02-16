@@ -35,13 +35,38 @@
     z-index: 1;
 }
 
+.counterButtons{
+    min-width:50px;
+}
+
 
 #topBottomButtons{
     position: absolute;
     top:0px;
+    background-color:black;
 }
 
 .invisButton{
-    border:none;
-    background: none;
+    /* border:none;
+    background: none; */
+}
+
+.amountText{
+    font-size: 2rem;
+    color:white;
+}
+
+.smallButtons{
+    min-width:20px;
+    padding:0px;
+
+}
+
+.noBorderRadius{
+    border-radius: 0px;
+}
+
+#fromText{
+    font-size:2rem;
+    color:white;
 }

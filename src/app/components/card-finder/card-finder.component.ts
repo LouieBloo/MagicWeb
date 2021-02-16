@@ -15,18 +15,20 @@ export class CardFinderComponent implements OnInit, OnDestroy {
   @Input() cardLocation: CardLocation;
   @Input() cardContainerManipulation: CardContainerManipulation;
 
-  constructor(private clickService: ClickService) { }
+  constructor(private clickService: ClickService, private gameEventService: GameEventService) { }
 
   ngOnInit(): void {
-    if (this.cardContainerManipulation == CardContainerManipulation.RevealFind) {
+    console.log("INSIDE CARD FINDER:",this.cards)
+    if (this.cardContainerManipulation == CardContainerManipulation.RevealFind || this.cardContainerManipulation == CardContainerManipulation.Scry) {
       this.cards.forEach(card => {
         card.temporarilyRevealed = true;
       })
     }
+
   }
 
   ngOnDestroy(): void {
-    if (this.cardContainerManipulation == CardContainerManipulation.RevealFind) {
+    if (this.cardContainerManipulation == CardContainerManipulation.RevealFind || this.cardContainerManipulation == CardContainerManipulation.Scry) {
       this.cards.forEach(card => {
         card.temporarilyRevealed = false;
       })
@@ -35,5 +37,19 @@ export class CardFinderComponent implements OnInit, OnDestroy {
 
   done() {
     this.clickService.findCardsFinished();
+  }
+
+  deckClickEventFired = (payload: any) =>{
+    console.log("DECK CLICK EVENT FIRED: ",payload)
+    // if(!payload){return;}
+    // if (this.cardContainerManipulation == CardContainerManipulation.Scry) {
+    //   let foundObject = this.cards.find(obj => {
+    //     return obj.id == payload.card.id;
+    //   })
+    //   if (foundObject) {
+    //     let index = this.cards.indexOf(foundObject);
+    //     this.cards.splice(index, 1);
+    //   }
+    // }
   }
 }

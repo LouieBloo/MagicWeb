@@ -48,6 +48,11 @@ export class GameEventService {
   }
 
   findCards(cards:Card[],cardLocation:CardLocation,cardContainerManipulation:CardContainerManipulation){
+    console.log("FIND CARDS",cards)
     this.findCardsEvent.next({cards:cards,cardLocation:cardLocation,cardContainerManipulation:cardContainerManipulation});
   }
+
+  
+
+
 }
