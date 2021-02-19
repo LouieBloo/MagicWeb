@@ -20,6 +20,7 @@ import { StackComponent } from './components/battlefield/stack/stack.component';
 import { ImportDeckModalComponent } from './components/modals/import-deck-modal/import-deck-modal.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CardFinderComponent } from './components/card-finder/card-finder.component';
+import { MdePopoverModule } from '@material-extended/mde';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { CardFinderComponent } from './components/card-finder/card-finder.compon
     MatFormFieldModule,
     MatInputModule,
     HammerModule,
-    HttpClientModule
+    HttpClientModule,
+    MdePopoverModule
   ],
   providers: [
     { provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig }

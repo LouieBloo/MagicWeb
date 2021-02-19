@@ -3,6 +3,14 @@
     <div class="row">
         <div class="col">
             <mat-form-field appearance="fill" id="textArea">
+                <mat-label>Commander</mat-label>
+                <textarea matInput [(ngModel)]="commander" rows="2" [disabled]="loading"></textarea>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <mat-form-field appearance="fill" id="textArea">
                 <mat-label>1 Card Per Line</mat-label>
                 <textarea matInput [(ngModel)]="cardList" rows="15" [disabled]="loading"></textarea>
             </mat-form-field>

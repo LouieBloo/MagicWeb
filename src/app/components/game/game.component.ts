@@ -30,6 +30,7 @@ export class GameComponent implements OnInit {
     this.gameEventService.modifyCounterEvent.subscribe(this.modifyCounterEventFired);
     this.gameEventService.flipCardEvent.subscribe(this.flipCardEventFired);
     this.gameEventService.importDeckEvent.subscribe(this.importDeckEventFired);
+    this.gameEventService.shuffleDeckEvent.subscribe(this.shuffleDeckEventFired);
   }
 
 
@@ -160,6 +161,12 @@ export class GameComponent implements OnInit {
   importDeckEventFired = (deck: any) => {
     if (this.room) {
       this.room.send("importDeck", { deck: deck });
+    }
+  }
+
+  shuffleDeckEventFired = ()=>{
+    if (this.room) {
+      this.room.send("shuffleDeck");
     }
   }
 

@@ -8,7 +8,7 @@
         <div class="d-flex flex-column">
             <div class="d-flex">
                 <app-card-container [ownerType]="ownerType" [ngStyle]="getOuterStyles()" [cards]="owner?.deck?.cards" [name]="'Deck'" [clickCallback]="deckClicked" [cardLocation]="'Deck'"></app-card-container>
-                <app-card-container [ownerType]="ownerType" [ngStyle]="getOuterStyles()" [cards]="" [name]="'Health'" [clickCallback]=""></app-card-container>
+                <app-card-container [ownerType]="ownerType" [ngStyle]="getOuterStyles()" [cards]="battlefield?.commandZone?.cards" [name]="'Command Zone'" [clickCallback]="commandZoneClicked" [cardLocation]="'CommandZone'"></app-card-container>
             </div>
             <div class="d-flex">
                 <app-card-container [ownerType]="ownerType" [ngStyle]="getOuterStyles()" [cards]="battlefield?.graveyard?.cards" [name]="'Graveyard'"

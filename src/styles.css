@@ -22,3 +22,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .yellowWarningBorder{
     border: 5px dashed #7D7D7D;
 }
+
+.noBorderRadius{
+    border-radius: 0px !important;
+}

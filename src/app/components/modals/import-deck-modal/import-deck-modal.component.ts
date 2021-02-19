@@ -12,6 +12,7 @@ export class ImportDeckModalComponent implements OnInit, OnDestroy {
 
 
   cardList: string;
+  commander: string;
   validationErrors: string[] = [];
 
   loading:boolean = false;
@@ -33,16 +34,16 @@ export class ImportDeckModalComponent implements OnInit, OnDestroy {
   validate = async () => {
     this.loading = true;
     let response = await this.authService.request('post', '/validate', {
-      deck: this.cardList
+      deck: this.cardList,
+      commander: this.commander
     }).subscribe(data => {
       this.loading = false;
-      console.log("got data: ",data)
       if(data && data.errors && data.errors.length > 0){
         this.validated = false;
         this.validationErrors = data.errors;
       }else{
         this.validated = true;
-        this.validatedDeck = data.deck;
+        this.validatedDeck = data;
         this.validationErrors = [];
       }
     }, error => {

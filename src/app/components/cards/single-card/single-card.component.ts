@@ -41,7 +41,8 @@ export class SingleCardComponent implements OnInit, Selectable {
         this.card.location == CardLocation.Battlefield ||
         this.card.location == CardLocation.Hand ||
         this.card.location == CardLocation.Stack ||
-        this.card.location == CardLocation.AttachedToCard
+        this.card.location == CardLocation.AttachedToCard ||
+        this.card.location == CardLocation.CommandZone
       ) {
         return this.getRevealedCardBack();
       } else if (this.card.location == CardLocation.Deck) {
@@ -77,6 +78,13 @@ export class SingleCardComponent implements OnInit, Selectable {
     }
   }
 
+  getPopupScaleCSS() {
+    return {
+      width: this.cardRealDimensions.width * 4 + "px",
+      height: this.cardRealDimensions.height * 4 + "px"
+    }
+  }
+
   getAttachmentCSS(step: number) {
     if (!this.card) { return; }
 
@@ -91,6 +99,15 @@ export class SingleCardComponent implements OnInit, Selectable {
 
   canRespondToClicks() {
     return this.clickService.canCardRespondToClick() && (this.clickable || this.card.temporarilyRevealed);
+  }
+
+  isPopoverDisabled(): boolean {
+    if (this.card && (
+      this.card.location == CardLocation.Battlefield ||
+      this.card.location == CardLocation.Hand ||
+      this.card.location == CardLocation.Stack)
+    ) { return false }
+    return true;
   }
 
   cardClicked() {
@@ -115,6 +132,9 @@ export class SingleCardComponent implements OnInit, Selectable {
         this.clickedInHand();
         break;
       case CardLocation.Deck:
+        this.clickedInHand();
+        break;
+      case CardLocation.CommandZone:
         this.clickedInHand();
         break;
     }
@@ -144,32 +164,20 @@ export class SingleCardComponent implements OnInit, Selectable {
     return this.card;
   }
 
-  inHand() {
-    return this.card && this.card.location == CardLocation.Hand;
-  }
-
-  inGraveyard() {
-    return this.card && this.card.location == CardLocation.Graveyard;
-  }
-
-  inExile() {
-    return this.card && this.card.location == CardLocation.Exile;
-  }
-
   inBattlefield() {
     return this.card && this.card.location == CardLocation.Battlefield;
   }
 
   sendToExile() {
-    this.gameEvents.moveCard(this.card, CardLocation.Exile, null, null,null);
+    this.gameEvents.moveCard(this.card, CardLocation.Exile, null, null, null);
   }
 
   sendToHand() {
-    this.gameEvents.moveCard(this.card, CardLocation.Hand, null, null,null);
+    this.gameEvents.moveCard(this.card, CardLocation.Hand, null, null, null);
   }
 
   sendToGraveyard() {
-    this.gameEvents.moveCard(this.card, CardLocation.Graveyard, null, null,null);
+    this.gameEvents.moveCard(this.card, CardLocation.Graveyard, null, null, null);
   }
 
   rotateCard() {
@@ -234,6 +242,9 @@ export class SingleCardComponent implements OnInit, Selectable {
 
   getCounterString(counterType: CounterTypes): string {
     if (this.card && this.card.counter && this.card.counter.type == counterType) {
+      if(this.card.counter.amount == 0){
+        return;
+      }
       switch (this.card.counter.type) {
         case CounterTypes.OneOne:
           return this.card.counter.amount + "/" + this.card.counter.amount;
@@ -243,9 +254,9 @@ export class SingleCardComponent implements OnInit, Selectable {
     } else {
       switch (counterType) {
         case CounterTypes.OneOne:
-          return "1/1";
+          return "0/0";
         case CounterTypes.General:
-          return "1"
+          return "0"
       }
     }
 

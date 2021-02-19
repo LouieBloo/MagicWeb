@@ -28,7 +28,6 @@ export class BoardComponent implements OnInit {
   }
 
   findCardsEventFired = (event: FindCardsEvent) => {
-    console.log("EVENT: ",event)
     if (!event) { return; }
 
     //if we get passed in a null location that means we need to close

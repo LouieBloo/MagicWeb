@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Card, BattlefieldOwnerType, CardLocation, SelectableObjectType, CardContainerManipulation, DeckFromLocation } from 'src/app/models/game';
+import { Card, BattlefieldOwnerType, CardLocation, SelectableObjectType, CardContainerManipulation, DeckFromLocation, CounterTypes } from 'src/app/models/game';
 import { ClickService } from 'src/app/services/game/click/click.service';
 import { Selectable } from 'src/app/interfaces/gameInterfaces';
 import { GameEventService } from 'src/app/services/game/game-event/game-event.service';
@@ -39,7 +39,6 @@ export class CardContainerComponent implements OnInit, Selectable {
   }
 
   clicked(event,deckFromLocation:DeckFromLocation = null) {
-    console.log("cLCIKED")
     if (this.clickCallback && this.isSelectable()) {
       this.clickCallback(deckFromLocation);
     } else {
@@ -93,6 +92,13 @@ export class CardContainerComponent implements OnInit, Selectable {
     this.clickService.findCards(this.cards, this.cardLocation,CardContainerManipulation.RevealFind);
   }
 
+  amountToPutCardModified = (counterType: CounterTypes, amount: number) => {
+    this.amountToPutCard += amount;
+    if(this.amountToPutCard <= 0){
+      this.amountToPutCard = 1;
+    }
+  }
+
   // insertClicked(){
   //   if(!this.cards || this.cards.length < 1){return;}
   //   this.clickService.findCards(this.cards, this.cardLocation,CardContainerManipulation.Insert);
@@ -130,5 +136,25 @@ export class CardContainerComponent implements OnInit, Selectable {
     if(this.amountToPutCard <= 0){
       this.amountToPutCard = 1;
     }
+  }
+
+  getText():string{
+    if(this.cardLocation == CardLocation.CommandZone){
+      return this.getFilteredName(this.cardLocation);
+    }else{
+      return this.getFilteredName(this.cardLocation) + " (" + (this.cards ? this.cards.length : 0) + ")";
+    }
+  }
+
+  getFilteredName(location:CardLocation):string{
+    if(location == CardLocation.CommandZone){
+      return "Command";
+    }else{
+      return location;
+    }
+  }
+
+  shuffleClicked(){
+    this.gameEventService.shuffleDeck();
   }
 }

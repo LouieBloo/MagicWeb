@@ -1,4 +1,4 @@
-<div  [ngStyle]="getMainCardScaleCSS()">
+<div [ngStyle]="getMainCardScaleCSS()" [mdePopoverTriggerFor]="appPopover">
 
     <!--Attachments-->
     <div *ngIf="card?.attachedCards && card?.attachedCards?.length > 0" class="d-flex justify-content-center">
@@ -39,20 +39,16 @@
                 [callback]="counterModified"></app-counter-modifier>
             <app-counter-modifier [text]="getCounterString(CounterTypes.General)" [counterType]="CounterTypes.General"
                 [callback]="counterModified"></app-counter-modifier>
-            <div >
+            <div>
                 <button mat-raised-button color="primary" class="p-0 counterButtons flex-grow-1" (click)="flip()">Flip</button>
             </div>
-            <!-- <div class="d-flex justify-content-center">
-                        <button mat-raised-button color="primary" class="p-0 counterButtons flex-grow-1" >1/1</button>
-                        <button mat-raised-button color="primary" class="p-0 counterButtons flex-grow-1" (click)="modifyOneOneCounter(1,$event)">+</button>
-                        <button mat-raised-button color="primary" class="p-0 counterButtons flex-grow-1" (click)="modifyOneOneCounter(-1,$event)">-</button>
-                    </div> -->
-            <!-- <button mat-flat-button color="primary" (click)="sendToGraveyard()" *ngIf="!inGraveyard()">Graveyard</button>
-                            <button mat-flat-button color="primary" (click)="sendToExile()" *ngIf="!inExile()">Exile</button>
-                            <button mat-flat-button color="primary" (click)="sendToHand()" *ngIf="!inHand()">Hand</button> -->
-            <!-- </div> -->
-            <!-- </div> -->
+           
         </div>
     </div>
 
+    <mde-popover #appPopover="mdePopover"  [mdePopoverOverlapTrigger]="false" [mdeFocusTrapEnabled]="false" [mdePopoverEnterDelay]="750" [mdePopoverLeaveDelay]="0">
+        <div *ngIf="!isPopoverDisabled()">
+            <img class="picture" [src]="getImgSource()" [ngStyle]="getPopupScaleCSS()">
+        </div>
+    </mde-popover>
 </div>

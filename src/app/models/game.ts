@@ -16,7 +16,8 @@ export enum CardLocation {
     Exile = "Exile",
     Stack = "Stack",
     Deck = "Deck",
-    AttachedToCard="AttachedToCard"
+    AttachedToCard="AttachedToCard",
+    CommandZone="CommandZone"
 }
 export enum SelectableObjectType {
     Card = "Card",
@@ -49,6 +50,7 @@ export interface Battlefield {
     battlefieldRows?: any;
     graveyard?: Graveyard;
     exile?: Exile;
+    commandZone?:CommandZone;
 }
 
 export interface BattlefieldRow {
@@ -61,6 +63,9 @@ export interface Graveyard {
 }
 
 export interface Exile {
+    cards?: Card[];
+}
+export interface CommandZone {
     cards?: Card[];
 }
 export interface Stack {

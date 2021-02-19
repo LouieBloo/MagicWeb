@@ -5,7 +5,7 @@
     </div>
 
     <div class="d-flex flex-column justify-content-center h-100 w-100" id="titleView">
-        <h5 class="text-center" id="name">{{name}} ({{cards?.length}})</h5>
+        <h5 class="text-center" id="name">{{getText()}}</h5>
     </div>
 
     <!--Selected View-->
@@ -21,19 +21,22 @@
         </div>
 
         <button mat-raised-button color="accent" class="p-0 counterButtons noBorderRadius" (click)="importClicked()">Import</button>
+        <button mat-raised-button color="accent" class="p-0 counterButtons noBorderRadius" (click)="shuffleClicked()">Shuffle</button>
     </div>
 
-    <div *ngIf="isSelectable() && this.cardLocation=='Deck'" id="topBottomButtons" class="h-100 w-100 d-flex flex-column">
-        <div class="flex-grow-1 d-flex ">
+    <div *ngIf="isSelectable() && this.cardLocation=='Deck'" id="topBottomButtons" class="h-100 w-100 d-flex flex-column ">
+        <!-- <div class="flex-grow-1 d-flex ">
             <p class="amountText mb-0">{{amountToPutCard}}</p>
 
             <button class="flex-grow-1 invisButton noBorderRadius" (click)="modifyAmount($event,1)">+</button>
             <button class="flex-grow-1 invisButton noBorderRadius" (click)="modifyAmount($event,-1)">-</button>
-        </div>
-        <p id="fromText" class="mb-0 flex-grow-1 text-center">from</p>
-        <button class="flex-grow-1 invisButton noBorderRadius" (click)="topHalfClicked($event)">Top</button>
+        </div> -->
+        <app-counter-modifier [text]="amountToPutCard + ' from'" [counterType]="'General'"
+        [callback]="amountToPutCardModified"></app-counter-modifier>
 
-        <button class="flex-grow-1 invisButton noBorderRadius" (click)="bottomHalfClicked($event)">Bottom</button>
+        <button id="topButton" class="flex-grow-1 noBorderRadius topButtonFont p-0" (click)="topHalfClicked($event)"><span class="d-block topButtonInnerText">Top</span></button>
+
+        <button class="flex-grow-1 noBorderRadius topButtonFont p-0" (click)="bottomHalfClicked($event)"><span class="d-block topButtonInnerText">Bottom</span></button>
     </div>
 
 </div>

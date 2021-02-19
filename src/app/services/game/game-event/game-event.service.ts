@@ -15,6 +15,7 @@ export class GameEventService {
   modifyCounterEvent = new BehaviorSubject<ModifyCounterEvent>(null);
   importDeckEvent = new BehaviorSubject<any>(null);
   findCardsEvent = new BehaviorSubject<FindCardsEvent>(null);
+  shuffleDeckEvent = new BehaviorSubject<any>(null);
 
   constructor() { }
 
@@ -48,10 +49,12 @@ export class GameEventService {
   }
 
   findCards(cards:Card[],cardLocation:CardLocation,cardContainerManipulation:CardContainerManipulation){
-    console.log("FIND CARDS",cards)
     this.findCardsEvent.next({cards:cards,cardLocation:cardLocation,cardContainerManipulation:cardContainerManipulation});
   }
 
+  shuffleDeck(){
+    this.shuffleDeckEvent.next(null);
+  }
   
 
 

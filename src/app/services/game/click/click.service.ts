@@ -132,6 +132,13 @@ export class ClickService {
     }
   }
 
+  public commandZoneSelected(){
+    if (this.isSelectedObjectACard()) {
+      this.gameEventService.moveCard(this.selectedObject.getData(), CardLocation.CommandZone, null, null);
+      this.resetToNormal();
+    }
+  }
+
   public deckSelected(deckFromLocation:DeckFromLocation) {
     if (this.isSelectedObjectACard()) {
       this.gameEventService.moveCard(this.selectedObject.getData(), CardLocation.Deck, null, null,deckFromLocation);

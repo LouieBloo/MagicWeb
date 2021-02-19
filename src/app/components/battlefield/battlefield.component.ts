@@ -72,4 +72,10 @@ export class BattlefieldComponent implements OnInit {
       this.clickService.deckSelected(deckFromLocation);
     }
   }
+
+  commandZoneClicked(){
+    if(this.clickService.isSelectingTargetObject()){
+      this.clickService.commandZoneSelected();
+    }
+  }
 }
