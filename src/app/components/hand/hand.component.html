@@ -1,9 +1,9 @@
 <div class="row">
-    <div class="col">
+    <div class="col pr-0 pl-0">
 
         <div *ngIf="isSelectable()" id="selectableMouseClick" class="row pointer" (click)="rowClicked()" [ngClass]="{'selectable': isSelectable()}"></div>
 
-        <div class="p-2">
+        <div class="">
             <div id="handRow" class="row d-flex justify-content-center">
                 <ng-template ngFor let-item [ngForOf]="cards" let-i="index">
                     <app-single-card [scale]="scale" [card]="item"></app-single-card>

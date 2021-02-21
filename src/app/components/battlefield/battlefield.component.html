@@ -1,14 +1,16 @@
 <div class="row h-100" style="background-color: aquamarine;">
-    <div class="col d-flex">
-        <div class="flex-grow-1 d-flex flex-column"  [ngClass]="{'justify-content-end': !isMine()}">
+    <div class="col d-flex pr-0 pl-0">
+        <div class="flex-grow-1 d-flex flex-column" [ngClass]="{'justify-content-end': !isMine()}">
             <ng-template ngFor let-item [ngForOf]="rows" let-i="index">
-                <app-battlefield-row class="" [owner]="owner" [ownerType]="ownerType" [rowType]="item.rowType"
-                    [cards]="getCards(item)"></app-battlefield-row>
+                <app-battlefield-row class="" [owner]="owner" [ownerType]="ownerType" [rowType]="item.rowType" [cards]="getCards(item)"></app-battlefield-row>
             </ng-template>
         </div>
-        <div class="d-flex flex-column sidePanelBackground">
+        <div class="d-flex flex-column sidePanelBackground" [ngClass]="{'flex-column-reverse': !isMine()}">
             <div class="d-flex flex-column">
                 <h4 class="text-center mb-0">{{owner?.name}}</h4>
+            </div>
+            <div class="d-flex flex-column">
+
                 <div class="d-flex flex-row">
                     <app-counter-modifier class="flex-grow-1" [ownerType]="ownerType" [text]="owner?.health?.amount"
                         [icon]="'favorite'" [counterType]="'Health'" [callback]="healthModified"></app-counter-modifier>
@@ -35,7 +37,8 @@
                 <app-card-container [ownerType]="ownerType" [ngStyle]="getOuterStyles()" [cards]="battlefield?.exile?.cards"
                     [name]="'Exile'" [clickCallback]="exileClicked" [cardLocation]="'Exile'"></app-card-container>
             </div>
-            <div *ngIf="ownerType == 'Mine'" class="d-flex h-100 align-items-center" [ngClass]="{'selectable': isTrashSelectable()}" (click)="trashClicked()">
+            <div id="trashCan" *ngIf="ownerType == 'Mine'" class="d-flex align-items-center" [ngClass]="{'selectable': isTrashSelectable()}"
+                (click)="trashClicked()">
                 <h5 class="text-center flex-grow-1" id="trashFont">Trash</h5>
             </div>
         </div>
