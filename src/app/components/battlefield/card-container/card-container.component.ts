@@ -14,7 +14,7 @@ import { ImportDeckModalComponent } from '../../modals/import-deck-modal/import-
 export class CardContainerComponent implements OnInit, Selectable {
 
 
-  scale: number = 1.8;
+  scale: number = 1.5;
   @Input() name: string;
   @Input() cards: Card[];
   @Input() clickCallback: any;
@@ -43,13 +43,13 @@ export class CardContainerComponent implements OnInit, Selectable {
       this.clickCallback(deckFromLocation);
     } else {
       event.stopPropagation();
-      if (this.cardLocation == CardLocation.Deck) {
+      if (this.cardLocation == CardLocation.Deck && this.ownerType == BattlefieldOwnerType.Mine) {
         if (this.selected) {
           this.clickService.objectDeselected(this);
         } else {
           this.clickService.objectSelected(this);
         }
-      } else {
+      } else if( this.ownerType == BattlefieldOwnerType.Mine) {
         this.find();
       }
     }

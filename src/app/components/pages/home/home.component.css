@@ -1,5 +1,10 @@
 #joinMenu{
-    position: absolute;
+    /* position: absolute;
     z-index: 1;
-    right: 0px;
+    right: 0px; */
+    height:100vh;
+}
+
+#settingsMenu{
+    max-width: 500px;
 }

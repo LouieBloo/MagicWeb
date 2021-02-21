@@ -49,10 +49,14 @@ export class BattlefieldComponent implements OnInit {
     }
   }
 
+  isMine(){
+    return this.ownerType == BattlefieldOwnerType.Mine;
+  }
+
   getOuterStyles() {
     return {
-      width: this.cardRealDimensions.width * 1.8 + "px",
-      height: this.cardRealDimensions.height * 1.8 + "px"
+      width: this.cardRealDimensions.width * 1.5 + "px",
+      height: this.cardRealDimensions.height * 1.5 + "px"
     }
   }
 

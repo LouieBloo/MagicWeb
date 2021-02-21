@@ -4,8 +4,15 @@
 
 #handRow{
     background-color: blueviolet;
+    position: fixed;
+    bottom:0px;
+    width:100%;
 }
 
 #main{
     background-color: blanchedalmond;
+}
+
+#lastRow{
+    margin-bottom:261px;
 }

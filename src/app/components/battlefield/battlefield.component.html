@@ -1,14 +1,14 @@
 <div class="row h-100" style="background-color: aquamarine;">
     <div class="col d-flex">
-        <div class="flex-grow-1 d-flex flex-column">
+        <div class="flex-grow-1 d-flex flex-column"  [ngClass]="{'justify-content-end': !isMine()}">
             <ng-template ngFor let-item [ngForOf]="rows" let-i="index">
-                <app-battlefield-row class="flex-grow-1" [owner]="owner" [ownerType]="ownerType" [rowType]="item.rowType"
+                <app-battlefield-row class="" [owner]="owner" [ownerType]="ownerType" [rowType]="item.rowType"
                     [cards]="getCards(item)"></app-battlefield-row>
             </ng-template>
         </div>
-        <div class="d-flex flex-column">
+        <div class="d-flex flex-column sidePanelBackground">
             <div class="d-flex flex-column">
-                <h4 class="text-center">{{owner?.name}}</h4>
+                <h4 class="text-center mb-0">{{owner?.name}}</h4>
                 <div class="d-flex flex-row">
                     <app-counter-modifier class="flex-grow-1" [ownerType]="ownerType" [text]="owner?.health?.amount"
                         [icon]="'favorite'" [counterType]="'Health'" [callback]="healthModified"></app-counter-modifier>

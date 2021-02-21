@@ -14,14 +14,15 @@
                 <app-stack [stack]="stack"></app-stack>
             </div>
         </div>
-        <div class="row flex-grow-1">
+        <div *ngIf="findingCards">
+            <app-card-finder [cards]="findCardsEvent?.cards" [cardLocation]="findCardsEvent?.cardLocation" [cardContainerManipulation]="findCardsEvent?.cardContainerManipulation"></app-card-finder>
+        </div>
+        <div class="row flex-grow-1" id="lastRow">
             <div class="col">
                 <app-battlefield [owner]="me" [battlefield]="me?.battlefield" [ownerType]="BattlefieldOwnerType.Mine"></app-battlefield>
             </div>
         </div>
-        <div *ngIf="findingCards">
-            <app-card-finder [cards]="findCardsEvent?.cards" [cardLocation]="findCardsEvent?.cardLocation" [cardContainerManipulation]="findCardsEvent?.cardContainerManipulation"></app-card-finder>
-        </div>
+       
         <div id="handRow">
             <app-hand [cards]="me?.hand?.cards"></app-hand>
         </div>

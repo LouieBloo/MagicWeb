@@ -1,6 +1,18 @@
-<div id="joinMenu">
-    <button mat-button color="primary" (click)="joinRoom()">Join or Create Room</button>
-    <button mat-button color="primary" (click)="leaveRoom()">Leave Room</button>
+<div id="joinMenu" *ngIf="!room">
+    <div class="d-flex h-100 align-items-center justify-content-center flex-column">
+
+        <div id="settingsMenu" class="d-flex flex-column ">
+            <mat-form-field>
+                <mat-label>Player Name</mat-label>
+                <input #searchBox matInput placeholder="" [(ngModel)]="name">
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="joinRoom()">Join or Create Room</button>
+            <!-- <button mat-raised-button color="primary" (click)="leaveRoom()">Leave Room</button> -->
+        </div>
+
+
+    </div>
+
 </div>
 
 <div class="row">

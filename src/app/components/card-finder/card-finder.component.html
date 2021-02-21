@@ -1,6 +1,8 @@
 <div class="row" id="handRow">
     <div class="col">
 
+
+
         <div class="row mt-2" *ngIf="!showSearch()">
             <div class="col d-flex justify-content-center">
                 <h5 class="text-center mb-0">{{cardContainerManipulation}} in {{cardLocation}}</h5>
@@ -8,7 +10,8 @@
 
         </div>
 
-        <div class="row" *ngIf="showSearch()">
+
+        <div class="row mt-2" *ngIf="showSearch()">
             <div class="col text-center">
                 <mat-form-field>
                     <mat-label>Search</mat-label>
@@ -17,6 +20,12 @@
                 <button mat-raised-button (click)="search()">Search</button>
             </div>
         </div>
+
+        <div class="row mb-2 mt-2">
+                <div class="col d-flex justify-content-center">
+                    <button mat-raised-button (click)="done()">Done</button>
+                </div>
+            </div>
 
         <div class="p-2">
             <div class="row d-flex justify-content-center">
