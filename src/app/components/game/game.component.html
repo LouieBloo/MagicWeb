@@ -1,5 +1,5 @@
-<div class="row" *ngIf="room" (click)="clickService.topLevelClickRecieved()">
-    <div class="col">
+<div *ngIf="room" (click)="clickService.topLevelClickRecieved()">
+    <div>
         <app-board [me]="me" [opponents]="opponents" [stack]="stack"></app-board>
     </div>
 </div>
