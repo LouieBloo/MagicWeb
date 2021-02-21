@@ -5,3 +5,7 @@
   .counterButtons{
     min-width:auto;
 }
+
+#iconFont{
+  font-size: 1rem;
+}

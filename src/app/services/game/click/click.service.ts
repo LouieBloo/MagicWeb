@@ -132,6 +132,13 @@ export class ClickService {
     }
   }
 
+  public trashSelected() {
+    if (this.isSelectedObjectACard()) {
+      this.gameEventService.moveCard(this.selectedObject.getData(), CardLocation.Trash, null, null);
+      this.resetToNormal();
+    }
+  }
+
   public commandZoneSelected(){
     if (this.isSelectedObjectACard()) {
       this.gameEventService.moveCard(this.selectedObject.getData(), CardLocation.CommandZone, null, null);

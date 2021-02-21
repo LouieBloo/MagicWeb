@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CardLocation, Card } from 'src/app/models/game';
+import { CardLocation, Card, CardContainerManipulation } from 'src/app/models/game';
 import { GameEventService } from 'src/app/services/game/game-event/game-event.service';
 import { ClickService } from 'src/app/services/game/click/click.service';
 
@@ -37,5 +37,21 @@ export class HandComponent implements OnInit {
     if(this.isSelectable()){
       this.clickService.handClicked();
     }
+  }
+
+  insertToken(){
+    this.gameEvents.findCards(null,CardLocation.Inserting,CardContainerManipulation.Insert)
+  }
+
+  untapAll(){
+    this.gameEvents.untapAll();
+  }
+
+  startTurn(){
+    this.gameEvents.startTurn();
+  }
+
+  mulligan(){
+    this.gameEvents.mulligan();
   }
 }

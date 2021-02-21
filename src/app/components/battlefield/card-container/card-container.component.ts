@@ -56,6 +56,7 @@ export class CardContainerComponent implements OnInit, Selectable {
   }
 
   getScaleCSS() {
+    if(this.cardLocation == CardLocation.Trash){return;}
     return {
       width: this.cardRealDimensions.width * this.scale + "px",
       height: this.cardRealDimensions.height * this.scale + "px"
@@ -139,7 +140,7 @@ export class CardContainerComponent implements OnInit, Selectable {
   }
 
   getText():string{
-    if(this.cardLocation == CardLocation.CommandZone){
+    if(this.cardLocation == CardLocation.CommandZone || this.cardLocation == CardLocation.Trash){
       return this.getFilteredName(this.cardLocation);
     }else{
       return this.getFilteredName(this.cardLocation) + " (" + (this.cards ? this.cards.length : 0) + ")";

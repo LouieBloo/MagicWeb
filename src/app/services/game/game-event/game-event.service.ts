@@ -11,11 +11,15 @@ export class GameEventService {
   moveCardEvent = new BehaviorSubject<any>(null);
   rotateCardEvent = new BehaviorSubject<Card>(null);
   flipCardEvent = new BehaviorSubject<Card>(null);
+  cardCopiedEvent = new BehaviorSubject<Card>(null);
   attachCardEvent = new BehaviorSubject<AttachCardEvent>(null);
   modifyCounterEvent = new BehaviorSubject<ModifyCounterEvent>(null);
   importDeckEvent = new BehaviorSubject<any>(null);
   findCardsEvent = new BehaviorSubject<FindCardsEvent>(null);
   shuffleDeckEvent = new BehaviorSubject<any>(null);
+  modifyPlayerCounterEvent = new BehaviorSubject<ModifyCounterEvent>(null);
+  untapAllEvent = new BehaviorSubject<any>(null);
+  mulliganEvent = new BehaviorSubject<any>(null);
 
   constructor() { }
 
@@ -56,6 +60,24 @@ export class GameEventService {
     this.shuffleDeckEvent.next(null);
   }
   
+  modifyPlayerCounter(counterType: CounterTypes, amount: number,playerId:string = null) {
+    this.modifyPlayerCounterEvent.next({counterType: counterType, amount: amount,playerId:playerId });
+  }
 
+  cardCopied(card:Card){
+    this.cardCopiedEvent.next(card);
+  }
 
+  untapAll(){
+    this.untapAllEvent.next(null);
+  }
+
+  mulligan(){
+    this.mulliganEvent.next(null);
+  }
+
+  startTurn(){
+    this.untapAll();
+    this.drawCard();
+  }
 }

@@ -2,3 +2,9 @@
     position: absolute;
     top:0px;
 }
+
+#trashFont{
+    color:white;
+    background-color: rgba(0, 0, 0, 0.397);
+    font-size: 1rem;
+}

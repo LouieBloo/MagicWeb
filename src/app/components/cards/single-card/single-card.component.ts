@@ -42,7 +42,8 @@ export class SingleCardComponent implements OnInit, Selectable {
         this.card.location == CardLocation.Hand ||
         this.card.location == CardLocation.Stack ||
         this.card.location == CardLocation.AttachedToCard ||
-        this.card.location == CardLocation.CommandZone
+        this.card.location == CardLocation.CommandZone ||
+        this.card.location == CardLocation.Inserting
       ) {
         return this.getRevealedCardBack();
       } else if (this.card.location == CardLocation.Deck) {
@@ -55,9 +56,9 @@ export class SingleCardComponent implements OnInit, Selectable {
   }
 
   getRevealedCardBack() {
-    if (this.card.cardFaces && this.card.cardFaces.length > 0) {
+    if (this.card.card_faces && this.card.card_faces.length > 0) {
       let index = this.card.flipped ? 1 : 0;
-      return this.card.cardFaces[index].image_uris ? this.card.cardFaces[index].image_uris.normal : this.backOfCardImgUrl;
+      return this.card.card_faces[index].image_uris ? this.card.card_faces[index].image_uris.normal : this.backOfCardImgUrl;
     } else {
       return this.card.image_uris && !this.card.flipped ? this.card.image_uris.normal : this.backOfCardImgUrl;
     }
@@ -105,6 +106,8 @@ export class SingleCardComponent implements OnInit, Selectable {
     if (this.card && (
       this.card.location == CardLocation.Battlefield ||
       this.card.location == CardLocation.Hand ||
+      this.card.location == CardLocation.Inserting ||
+      this.card.location == CardLocation.Deck ||
       this.card.location == CardLocation.Stack)
     ) { return false }
     return true;
@@ -137,11 +140,19 @@ export class SingleCardComponent implements OnInit, Selectable {
       case CardLocation.CommandZone:
         this.clickedInHand();
         break;
+      case CardLocation.Inserting:
+        this.clickedInHand();
+        break;
     }
   }
 
   flip() {
     this.gameEvents.flipCard(this.card);
+  }
+
+  copy(event){
+    event.stopPropagation();
+    this.gameEvents.cardCopied(this.card);
   }
 
   select() {
@@ -242,7 +253,7 @@ export class SingleCardComponent implements OnInit, Selectable {
 
   getCounterString(counterType: CounterTypes): string {
     if (this.card && this.card.counter && this.card.counter.type == counterType) {
-      if(this.card.counter.amount == 0){
+      if (this.card.counter.amount == 0) {
         return;
       }
       switch (this.card.counter.type) {

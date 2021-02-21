@@ -17,7 +17,9 @@ export enum CardLocation {
     Stack = "Stack",
     Deck = "Deck",
     AttachedToCard="AttachedToCard",
-    CommandZone="CommandZone"
+    CommandZone="CommandZone",
+    Inserting="Inserting",
+    Trash="Trash"
 }
 export enum SelectableObjectType {
     Card = "Card",
@@ -43,7 +45,10 @@ export enum KEY_CODES {
     DOWN_ARROW = 40,
     RIGHT_ARROW = 39,
     LEFT_ARROW = 37,
-    D=68
+    D=68,
+    I=73,
+    U=85,
+    T=84
 }
 
 export interface Battlefield {
@@ -75,6 +80,7 @@ export interface Stack {
 export interface Card {
     rotation?: number;
     id?: string;
+    disc_id?:string;
     location?: CardLocation;
     name?: string;
     owner?:string;
@@ -82,7 +88,7 @@ export interface Card {
     attachedCards?:Card[];
     attachedToCardId?: string;
     counter?:Counter;
-    cardFaces?:CardFace[];
+    card_faces?:CardFace[];
     flipped?:boolean;
     temporarilyRevealed?:boolean;
 }
@@ -111,6 +117,9 @@ export interface Player {
     deck?: Deck;
     hand?: Hand;
     battlefield?:Battlefield;
+    health?:Counter;
+    poison?:Counter;
+    commanderDamages?:any;
 }
 
 export interface AttachCardEvent {
@@ -118,9 +127,10 @@ export interface AttachCardEvent {
     sourceCard:Card;
 }
 export interface ModifyCounterEvent {
-    targetCard:Card;
+    targetCard?:Card;
     counterType:CounterTypes;
     amount:number;
+    playerId?:string;
 }
 export interface FindCardsEvent{
     cards?:Card[];

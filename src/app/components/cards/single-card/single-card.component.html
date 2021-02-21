@@ -32,21 +32,26 @@
         </div>
 
         <!--Selected View-->
-        <div *ngIf="selected" class="selectedView d-flex flex-column justify-content-center" (click)="cardClicked()">
+        <div *ngIf="selected" class="selectedView" (click)="cardClicked()">
             <!-- <div class="row flex-grow-1"> -->
             <!-- <div class="col d-flex justify-content-center flex-column"> -->
-            <app-counter-modifier [text]="getCounterString(CounterTypes.OneOne)" [counterType]="CounterTypes.OneOne"
-                [callback]="counterModified"></app-counter-modifier>
-            <app-counter-modifier [text]="getCounterString(CounterTypes.General)" [counterType]="CounterTypes.General"
-                [callback]="counterModified"></app-counter-modifier>
-            <div>
-                <button mat-raised-button color="primary" class="p-0 counterButtons flex-grow-1" (click)="flip()">Flip</button>
+            <div *ngIf="card?.location != 'Inserting'" class=" d-flex flex-column justify-content-center h-100">
+                <app-counter-modifier [text]="getCounterString(CounterTypes.OneOne)" [counterType]="CounterTypes.OneOne"
+                    [callback]="counterModified"></app-counter-modifier>
+                <app-counter-modifier [text]="getCounterString(CounterTypes.General)" [counterType]="CounterTypes.General"
+                    [callback]="counterModified"></app-counter-modifier>
+                <div class="d-flex flex-row ">
+                    <button mat-raised-button color="primary" class="p-0 counterButtons flex-grow-1" (click)="flip()">Flip</button>
+                    <button *ngIf="card?.location == 'Battlefield'" mat-raised-button color="primary" class="p-0 counterButtons flex-grow-1" (click)="copy($event)">Copy</button>
+                </div>
             </div>
-           
+
+
         </div>
     </div>
 
-    <mde-popover #appPopover="mdePopover"  [mdePopoverOverlapTrigger]="false" [mdeFocusTrapEnabled]="false" [mdePopoverEnterDelay]="750" [mdePopoverLeaveDelay]="0">
+    <mde-popover #appPopover="mdePopover" [mdePopoverOverlapTrigger]="false" [mdeFocusTrapEnabled]="false"
+        [mdePopoverEnterDelay]="750" [mdePopoverLeaveDelay]="0">
         <div *ngIf="!isPopoverDisabled()">
             <img class="picture" [src]="getImgSource()" [ngStyle]="getPopupScaleCSS()">
         </div>

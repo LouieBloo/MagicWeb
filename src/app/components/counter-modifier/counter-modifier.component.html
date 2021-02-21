@@ -1,5 +1,11 @@
 <div class="d-flex justify-content-center">
-    <button mat-raised-button color="primary" class="p-0 counterButtons flex-grow-1 noBorderRadius" (click)="modifyOneOneCounter(-1,$event)">-</button>
-    <button mat-raised-button color="primary" class="p-0 counterButtons flex-grow-1 noBorderRadius" (click)="modifyOneOneCounter(1,$event)">+</button>
-    <button mat-raised-button color="primary" class="p-0 counterButtons flex-grow-1 noBorderRadius">{{text}}</button>
+    <button mat-raised-button color="primary" class="p-0 counterButtons flex-grow-1 noBorderRadius" (click)="modifyOneOneCounter(-1,$event)"
+        [disabled]="isDisabled()">-</button>
+    <button mat-raised-button color="primary" class="p-0 counterButtons flex-grow-1 noBorderRadius" (click)="modifyOneOneCounter(1,$event)"
+        [disabled]="isDisabled()">+</button>
+    <button mat-raised-button color="primary" class="p-0 counterButtons flex-grow-1 noBorderRadius">
+        {{text}} <span id="iconFont" *ngIf="icon" class="material-icons">
+            {{icon}}
+        </span>
+    </button>
 </div>

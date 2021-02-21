@@ -1,7 +1,7 @@
 <div class="pointer" id="main" (click)="clicked($event)" [ngStyle]="getScaleCSS()" [ngClass]="{'selectable': isSelectable()}">
 
     <div class="" *ngIf="cards && cards.length > 0">
-        <app-single-card [scale]="scale" [card]="cards[0]" [clickable]="false"></app-single-card>
+        <app-single-card [scale]="scale" [card]="cards[cards.length-1]" [clickable]="false"></app-single-card>
     </div>
 
     <div class="d-flex flex-column justify-content-center h-100 w-100" id="titleView">
@@ -25,12 +25,6 @@
     </div>
 
     <div *ngIf="isSelectable() && this.cardLocation=='Deck'" id="topBottomButtons" class="h-100 w-100 d-flex flex-column ">
-        <!-- <div class="flex-grow-1 d-flex ">
-            <p class="amountText mb-0">{{amountToPutCard}}</p>
-
-            <button class="flex-grow-1 invisButton noBorderRadius" (click)="modifyAmount($event,1)">+</button>
-            <button class="flex-grow-1 invisButton noBorderRadius" (click)="modifyAmount($event,-1)">-</button>
-        </div> -->
         <app-counter-modifier [text]="amountToPutCard + ' from'" [counterType]="'General'"
         [callback]="amountToPutCardModified"></app-counter-modifier>
 

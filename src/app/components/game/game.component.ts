@@ -2,7 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import * as Colyseus from "colyseus.js"; // not necessary if included via <script> tag.
 import { GameEventService } from 'src/app/services/game/game-event/game-event.service';
 import { DataChange } from 'colyseus.js';
-import { Player, Card, CardLocation, AttachCardEvent, ModifyCounterEvent, KEY_CODES, Stack } from 'src/app/models/game';
+import { Player, Card, CardLocation, AttachCardEvent, ModifyCounterEvent, KEY_CODES, Stack, CardContainerManipulation } from 'src/app/models/game';
 import { ClickService } from 'src/app/services/game/click/click.service';
 
 @Component({
@@ -27,10 +27,14 @@ export class GameComponent implements OnInit {
     this.gameEventService.moveCardEvent.subscribe(this.moveCardEventFired);
     this.gameEventService.rotateCardEvent.subscribe(this.rotateCardEventFired);
     this.gameEventService.attachCardEvent.subscribe(this.attachCardEventFired);
+    this.gameEventService.cardCopiedEvent.subscribe(this.cardCopiedEventFired);
     this.gameEventService.modifyCounterEvent.subscribe(this.modifyCounterEventFired);
+    this.gameEventService.modifyPlayerCounterEvent.subscribe(this.modifyPlayerCounterEventFired);
     this.gameEventService.flipCardEvent.subscribe(this.flipCardEventFired);
     this.gameEventService.importDeckEvent.subscribe(this.importDeckEventFired);
     this.gameEventService.shuffleDeckEvent.subscribe(this.shuffleDeckEventFired);
+    this.gameEventService.untapAllEvent.subscribe(this.untapAllEventFired);
+    this.gameEventService.mulliganEvent.subscribe(this.mulliganEventFired);
   }
 
 
@@ -113,6 +117,12 @@ export class GameComponent implements OnInit {
     console.log(event.keyCode);
     if (event.keyCode == KEY_CODES.D) {
       this.cardDrawEventFired();
+    }else if(event.keyCode == KEY_CODES.I){
+      this.gameEventService.findCards(null,CardLocation.Inserting,CardContainerManipulation.Insert)
+    }else if(event.keyCode == KEY_CODES.U){
+      this.untapAllEventFired();
+    }else if(event.keyCode == KEY_CODES.T){
+      this.gameEventService.startTurn();
     }
     // if (event.keyCode == KEY_CODE.DOWN_ARROW) {
     //   // Your row selection code
@@ -145,6 +155,18 @@ export class GameComponent implements OnInit {
     }
   }
 
+  cardCopiedEventFired = (card: Card) => {
+    if (this.room) {
+      this.room.send("cardCopied", { card: card })
+    }
+  }
+
+  mulliganEventFired = ()=>{
+    if (this.room) {
+      this.room.send("mulligan")
+    }
+  }
+
   attachCardEventFired = (event: AttachCardEvent) => {
     if (this.room) {
       console.log("ATTACH: ", event)
@@ -158,6 +180,12 @@ export class GameComponent implements OnInit {
     }
   }
 
+  modifyPlayerCounterEventFired = (event: ModifyCounterEvent) => {
+    if (this.room) {
+      this.room.send("modifyPlayerCounter", event);
+    }
+  }
+
   importDeckEventFired = (deck: any) => {
     if (this.room) {
       this.room.send("importDeck", { deck: deck });
@@ -167,6 +195,12 @@ export class GameComponent implements OnInit {
   shuffleDeckEventFired = ()=>{
     if (this.room) {
       this.room.send("shuffleDeck");
+    }
+  }
+
+  untapAllEventFired = ()=>{
+    if (this.room) {
+      this.room.send("untapAll");
     }
   }
 

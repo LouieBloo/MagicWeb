@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ClickService } from 'src/app/services/game/click/click.service';
-import { BattlefieldRowType, BattlefieldOwnerType, Battlefield, CardLocation, Player, DeckFromLocation } from 'src/app/models/game';
+import { BattlefieldRowType, BattlefieldOwnerType, Battlefield, CardLocation, Player, DeckFromLocation, CounterTypes } from 'src/app/models/game';
+import { GameEventService } from 'src/app/services/game/game-event/game-event.service';
 
 @Component({
   selector: 'app-battlefield',
@@ -20,7 +21,7 @@ export class BattlefieldComponent implements OnInit {
 
   rows: any = [];
 
-  constructor(public clickService: ClickService) { }
+  constructor(public clickService: ClickService,private gameEventService:GameEventService) { }
 
   ngOnInit(): void {
     this.setRowTypes();
@@ -77,5 +78,27 @@ export class BattlefieldComponent implements OnInit {
     if(this.clickService.isSelectingTargetObject()){
       this.clickService.commandZoneSelected();
     }
+  }
+
+  healthModified = (counterType: CounterTypes, amount: number) => {
+    this.gameEventService.modifyPlayerCounter(counterType,amount);
+  }
+
+  poisonModified = (counterType: CounterTypes, amount: number) => {
+    this.gameEventService.modifyPlayerCounter(counterType,amount);
+  }
+
+  commanderDamageModified = (counterType: CounterTypes, amount: number,playerId:string)=>{
+    this.gameEventService.modifyPlayerCounter(counterType,amount,playerId);
+  }
+
+  trashClicked(){
+    if(this.clickService.isSelectingTargetObject()){
+      this.clickService.trashSelected();
+    }
+  }
+
+  isTrashSelectable() {
+    return this.clickService.isSelectingTargetObject() && this.ownerType == BattlefieldOwnerType.Mine;
   }
 }

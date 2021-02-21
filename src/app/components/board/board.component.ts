@@ -36,7 +36,7 @@ export class BoardComponent implements OnInit {
       this.findingCards = false;
     } else if (this.findCardsEvent && this.findCardsEvent.cardLocation == event.cardLocation) {
       //same event fired twice, means to close
-      //this.clickService.findCardsFinished();
+      this.clickService.findCardsFinished();
     } else {
       this.findCardsEvent = event;
       this.findingCards = true;
