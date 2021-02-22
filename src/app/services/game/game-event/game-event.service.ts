@@ -21,6 +21,9 @@ export class GameEventService {
   untapAllEvent = new BehaviorSubject<any>(null);
   mulliganEvent = new BehaviorSubject<any>(null);
 
+  isShowingScales = false;
+  showingScales = new BehaviorSubject<boolean>(this.isShowingScales);
+
   constructor() { }
 
 
@@ -79,5 +82,10 @@ export class GameEventService {
   startTurn(){
     this.untapAll();
     this.drawCard();
+  }
+
+  toggleShowingScales(){
+    this.isShowingScales = !this.isShowingScales;
+    this.showingScales.next(this.isShowingScales);
   }
 }

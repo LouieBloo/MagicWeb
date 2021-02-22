@@ -41,6 +41,7 @@ export class CardFinderComponent implements OnInit, OnDestroy {
     }
 
     this.moveCardSubscription = this.gameEventService.moveCardEvent.subscribe(this.moveCardEventFired);
+    window.scrollTo(0,document.body.scrollHeight);
   }
 
   ngOnDestroy(): void {

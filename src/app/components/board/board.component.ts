@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { BattlefieldOwnerType, Player, Battlefield, Stack, FindCardsEvent } from 'src/app/models/game';
 import { GameEventService } from 'src/app/services/game/game-event/game-event.service';
 import { ClickService } from 'src/app/services/game/click/click.service';
@@ -14,6 +14,7 @@ export class BoardComponent implements OnInit {
   @Input() me: Player;
   @Input() stack: Stack;
 
+  @ViewChild('scrollBottom') private scrollBottom: ElementRef;
 
   scale: number = 4.0;
   BattlefieldOwnerType = BattlefieldOwnerType;
@@ -43,4 +44,17 @@ export class BoardComponent implements OnInit {
     }
   }
 
+  getBottomRowMargin(){
+    return{
+      marginBottom: this.findingCards ? "0px" : "245px"
+    }
+  }
+
+  getFindingRowMargin(){
+
+  }
+
+  scrollToBottom(){
+    
+  }
 }

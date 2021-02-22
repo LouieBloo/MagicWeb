@@ -1,19 +1,18 @@
-
 <div class="h-100 d-flex" id="cardRow" (click)="rowClicked()" [ngClass]="{'selectable': isSelectable()}">
 
     <div class="d-flex flex-row flex-grow-1 justify-content-center" style="position: relative;">
         <!-- <div *ngIf="isSelectable()" id="selectableMouseClick" class="row pointer" >
         </div> -->
 
-        <!-- <div id="formatOptions">
-                <mat-slider [(ngModel)]="scale" max="3" min="0.1" step="0.25" (input)="scaleChanged($event)"></mat-slider>
-                {{scale}}
-            </div> -->
+        <div id="formatOptions" *ngIf="showingScale">
+            <mat-slider [(ngModel)]="scale" max="3" min="0.1" step="0.25" (input)="scaleChanged($event)"></mat-slider>
+            {{scale}}
+        </div>
 
 
         <div *ngIf="!cards || cards.length < 1" class="flex-grow-1 d-flex align-items-center justify-content-center">
             <h5 id="rowTypeText" class="mb-0 text-center">{{rowType}}</h5>
-            
+
         </div>
 
 

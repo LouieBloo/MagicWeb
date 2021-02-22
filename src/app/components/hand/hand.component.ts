@@ -54,4 +54,8 @@ export class HandComponent implements OnInit {
   mulligan(){
     this.gameEvents.mulligan();
   }
+
+  toggleShowScales(){
+    this.gameEvents.toggleShowingScales();
+  }
 }

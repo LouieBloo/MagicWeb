@@ -1,4 +1,4 @@
-<div class="min-vh-100" id="main">
+<div #scrollBottom class="min-vh-100" id="main">
     <div class="d-flex flex-column ">
         <div class="flex-grow-1" id="boardRow">
             <div class="d-flex flex-row">
@@ -14,14 +14,14 @@
                 <app-stack [stack]="stack"></app-stack>
             </div>
         </div>
-        <div *ngIf="findingCards">
+
+        <div class="flex-grow-1" [ngStyle]="getBottomRowMargin()">
+            <app-battlefield [owner]="me" [battlefield]="me?.battlefield" [ownerType]="BattlefieldOwnerType.Mine"></app-battlefield>
+        </div>
+        <div *ngIf="findingCards" id="findingRow">
             <app-card-finder [cards]="findCardsEvent?.cards" [cardLocation]="findCardsEvent?.cardLocation"
                 [cardContainerManipulation]="findCardsEvent?.cardContainerManipulation"></app-card-finder>
         </div>
-        <div class="flex-grow-1" id="lastRow">
-            <app-battlefield [owner]="me" [battlefield]="me?.battlefield" [ownerType]="BattlefieldOwnerType.Mine"></app-battlefield>
-        </div>
-
         <div id="handRow">
             <app-hand [cards]="me?.hand?.cards"></app-hand>
         </div>

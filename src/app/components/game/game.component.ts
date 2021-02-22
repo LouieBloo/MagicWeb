@@ -123,6 +123,8 @@ export class GameComponent implements OnInit {
       this.untapAllEventFired();
     }else if(event.keyCode == KEY_CODES.T){
       this.gameEventService.startTurn();
+    }else if(event.keyCode == KEY_CODES.M){
+      this.gameEventService.mulligan();
     }
     // if (event.keyCode == KEY_CODE.DOWN_ARROW) {
     //   // Your row selection code
