@@ -1,17 +1,18 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Card, BattlefieldOwnerType, CardLocation, SelectableObjectType, CardContainerManipulation, DeckFromLocation, CounterTypes } from 'src/app/models/game';
 import { ClickService } from 'src/app/services/game/click/click.service';
 import { Selectable } from 'src/app/interfaces/gameInterfaces';
 import { GameEventService } from 'src/app/services/game/game-event/game-event.service';
 import { MatDialog } from '@angular/material';
 import { ImportDeckModalComponent } from '../../modals/import-deck-modal/import-deck-modal.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-card-container',
   templateUrl: './card-container.component.html',
   styleUrls: ['./card-container.component.css']
 })
-export class CardContainerComponent implements OnInit, Selectable {
+export class CardContainerComponent implements OnInit,OnDestroy, Selectable {
 
 
   scale: number = 1.5;
@@ -24,6 +25,9 @@ export class CardContainerComponent implements OnInit, Selectable {
   selected: boolean = false;
   amountToPutCard:number = 1;
 
+  scryEventSubscription: Subscription;
+  findInDeckEventSubscription: Subscription;
+
   cardRealDimensions: any = {
     width: 63,
     height: 88
@@ -32,6 +36,19 @@ export class CardContainerComponent implements OnInit, Selectable {
   constructor(private clickService: ClickService, private gameEventService: GameEventService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    if(this.ownerType == BattlefieldOwnerType.Mine && this.cardLocation == CardLocation.Deck){
+      this.scryEventSubscription = this.gameEventService.scryClickedEvent.subscribe(()=>{this.scryClicked(null)})
+      this.findInDeckEventSubscription = this.gameEventService.findInDeckClickedEvent.subscribe(()=>{this.findInDeckClicked()})
+    }
+  }
+
+  ngOnDestroy(){
+    if(this.scryEventSubscription){
+      this.scryEventSubscription.unsubscribe();
+    }
+    if(this.findInDeckEventSubscription){
+      this.findInDeckEventSubscription.unsubscribe();
+    }
   }
 
   isSelectable() {
@@ -106,7 +123,8 @@ export class CardContainerComponent implements OnInit, Selectable {
   // }
 
   scryClicked = (event)=>{
-    event.stopPropagation();
+    if(event){event.stopPropagation();}
+    
     if(!this.cards || this.cards.length < 1){return;}
     let scryCards:Card[] = [];
     

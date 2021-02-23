@@ -28,7 +28,7 @@ export class BattlefieldRowComponent implements OnInit,OnDestroy,Selectable {
   private defaultScales: any = {
     creature: 2,
     nonCreature: 1.5,
-    land: 1
+    land: 1.35
   }
 
   constructor(private clickService:ClickService,private gameEventService:GameEventService) { }

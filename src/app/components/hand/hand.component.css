@@ -1,15 +1,21 @@
 #handRow{
-    background-color: bisque;
+    background-color: #fcfcfd00;
+background-image: url("https://www.transparenttextures.com/patterns/brushed-alum.png");
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+    /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
     min-height: 245px;
+
 }
 
 #handControl{
     position: absolute;
     bottom:0px;
-
+    right:50px;
+    max-width:300px;
 }
 #handControl .col{
-    background-color: white;
+    /* background-color: white; */
 }
 
 #selectableMouseClick{
@@ -17,4 +23,8 @@
     height:100%;
     position: absolute;
     /* top:-100%; */
+}
+
+#buttonRow{
+    
 }

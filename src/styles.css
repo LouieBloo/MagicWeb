@@ -28,5 +28,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .sidePanelBackground{
-    background-color: aliceblue
+    background-color: #e0d1c7;
+    background-image: url("https://www.transparenttextures.com/patterns/dark-denim-3.png");
+    /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+}
+
+.brightFont{
+    color:white;
+}
+.mutedFont{
+    color:#ffffff33;
 }

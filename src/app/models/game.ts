@@ -49,7 +49,10 @@ export enum KEY_CODES {
     I=73,
     U=85,
     T=84,
-    M=77
+    M=77,
+    Z=90,
+    S=83,
+    F=70
 }
 
 export interface Battlefield {

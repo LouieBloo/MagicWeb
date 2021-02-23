@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { Card, CardLocation, BattlefieldRowType, Player, AttachCardEvent, ModifyCounterEvent, Counter, CounterTypes, FindCardsEvent, CardContainerManipulation, DeckFromLocation } from 'src/app/models/game';
 
 @Injectable({
@@ -20,6 +20,8 @@ export class GameEventService {
   modifyPlayerCounterEvent = new BehaviorSubject<ModifyCounterEvent>(null);
   untapAllEvent = new BehaviorSubject<any>(null);
   mulliganEvent = new BehaviorSubject<any>(null);
+  public scryClickedEvent = new Subject();
+  public findInDeckClickedEvent = new Subject();
 
   isShowingScales = false;
   showingScales = new BehaviorSubject<boolean>(this.isShowingScales);

@@ -16,6 +16,8 @@ export class BoardComponent implements OnInit {
 
   @ViewChild('scrollBottom') private scrollBottom: ElementRef;
 
+  @ViewChild('handRow') private handRow: ElementRef;
+
   scale: number = 4.0;
   BattlefieldOwnerType = BattlefieldOwnerType;
 
@@ -45,8 +47,12 @@ export class BoardComponent implements OnInit {
   }
 
   getBottomRowMargin(){
+    let height = 245;
+    if(this.handRow){
+      height = this.handRow.nativeElement.offsetHeight;
+    }
     return{
-      marginBottom: this.findingCards ? "0px" : "245px"
+      marginBottom: height+"px"
     }
   }
 

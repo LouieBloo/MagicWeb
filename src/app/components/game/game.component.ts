@@ -125,11 +125,13 @@ export class GameComponent implements OnInit {
       this.gameEventService.startTurn();
     }else if(event.keyCode == KEY_CODES.M){
       this.gameEventService.mulligan();
+    }else if(event.keyCode == KEY_CODES.S){
+      this.gameEventService.scryClickedEvent.next(1);
+    }else if(event.keyCode == KEY_CODES.F){
+      this.gameEventService.findInDeckClickedEvent.next(1);
+    }else if(event.keyCode == KEY_CODES.Z){
+      this.gameEventService.toggleShowingScales();
     }
-    // if (event.keyCode == KEY_CODE.DOWN_ARROW) {
-    //   // Your row selection code
-    //   console.log(event.keyCode);
-    // }
   }
 
   cardDrawEventFired = () => {

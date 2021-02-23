@@ -1,18 +1,15 @@
 #boardRow{
-    background-color: aqua;
+    /* background-color: aqua; */
 }
 
 #handRow{
-    background-color: blueviolet;
     position: fixed;
     bottom:0px;
     width:100%;
 }
 
-#main{
-    background-color: blanchedalmond;
-}
+
 
 #findingRow{
-    margin-bottom:245px;
+    /* margin-bottom:245px; */
 }
