@@ -113,6 +113,7 @@ export class GameComponent implements OnInit {
 
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
+    if(!this.room){return;}
     if (!this.clickService.isRespondingToKeyboardPresses()) { return; }
     console.log(event.keyCode);
     if (event.keyCode == KEY_CODES.D) {
