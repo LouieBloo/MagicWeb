@@ -35,6 +35,7 @@ export class GameComponent implements OnInit {
     this.gameEventService.shuffleDeckEvent.subscribe(this.shuffleDeckEventFired);
     this.gameEventService.untapAllEvent.subscribe(this.untapAllEventFired);
     this.gameEventService.mulliganEvent.subscribe(this.mulliganEventFired);
+    this.gameEventService.chatMessageEvent.subscribe(this.sendChatMessageEventFired);
   }
 
 
@@ -97,8 +98,9 @@ export class GameComponent implements OnInit {
     //   console.log("DATA CHANGED!!")
     // })
 
-    this.room.onMessage("message_type", (message) => {
-      console.log("message received on", room.name, message);
+    this.room.onMessage("chat", (message) => {
+      // console.log("message received on", room.name, message);
+      this.gameEventService.chatMessageReceived(message);
     });
 
     this.room.onError((code, message) => {
@@ -206,6 +208,12 @@ export class GameComponent implements OnInit {
   untapAllEventFired = ()=>{
     if (this.room) {
       this.room.send("untapAll");
+    }
+  }
+
+  sendChatMessageEventFired = (message:string)=>{
+    if(this.room){
+      this.room.send("chat",{message:message});
     }
   }
 

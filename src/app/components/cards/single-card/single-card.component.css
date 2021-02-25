@@ -16,6 +16,7 @@
     color:black;
     margin-bottom:0px;
     font-size:25px;
+    transform: rotate(90deg)
 }
 
 .selectedView{

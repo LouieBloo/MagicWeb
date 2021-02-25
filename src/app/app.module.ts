@@ -21,6 +21,7 @@ import { ImportDeckModalComponent } from './components/modals/import-deck-modal/
 import { HttpClientModule } from '@angular/common/http';
 import { CardFinderComponent } from './components/card-finder/card-finder.component';
 import { MdePopoverModule } from '@material-extended/mde';
+import { ChatComponent } from './components/chat/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { MdePopoverModule } from '@material-extended/mde';
     CounterModifierComponent,
     StackComponent,
     ImportDeckModalComponent,
-    CardFinderComponent
+    CardFinderComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
