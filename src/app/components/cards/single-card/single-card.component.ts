@@ -15,6 +15,7 @@ export class SingleCardComponent implements OnInit, Selectable {
   @Input() card: Card;
   //rows, card containers, etc can dictate if a card is clickable or not
   @Input() clickable: boolean = true;
+  @Input() opponentsHand: boolean = false;
 
   backOfCardImgUrl: string = "https://i.redd.it/qnnotlcehu731.jpg"
 
@@ -36,14 +37,16 @@ export class SingleCardComponent implements OnInit, Selectable {
   getImgSource() {
     if (this.card) {
       if (
-        this.card.location == CardLocation.Graveyard ||
-        this.card.location == CardLocation.Exile ||
-        this.card.location == CardLocation.Battlefield ||
-        this.card.location == CardLocation.Hand ||
-        this.card.location == CardLocation.Stack ||
-        this.card.location == CardLocation.AttachedToCard ||
-        this.card.location == CardLocation.CommandZone ||
-        this.card.location == CardLocation.Inserting
+        !this.opponentsHand && (
+          this.card.location == CardLocation.Graveyard ||
+          this.card.location == CardLocation.Exile ||
+          this.card.location == CardLocation.Battlefield ||
+          this.card.location == CardLocation.Hand ||
+          this.card.location == CardLocation.Stack ||
+          this.card.location == CardLocation.AttachedToCard ||
+          this.card.location == CardLocation.CommandZone ||
+          this.card.location == CardLocation.Inserting
+        )
       ) {
         return this.getRevealedCardBack();
       } else if (this.card.location == CardLocation.Deck) {
