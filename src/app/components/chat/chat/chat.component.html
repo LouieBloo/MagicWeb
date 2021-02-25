@@ -1,0 +1,27 @@
+<div id="main" class="d-flex flex-column">
+    <div class="">
+        <div *ngIf="toggled" class="d-flex justify-content-end">
+            <button (click)="toggleSize()" mat-raised-button color="primary" class="noBorderRadius p-0" id="minus">-</button>
+        </div>
+        <div *ngIf="!toggled">
+            <button (click)="toggleSize()" mat-raised-button color="primary" class="noBorderRadius">Maximize Chat</button>
+        </div>
+
+    </div>
+
+    <div *ngIf="toggled" class="flex-grow-1" id="messageWindow" #messageWindow>
+        <ng-template ngFor let-item [ngForOf]="allMessages" let-i="index">
+            <p class="mb-0 ml-2"><span class="playerColor">{{item.playerName}}: </span>{{item.message}}</p>
+        </ng-template>
+    </div>
+
+    <div *ngIf="toggled">
+        <mat-form-field appearance="fill" id="textArea">
+            <mat-label>Chat</mat-label>
+            <textarea matInput [(ngModel)]="message" rows="1" (focus)="chatBoxFocused()" (focusout)="chatBoxDeFocused()"
+                (keydown)="keyDownFunction($event)"></textarea>
+        </mat-form-field>
+        <button (click)="sendMessage()" mat-button>Send</button>
+    </div>
+
+</div>

@@ -22,6 +22,9 @@ export class GameEventService {
   mulliganEvent = new BehaviorSubject<any>(null);
   public scryClickedEvent = new Subject();
   public findInDeckClickedEvent = new Subject();
+  
+  public chatMessageEvent = new Subject();
+  public chatMessageReceivedEvent = new Subject();
 
   isShowingScales = false;
   showingScales = new BehaviorSubject<boolean>(this.isShowingScales);
@@ -89,5 +92,13 @@ export class GameEventService {
   toggleShowingScales(){
     this.isShowingScales = !this.isShowingScales;
     this.showingScales.next(this.isShowingScales);
+  }
+
+  sendChatMessage(message:string){
+    this.chatMessageEvent.next(message);
+  }
+
+  chatMessageReceived(event:any){
+    this.chatMessageReceivedEvent.next(event);
   }
 }

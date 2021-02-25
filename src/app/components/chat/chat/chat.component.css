@@ -1,0 +1,28 @@
+#main{
+    position: fixed;
+    bottom:0px;
+    left:0px;
+    background-color: rgba(255, 255, 255, 0.514);
+
+    max-height: 245px;
+    max-width: 275px;
+}
+
+
+#messageWindow{
+    overflow-y: auto;
+}
+
+#minus{
+    min-width: 25px;
+    min-height: 25px;
+    width: 25px;
+    height:25px;
+    position: absolute;
+    right:0px;
+}
+
+.playerColor{
+    color:purple;
+
+}

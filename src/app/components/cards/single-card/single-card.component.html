@@ -25,7 +25,10 @@
                     <button class="flex-grow-1 invisButton" (click)="topHalfClicked($event)"></button>
                     <button *ngIf="shouldShowBottomButton()" class="flex-grow-1 d-flex justify-content-center align-items-center invisButton"
                         (click)="bottomHalfClicked($event)">
-                        <p *ngIf="inBattlefield()" id="tapText">⭯</p>
+                        <p *ngIf="inBattlefield()" id="tapText">
+                            <span class="material-icons">
+                                replay
+                                </span></p>
                     </button>
                 </div>
             </div>
