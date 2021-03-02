@@ -64,7 +64,7 @@
 .topButtonFont{
     color:white;
     font-size:1.25rem;
-    background-color: rgb(189 251 128);
+    background-color: rgba(255, 255, 255, 0);
     border:none;
 }
 

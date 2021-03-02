@@ -16,14 +16,21 @@
             <div *ngIf="showingScale" class="mr-3">
                 <mat-slider [(ngModel)]="scale" max="10" min="0.1" step="0.1"></mat-slider> {{scale}}
             </div>
-            <button mat-raised-button color="primary" (click)="drawCard()" class="flex-grow-1 noBorderRadius">Draw (D)</button>
-            <button mat-raised-button color="primary" (click)="startTurn()" class="flex-grow-1 noBorderRadius">Start Turn (T)</button>
-            <button mat-raised-button color="primary" (click)="findInDeck()" class="flex-grow-1 noBorderRadius">Find in Deck (F)</button>
-            <button mat-raised-button color="primary" (click)="scry()" class="flex-grow-1 noBorderRadius">Scry (S)</button>
-            <button mat-raised-button color="primary" (click)="insertToken()" class="flex-grow-1 noBorderRadius">Insert Card (I)</button>
-            <button mat-raised-button color="primary" (click)="untapAll()" class="flex-grow-1 noBorderRadius">Untap All (U)</button>
-            <button mat-raised-button color="primary" (click)="mulligan()" class="flex-grow-1 noBorderRadius">Mulligan (M)</button>
-            <button mat-raised-button color="primary" (click)="toggleShowScales()" class="flex-grow-1 noBorderRadius">Scales (Z)</button>
+            <button mat-raised-button color="primary" (click)="drawCard()" class="flex-grow-1 smallMinWidth noBorderRadius">Draw (D)</button>
+            <button mat-raised-button color="primary" (click)="startTurn()" class="flex-grow-1 smallMinWidth noBorderRadius">Start Turn (T)</button>
+            <button mat-raised-button color="primary" (click)="findInDeck()" class="flex-grow-1 smallMinWidth noBorderRadius">Find in Deck (F)</button>
+            <button mat-raised-button color="primary" (click)="scry()" class="flex-grow-1 smallMinWidth noBorderRadius">Scry (S)</button>
+            <button mat-raised-button color="primary" (click)="insertToken()" class="flex-grow-1 smallMinWidth noBorderRadius">Insert Card (I)</button>
+            <button mat-raised-button color="primary" (click)="untapAll()" class="flex-grow-1 smallMinWidth noBorderRadius">Untap All (U)</button>
+            <button mat-raised-button color="primary" (click)="mulligan()" class="flex-grow-1 smallMinWidth noBorderRadius">Mulligan (M)</button>
+            <button mat-raised-button color="primary" (click)="endTurn()" class="flex-grow-1 smallMinWidth noBorderRadius">End Turn (E)</button>
+            <div class="d-flex flex-grow-1">
+                <button mat-raised-button color="primary" (click)="tinyClicked()" class=" flex-grow-1 smallMinWidth noBorderRadius">Tiny</button>
+                <button mat-raised-button color="primary" (click)="mediumClicked()" class="flex-grow-1 smallMinWidth noBorderRadius">Medium</button>
+                <button mat-raised-button color="primary" (click)="largeClicked()" class="flex-grow-1 smallMinWidth noBorderRadius">Large</button>
+                <button mat-raised-button color="primary" (click)="toggleShowScales()" class="flex-grow-1 noBorderRadius">Scales (Z)</button>
+            </div>
+            
         </div>
     </div>
 </div>

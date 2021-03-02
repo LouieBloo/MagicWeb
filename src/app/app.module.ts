@@ -22,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CardFinderComponent } from './components/card-finder/card-finder.component';
 import { MdePopoverModule } from '@material-extended/mde';
 import { ChatComponent } from './components/chat/chat/chat.component';
+import { ChatMessageComponent } from './components/chat/chat-message/chat-message.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ChatComponent } from './components/chat/chat/chat.component';
     StackComponent,
     ImportDeckModalComponent,
     CardFinderComponent,
-    ChatComponent
+    ChatComponent,
+    ChatMessageComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-<div class="h-100 d-flex align-items-end flex-column">
+<div class="h-100 d-flex align-items-end flex-column turnBorder" [ngClass]="{'turnBorder':isMyTurn()}">
     <div *ngIf="ownerType == 'Theirs'" class="w-100 d-flex justify-content-center" id="hand">
         <ng-template ngFor let-item [ngForOf]="owner?.hand?.cards" let-i="index">
             <app-single-card [scale]="0.75" [card]="item" [clickable]="false" [opponentsHand]="true"></app-single-card>

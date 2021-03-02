@@ -2,8 +2,9 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import * as Colyseus from "colyseus.js"; // not necessary if included via <script> tag.
 import { GameEventService } from 'src/app/services/game/game-event/game-event.service';
 import { DataChange } from 'colyseus.js';
-import { Player, Card, CardLocation, AttachCardEvent, ModifyCounterEvent, KEY_CODES, Stack, CardContainerManipulation } from 'src/app/models/game';
+import { Player, Card, CardLocation, KEY_CODES, Stack, CardContainerManipulation } from 'src/app/models/game';
 import { ClickService } from 'src/app/services/game/click/click.service';
+import { AttachCardEvent, ModifyCounterEvent } from 'src/app/models/events';
 
 @Component({
   selector: 'app-game',
@@ -18,7 +19,6 @@ export class GameComponent implements OnInit {
   me: Player;
   opponents: Player[] = [];
   stack: Stack;
-
 
   constructor(private gameEventService: GameEventService, public clickService: ClickService) { }
 
@@ -36,6 +36,7 @@ export class GameComponent implements OnInit {
     this.gameEventService.untapAllEvent.subscribe(this.untapAllEventFired);
     this.gameEventService.mulliganEvent.subscribe(this.mulliganEventFired);
     this.gameEventService.chatMessageEvent.subscribe(this.sendChatMessageEventFired);
+    this.gameEventService.endTurnEvent.subscribe(this.endTurnEventFired);
   }
 
 
@@ -223,6 +224,12 @@ export class GameComponent implements OnInit {
 
   playCard() {
     this.room.send("cardPlayed", { name: "Black" })
+  }
+
+  endTurnEventFired = ()=>{
+    if (this.room) {
+      this.room.send("endTurn");
+    }
   }
 
 }

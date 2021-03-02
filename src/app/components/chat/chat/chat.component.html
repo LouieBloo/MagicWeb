@@ -11,7 +11,7 @@
 
     <div *ngIf="toggled" class="flex-grow-1" id="messageWindow" #messageWindow>
         <ng-template ngFor let-item [ngForOf]="allMessages" let-i="index">
-            <p class="mb-0 ml-2"><span class="playerColor">{{item.playerName}}: </span>{{item.message}}</p>
+            <app-chat-message [message]="item"></app-chat-message>
         </ng-template>
     </div>
 

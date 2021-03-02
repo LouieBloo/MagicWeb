@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { Card, CardLocation, BattlefieldRowType, Player, AttachCardEvent, ModifyCounterEvent, Counter, CounterTypes, FindCardsEvent, CardContainerManipulation, DeckFromLocation } from 'src/app/models/game';
+import { Card, CardLocation, BattlefieldRowType, Player, Counter, CounterTypes, CardContainerManipulation, DeckFromLocation } from 'src/app/models/game';
+import { AttachCardEvent, ModifyCounterEvent, FindCardsEvent, ScaleChangedEvent } from 'src/app/models/events';
 
 @Injectable({
   providedIn: 'root'
@@ -20,11 +21,19 @@ export class GameEventService {
   modifyPlayerCounterEvent = new BehaviorSubject<ModifyCounterEvent>(null);
   untapAllEvent = new BehaviorSubject<any>(null);
   mulliganEvent = new BehaviorSubject<any>(null);
+  scaleEvent = new BehaviorSubject<ScaleChangedEvent>({
+    handScale:2.6,
+    landScale:1.35,
+    nonCreatureScale:1.5,
+    creatureScale:2
+  });
   public scryClickedEvent = new Subject();
   public findInDeckClickedEvent = new Subject();
   
   public chatMessageEvent = new Subject();
   public chatMessageReceivedEvent = new Subject();
+
+  public endTurnEvent = new Subject();
 
   isShowingScales = false;
   showingScales = new BehaviorSubject<boolean>(this.isShowingScales);
@@ -100,5 +109,13 @@ export class GameEventService {
 
   chatMessageReceived(event:any){
     this.chatMessageReceivedEvent.next(event);
+  }
+
+  scaleChanged(newScale:ScaleChangedEvent){
+    this.scaleEvent.next(newScale);
+  }
+
+  endTurn(){
+    this.endTurnEvent.next();
   }
 }

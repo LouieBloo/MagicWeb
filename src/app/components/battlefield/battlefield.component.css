@@ -16,3 +16,7 @@
 #hand{
     padding-right:189px;
 }
+
+.turnBorder{
+    border: 10px outset rgba(0, 255, 13, 0.596);
+}

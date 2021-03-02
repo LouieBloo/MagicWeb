@@ -5,6 +5,11 @@
     height:100vh;
 }
 
-#settingsMenu{
+.settingsMenu{
     max-width: 500px;
+}
+
+
+.smallFont{
+    font-size:0.85rem;
 }

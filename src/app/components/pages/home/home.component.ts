@@ -14,6 +14,8 @@ export class HomeComponent implements OnInit {
   client = new Colyseus.Client(environment.webSocketUrl);
   room: Colyseus.Room;
   name:string = "Lukey";
+  roomId:string;
+  error:string;
 
   @ViewChild('game') game: GameComponent;
 
@@ -23,8 +25,16 @@ export class HomeComponent implements OnInit {
   }
 
   joinRoom() {
-    if(!this.name){return;}
-    this.client.joinOrCreate("my_room", { name: this.name}).then(room => {
+    if(!this.name){
+      this.error = "You need a name!"
+      return;
+    }
+    if(!this.roomId){
+      this.error = "Invalid room Id"
+      return;
+    }
+    this.error = "";
+    this.client.joinOrCreate("my_room", { name: this.name,code:this.roomId}).then(room => {
       this.room = room;
       this.game.joinRoom(room);
     }).catch(e => {

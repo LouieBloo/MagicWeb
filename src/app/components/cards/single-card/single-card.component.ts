@@ -110,6 +110,9 @@ export class SingleCardComponent implements OnInit, Selectable {
       this.card.location == CardLocation.Battlefield ||
       this.card.location == CardLocation.Hand ||
       this.card.location == CardLocation.Inserting ||
+      this.card.location == CardLocation.Graveyard ||
+      this.card.location == CardLocation.Exile ||
+      this.card.location == CardLocation.CommandZone ||
       this.card.location == CardLocation.Deck ||
       this.card.location == CardLocation.Stack)
     ) { return false }

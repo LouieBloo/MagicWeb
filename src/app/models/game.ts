@@ -124,23 +124,9 @@ export interface Player {
     health?:Counter;
     poison?:Counter;
     commanderDamages?:any;
+    isCurrentTurn?:boolean;
 }
 
-export interface AttachCardEvent {
-    targetCard:Card;
-    sourceCard:Card;
-}
-export interface ModifyCounterEvent {
-    targetCard?:Card;
-    counterType:CounterTypes;
-    amount:number;
-    playerId?:string;
-}
-export interface FindCardsEvent{
-    cards?:Card[];
-    cardLocation?:CardLocation;
-    cardContainerManipulation?:CardContainerManipulation;
-}
 
 export interface Counter {
     type?: CounterTypes;

@@ -14,10 +14,10 @@
         <button mat-raised-button color="primary" class="p-0 counterButtons noBorderRadius" (click)="findInDeckClicked()">Find</button>
         <div class="d-flex ">
             <button mat-raised-button color="primary" class="p-0 counterButtons noBorderRadius" (click)="scryClicked($event)">Scry</button>
-            <p class="amountText mb-0">{{amountToPutCard}}</p>
-
-            <button class="invisButton smallButtons flex-grow-1 noBorderRadius" (click)="modifyAmount($event,1)" mat-flat-button>+</button>
-            <button class="invisButton smallButtons flex-grow-1 noBorderRadius" (click)="modifyAmount($event,-1)" mat-flat-button>-</button>
+            <!-- <p class="amountText mb-0">{{amountToPutCard}}</p> -->
+            <app-counter-modifier [text]="amountToPutCard + ''" [counterType]="'General'" [callback]="amountToPutCardModified" class="flex-grow-1"></app-counter-modifier>
+            <!-- <button class="invisButton smallButtons flex-grow-1 noBorderRadius" (click)="modifyAmount($event,1)" mat-flat-button>+</button>
+            <button class="invisButton smallButtons flex-grow-1 noBorderRadius" (click)="modifyAmount($event,-1)" mat-flat-button>-</button> -->
         </div>
 
         <button mat-raised-button color="accent" class="p-0 counterButtons noBorderRadius" (click)="importClicked()">Import</button>
@@ -25,10 +25,10 @@
     </div>
 
     <div *ngIf="isSelectable() && this.cardLocation=='Deck'" id="topBottomButtons" class="h-100 w-100 d-flex flex-column ">
-        <app-counter-modifier [text]="amountToPutCard + ' from'" [counterType]="'General'"
-        [callback]="amountToPutCardModified"></app-counter-modifier>
+        <app-counter-modifier [text]="amountToPutCard + ' from'" [counterType]="'General'" [callback]="amountToPutCardModified"></app-counter-modifier>
 
-        <button id="topButton" class="flex-grow-1 noBorderRadius topButtonFont p-0" (click)="topHalfClicked($event)"><span class="d-block topButtonInnerText">Top</span></button>
+        <button id="topButton" class="flex-grow-1 noBorderRadius topButtonFont p-0" (click)="topHalfClicked($event)"><span
+                class="d-block topButtonInnerText">Top</span></button>
 
         <button class="flex-grow-1 noBorderRadius topButtonFont p-0" (click)="bottomHalfClicked($event)"><span class="d-block topButtonInnerText">Bottom</span></button>
     </div>
