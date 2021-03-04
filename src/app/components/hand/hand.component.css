@@ -4,7 +4,10 @@ background-image: url("https://www.transparenttextures.com/patterns/brushed-alum
 /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
     /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
-    min-height: 245px;
+
+
+    min-height: 144px;
+    /* min-height: 245px; */
 
 }
 
@@ -27,4 +30,10 @@ background-image: url("https://www.transparenttextures.com/patterns/brushed-alum
 
 #buttonRow{
     
+}
+
+.smallMinWidth{
+    min-width: 45px;
+    padding-left:5px;
+    padding-right:5px;
 }

@@ -3,6 +3,7 @@ import { CardLocation, Card, CardContainerManipulation } from 'src/app/models/ga
 import { GameEventService } from 'src/app/services/game/game-event/game-event.service';
 import { ClickService } from 'src/app/services/game/click/click.service';
 import { Subscription } from 'rxjs';
+import { ScaleChangedEvent } from 'src/app/models/events';
 
 @Component({
   selector: 'app-hand',
@@ -20,6 +21,9 @@ export class HandComponent implements OnInit,OnDestroy {
 
   ngOnInit() {
     this.showScaleSubscription = this.gameEvents.showingScales.subscribe(this.showingScaleChanged);
+    this.gameEvents.scaleEvent.subscribe((newScales:ScaleChangedEvent)=>{
+      this.scale = newScales.handScale;
+    })
   }
 
   ngOnDestroy(): void {
@@ -78,5 +82,36 @@ export class HandComponent implements OnInit,OnDestroy {
 
   scry(){
     this.gameEvents.scryClickedEvent.next(1);
+  }
+
+  endTurn(){
+    this.gameEvents.endTurn();
+  }
+
+  tinyClicked(){
+    this.gameEvents.scaleChanged({
+      handScale:1.5,
+      landScale:1.35,
+      nonCreatureScale:1.35,
+      creatureScale:1.5
+    })
+  }
+
+  mediumClicked(){
+    this.gameEvents.scaleChanged({
+      handScale:2.6,
+      landScale:1.35,
+      nonCreatureScale:1.5,
+      creatureScale:2
+    })
+  }
+
+  largeClicked(){
+    this.gameEvents.scaleChanged({
+      handScale:3.1,
+      landScale:1.6,
+      nonCreatureScale:1.85,
+      creatureScale:2.1
+    })
   }
 }

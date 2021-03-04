@@ -1,4 +1,4 @@
-<div class="h-100 d-flex align-items-end flex-column">
+<div class="h-100 d-flex align-items-end flex-column turnBorder" [ngClass]="{'turnBorder':isMyTurn()}">
     <div *ngIf="ownerType == 'Theirs'" class="w-100 d-flex justify-content-center" id="hand">
         <ng-template ngFor let-item [ngForOf]="owner?.hand?.cards" let-i="index">
             <app-single-card [scale]="0.75" [card]="item" [clickable]="false" [opponentsHand]="true"></app-single-card>
@@ -14,7 +14,7 @@
         </div>
         <div class="d-flex flex-column sidePanelBackground" [ngClass]="{'flex-column-reverse': !isMine()}" id="sidePanel">
             <div class="d-flex flex-column">
-                <h4 class="text-center mb-0">{{owner?.name}}</h4>
+                <h4 class="text-center mb-0" id="ownerName">{{owner?.name | titlecase }}</h4>
             </div>
             <div class="d-flex flex-column">
 

@@ -13,18 +13,35 @@ export class HomeComponent implements OnInit {
   //client = new Colyseus.Client('ws://localhost:2567');
   client = new Colyseus.Client(environment.webSocketUrl);
   room: Colyseus.Room;
-  name:string = "Lukey";
+  name:string;
+  roomId:string;
+  error:string;
 
   @ViewChild('game') game: GameComponent;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.name = localStorage.getItem('savedPlayerName');
+    this.roomId = localStorage.getItem('savedRoomId');
   }
 
   joinRoom() {
-    if(!this.name){return;}
-    this.client.joinOrCreate("my_room", { name: this.name}).then(room => {
+    if(!this.name){
+      this.error = "You need a name!"
+      return;
+    }
+    if(!this.roomId){
+      this.error = "Invalid room Id"
+      return;
+    }
+    
+    this.error = "";
+
+    localStorage.setItem('savedPlayerName', this.name);
+    localStorage.setItem('savedRoomId', this.roomId);
+    
+    this.client.joinOrCreate("my_room", { name: this.name,code:this.roomId}).then(room => {
       this.room = room;
       this.game.joinRoom(room);
     }).catch(e => {
@@ -35,6 +52,12 @@ export class HomeComponent implements OnInit {
   leaveRoom() {
     this.room.leave();
     this.room = null;
+  }
+
+  keyDownFunction(event) {
+    if (event.keyCode === 13) {
+      this.joinRoom();
+    }
   }
 
 }

@@ -16,3 +16,13 @@
 #hand{
     padding-right:189px;
 }
+
+.turnBorder{
+    border: 8px outset rgba(0, 255, 13, 0.596);
+}
+
+#ownerName{
+    font-family: 'MedievalSharp', cursive;
+    font-size:1.8rem;
+    background-color: white;
+}

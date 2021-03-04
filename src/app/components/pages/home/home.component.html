@@ -1,15 +1,47 @@
 <div id="joinMenu" *ngIf="!room">
     <div class="d-flex h-100 align-items-center justify-content-center flex-column">
 
-        <div id="settingsMenu" class="d-flex flex-column ">
-            <mat-form-field>
-                <mat-label>Player Name</mat-label>
-                <input #searchBox matInput placeholder="" [(ngModel)]="name">
-            </mat-form-field>
-            <button mat-raised-button color="primary" (click)="joinRoom()">Join or Create Room</button>
-            <!-- <button mat-raised-button color="primary" (click)="leaveRoom()">Leave Room</button> -->
+        <div class="flex-grow-1  align-items-center justify-content-end flex-column d-flex">
+            <div class="mb-4">
+                <h1 id="title">MTG on the Web</h1>
+            </div>
+
+            <div class="settingsMenu mb-4">
+                <p>MTG on the Web was built to provide an easy, scalable interface to play tabletop Magic the
+                    Gathering.
+                    There is no rules engine so all gameplay is
+                    conducted by the players. Check out <a href="https://magic.wizards.com/en/mtgarena">Magic Arena</a>
+                    for
+                    the defacto standard of
+                    online multiplayer Magic.</p>
+
+                <!-- <p class="smallFont">LSquared ENT holds NO copyrights for Magic the Gathering. All rights belong to Wizards of the Coast</p> -->
+            </div>
+
+            <div class="d-flex flex-column settingsMenu mb-4 w-100">
+                <mat-form-field>
+                    <mat-label>Player Name</mat-label>
+                    <input #searchBox matInput placeholder="" [(ngModel)]="name" (keydown)="keyDownFunction($event)">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Room Id</mat-label>
+                    <input #searchBox matInput placeholder="" [(ngModel)]="roomId" (keydown)="keyDownFunction($event)">
+                </mat-form-field>
+                <h6 class="text-danger">{{error}}</h6>
+                <button mat-raised-button color="primary" (click)="joinRoom()">Join or Create Room</button>
+                <!-- <button mat-raised-button color="primary" (click)="leaveRoom()">Leave Room</button> -->
+            </div>
         </div>
 
+
+        <div class="mt-4 d-flex flex-column justify-content-end mb-4 flex-grow-1">
+            <h6 class="text-center">Powered by</h6>
+            <div>
+                <a mat-button href="https://angular.io/" target="_blank">Angular</a>
+                <a mat-button href="https://www.colyseus.io/" target="_blank">Colyseus</a>
+                <a mat-button href="https://scryfall.com/docs/api" target="_blank">Scryfall</a>
+            </div>
+        </div>
 
     </div>
 

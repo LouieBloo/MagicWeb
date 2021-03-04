@@ -66,7 +66,7 @@ export class CardContainerComponent implements OnInit,OnDestroy, Selectable {
         } else {
           this.clickService.objectSelected(this);
         }
-      } else if( this.ownerType == BattlefieldOwnerType.Mine) {
+      } else {
         this.find();
       }
     }
@@ -102,6 +102,7 @@ export class CardContainerComponent implements OnInit,OnDestroy, Selectable {
 
   find(){
     if(!this.cards || this.cards.length < 1){return;}
+    if(this.ownerType == BattlefieldOwnerType.Theirs && this.cardLocation == CardLocation.Deck){return;}
     this.clickService.findCards(this.cards, this.cardLocation,CardContainerManipulation.Find);
   }
 

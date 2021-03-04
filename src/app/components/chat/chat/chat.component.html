@@ -11,14 +11,14 @@
 
     <div *ngIf="toggled" class="flex-grow-1" id="messageWindow" #messageWindow>
         <ng-template ngFor let-item [ngForOf]="allMessages" let-i="index">
-            <p class="mb-0 ml-2"><span class="playerColor">{{item.playerName}}: </span>{{item.message}}</p>
+            <app-chat-message [message]="item"></app-chat-message>
         </ng-template>
     </div>
 
     <div *ngIf="toggled">
         <mat-form-field appearance="fill" id="textArea">
             <mat-label>Chat</mat-label>
-            <textarea matInput [(ngModel)]="message" rows="1" (focus)="chatBoxFocused()" (focusout)="chatBoxDeFocused()"
+            <textarea matInput placeholder="/help for options" [(ngModel)]="message" rows="1" (focus)="chatBoxFocused()" (focusout)="chatBoxDeFocused()"
                 (keydown)="keyDownFunction($event)"></textarea>
         </mat-form-field>
         <button (click)="sendMessage()" mat-button>Send</button>

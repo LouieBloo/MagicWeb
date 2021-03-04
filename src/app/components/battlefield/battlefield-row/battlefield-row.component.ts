@@ -4,26 +4,27 @@ import { ClickService } from 'src/app/services/game/click/click.service';
 import { Selectable } from 'src/app/interfaces/gameInterfaces';
 import { Subscription } from 'rxjs';
 import { GameEventService } from 'src/app/services/game/game-event/game-event.service';
+import { ScaleChangedEvent } from 'src/app/models/events';
 
 @Component({
   selector: 'app-battlefield-row',
   templateUrl: './battlefield-row.component.html',
   styleUrls: ['./battlefield-row.component.css']
 })
-export class BattlefieldRowComponent implements OnInit,OnDestroy,Selectable {
-  
+export class BattlefieldRowComponent implements OnInit, OnDestroy, Selectable {
+
 
   @Input() cards: any = []
-  @Input() owner:Player;
+  @Input() owner: Player;
 
   @Input() rowType: BattlefieldRowType;
   @Input() scale: number = 1;
   @Input() ownerType: BattlefieldOwnerType;
-  
-  selectable:boolean = false;
+
+  selectable: boolean = false;
 
   showScaleSubscription: Subscription;
-  showingScale:boolean = false;
+  showingScale: boolean = false;
 
   private defaultScales: any = {
     creature: 2,
@@ -31,22 +32,36 @@ export class BattlefieldRowComponent implements OnInit,OnDestroy,Selectable {
     land: 1.35
   }
 
-  constructor(private clickService:ClickService,private gameEventService:GameEventService) { }
+  constructor(private clickService: ClickService, private gameEventService: GameEventService) { }
 
-  
+
 
   ngOnInit(): void {
     this.setDefaultScale();
     this.showScaleSubscription = this.gameEventService.showingScales.subscribe(this.showingScaleChanged);
+
+    this.gameEventService.scaleEvent.subscribe((newScales: ScaleChangedEvent) => {
+      switch (this.rowType) {
+        case BattlefieldRowType.Creature:
+          this.scale = newScales.creatureScale;
+          return;
+        case BattlefieldRowType.Land:
+          this.scale = newScales.landScale;
+          return;
+        case BattlefieldRowType.Noncreature:
+          this.scale = newScales.nonCreatureScale;
+          return;
+      }
+    })
   }
 
   ngOnDestroy(): void {
-    if(this.showScaleSubscription){
+    if (this.showScaleSubscription) {
       this.showScaleSubscription.unsubscribe();
     }
   }
 
-  showingScaleChanged= (isShowingScale:boolean)=>{
+  showingScaleChanged = (isShowingScale: boolean) => {
     this.showingScale = isShowingScale;
   }
 
@@ -56,29 +71,29 @@ export class BattlefieldRowComponent implements OnInit,OnDestroy,Selectable {
   deselect() {
   }
 
-  getType():SelectableObjectType{
+  getType(): SelectableObjectType {
     return SelectableObjectType.BattlefieldRow;
   }
 
-  getData(){
+  getData() {
     return this.rowType;
   }
 
-  getCard(){
+  getCard() {
     return null;
   }
 
-  isSelectable(){
+  isSelectable() {
     return this.clickService.isSelectingTargetObject();
   }
 
-  areCardsClickable(){
+  areCardsClickable() {
     return this.ownerType && this.ownerType == BattlefieldOwnerType.Mine;
   }
 
-  rowClicked(){
-    if(this.isSelectable()){
-      this.clickService.battlefieldRowClicked(this.rowType,this.owner);
+  rowClicked() {
+    if (this.isSelectable()) {
+      this.clickService.battlefieldRowClicked(this.rowType, this.owner);
     }
   }
 

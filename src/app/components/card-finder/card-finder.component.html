@@ -43,7 +43,7 @@
         </div>
 
 
-        <div class="row mb-2">
+        <div class="row mb-2" *ngIf="cards && cards.length > 0">
             <div class="col d-flex justify-content-center">
                 <button mat-raised-button (click)="done()">Done</button>
             </div>

@@ -53,6 +53,10 @@ export class BattlefieldComponent implements OnInit {
     return this.ownerType == BattlefieldOwnerType.Mine;
   }
 
+  isMyTurn(){
+    return this.owner && this.owner.isCurrentTurn;
+  }
+
   getOuterStyles() {
     return {
       width: this.cardRealDimensions.width * 1.5 + "px",
