@@ -3,7 +3,7 @@
 
         <div class="flex-grow-1  align-items-center justify-content-end flex-column d-flex">
             <div class="mb-4">
-                <h1>MTG on the Web</h1>
+                <h1 id="title">MTG on the Web</h1>
             </div>
 
             <div class="settingsMenu mb-4">
@@ -21,11 +21,11 @@
             <div class="d-flex flex-column settingsMenu mb-4 w-100">
                 <mat-form-field>
                     <mat-label>Player Name</mat-label>
-                    <input #searchBox matInput placeholder="" [(ngModel)]="name">
+                    <input #searchBox matInput placeholder="" [(ngModel)]="name" (keydown)="keyDownFunction($event)">
                 </mat-form-field>
                 <mat-form-field>
                     <mat-label>Room Id</mat-label>
-                    <input #searchBox matInput placeholder="" [(ngModel)]="roomId">
+                    <input #searchBox matInput placeholder="" [(ngModel)]="roomId" (keydown)="keyDownFunction($event)">
                 </mat-form-field>
                 <h6 class="text-danger">{{error}}</h6>
                 <button mat-raised-button color="primary" (click)="joinRoom()">Join or Create Room</button>

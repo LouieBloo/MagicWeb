@@ -13,3 +13,7 @@
 .smallFont{
     font-size:0.85rem;
 }
+
+#title{
+    font-family: 'MedievalSharp', cursive;
+}

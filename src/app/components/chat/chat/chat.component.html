@@ -18,7 +18,7 @@
     <div *ngIf="toggled">
         <mat-form-field appearance="fill" id="textArea">
             <mat-label>Chat</mat-label>
-            <textarea matInput [(ngModel)]="message" rows="1" (focus)="chatBoxFocused()" (focusout)="chatBoxDeFocused()"
+            <textarea matInput placeholder="/help for options" [(ngModel)]="message" rows="1" (focus)="chatBoxFocused()" (focusout)="chatBoxDeFocused()"
                 (keydown)="keyDownFunction($event)"></textarea>
         </mat-form-field>
         <button (click)="sendMessage()" mat-button>Send</button>

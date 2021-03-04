@@ -45,6 +45,7 @@ export enum KEY_CODES {
     DOWN_ARROW = 40,
     RIGHT_ARROW = 39,
     LEFT_ARROW = 37,
+    E=69,
     D=68,
     I=73,
     U=85,

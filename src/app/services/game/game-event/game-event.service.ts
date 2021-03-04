@@ -33,6 +33,7 @@ export class GameEventService {
   public chatMessageEvent = new Subject();
   public chatMessageReceivedEvent = new Subject();
 
+  public startTurnEvent = new Subject();
   public endTurnEvent = new Subject();
 
   isShowingScales = false;
@@ -94,8 +95,7 @@ export class GameEventService {
   }
 
   startTurn(){
-    this.untapAll();
-    this.drawCard();
+    this.startTurnEvent.next();
   }
 
   toggleShowingScales(){

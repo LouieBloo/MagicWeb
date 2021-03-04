@@ -37,6 +37,7 @@ export class GameComponent implements OnInit {
     this.gameEventService.mulliganEvent.subscribe(this.mulliganEventFired);
     this.gameEventService.chatMessageEvent.subscribe(this.sendChatMessageEventFired);
     this.gameEventService.endTurnEvent.subscribe(this.endTurnEventFired);
+    this.gameEventService.startTurnEvent.subscribe(this.startTurnEventFired);
   }
 
 
@@ -110,6 +111,11 @@ export class GameComponent implements OnInit {
 
     this.room.onLeave((code) => {
       console.log("left " + code, room.name);
+      // this.room = null;
+      // this.me = null;
+      // this.opponents = null;
+      // this.stack = null;
+      location.reload();
     });
 
   }
@@ -135,6 +141,8 @@ export class GameComponent implements OnInit {
       this.gameEventService.findInDeckClickedEvent.next(1);
     }else if(event.keyCode == KEY_CODES.Z){
       this.gameEventService.toggleShowingScales();
+    }else if(event.keyCode == KEY_CODES.E){
+      this.gameEventService.endTurn();
     }
   }
 
@@ -166,6 +174,12 @@ export class GameComponent implements OnInit {
   cardCopiedEventFired = (card: Card) => {
     if (this.room) {
       this.room.send("cardCopied", { card: card })
+    }
+  }
+
+  startTurnEventFired = ()=>{
+    if (this.room) {
+      this.room.send("startTurn")
     }
   }
 
