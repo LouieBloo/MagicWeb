@@ -76,3 +76,52 @@
     background-color:rgba(0, 0, 0, 0.397);
 }
 
+
+#tooltip{
+    position: absolute;
+    left:-137px;
+    top:15%;
+    max-width:130px;
+    background-color:black;
+    color:white;
+}
+#tooltip button{
+    background-color:none;
+    color:white;
+    width:20px;
+    height:20px;
+}
+.tip {
+    background: #ffffff;
+    padding: 20px;
+    border: 1px solid #B4B4B5;
+    width: 200px;
+    border-radius: 5px;
+    position: relative;
+    color: #555555;
+    text-align: center;
+    box-shadow: 0 0 3px #B4B4B5;
+  }
+  .tip:before, .tip:after {
+    position: absolute;
+    content: "";
+    display: block;
+  }
+  .tip:before {
+    right: -22px;
+    z-index: 2;
+    top: 35%;
+    border-bottom: 11px solid transparent;
+    border-top: 11px solid transparent;
+    border-left: 11px solid white;
+    border-right: 11px solid transparent;
+  }
+  .tip:after {
+    right: -23px;
+    z-index: 1;
+    top: 35%;
+    border-bottom: 11px solid transparent;
+    border-top: 11px solid transparent;
+    border-left: 11px solid #B4B4B5;
+    border-right: 11px solid transparent;
+  }

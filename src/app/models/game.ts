@@ -48,6 +48,7 @@ export enum KEY_CODES {
     E=69,
     D=68,
     I=73,
+    R=82,
     U=85,
     T=84,
     M=77,

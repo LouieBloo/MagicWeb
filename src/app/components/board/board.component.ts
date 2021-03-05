@@ -57,6 +57,16 @@ export class BoardComponent implements OnInit {
     }
   }
 
+  getChatPosition(){
+    let height = 245;
+    if(this.handRow){
+      height = this.handRow.nativeElement.offsetHeight;
+    }
+    return{
+      bottom: height+"px"
+    }
+  }
+
   getFindingRowMargin(){
 
   }

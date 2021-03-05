@@ -22,6 +22,13 @@
                     [cardContainerManipulation]="findCardsEvent?.cardContainerManipulation"></app-card-finder>
             </div>
         </div>
+
+
+        
+        <div id="chat" [ngStyle]="getChatPosition()">
+            <app-chat></app-chat>
+        </div>
+        
         
         <div #handRow id="handRow">
             <app-hand [cards]="me?.hand?.cards"></app-hand>

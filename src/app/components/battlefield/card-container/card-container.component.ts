@@ -33,6 +33,8 @@ export class CardContainerComponent implements OnInit,OnDestroy, Selectable {
     height: 88
   }
 
+  showingTooltip:boolean = true;
+
   constructor(private clickService: ClickService, private gameEventService: GameEventService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -70,6 +72,8 @@ export class CardContainerComponent implements OnInit,OnDestroy, Selectable {
         this.find();
       }
     }
+
+    this.showingTooltip = false;
   }
 
   getScaleCSS() {
@@ -176,5 +180,10 @@ export class CardContainerComponent implements OnInit,OnDestroy, Selectable {
 
   shuffleClicked(){
     this.gameEventService.shuffleDeck();
+  }
+
+  hideTooltip(event:any){
+    event.stopPropagation();
+    this.showingTooltip = false;
   }
 }
