@@ -135,7 +135,7 @@ export class GameComponent implements OnInit {
       this.gameEventService.startTurn();
     }else if(event.keyCode == KEY_CODES.M){
       this.gameEventService.mulligan();
-    }else if(event.keyCode == KEY_CODES.S){
+    }else if(event.keyCode == KEY_CODES.R){
       this.gameEventService.scryClickedEvent.next(1);
     }else if(event.keyCode == KEY_CODES.F){
       this.gameEventService.findInDeckClickedEvent.next(1);
@@ -143,6 +143,8 @@ export class GameComponent implements OnInit {
       this.gameEventService.toggleShowingScales();
     }else if(event.keyCode == KEY_CODES.E){
       this.gameEventService.endTurn();
+    }else if(event.keyCode == KEY_CODES.S){
+      this.gameEventService.shuffleDeck();
     }
   }
 

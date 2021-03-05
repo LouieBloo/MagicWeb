@@ -88,6 +88,10 @@ export class HandComponent implements OnInit,OnDestroy {
     this.gameEvents.endTurn();
   }
 
+  shuffle(){
+    this.gameEvents.shuffleDeck();
+  }
+
   tinyClicked(){
     this.gameEvents.scaleChanged({
       handScale:1.5,

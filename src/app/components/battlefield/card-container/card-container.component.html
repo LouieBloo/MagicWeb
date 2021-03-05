@@ -1,4 +1,4 @@
-<div class="pointer" id="main" (click)="clicked($event)" [ngStyle]="getScaleCSS()" [ngClass]="{'selectable': isSelectable()}">
+<div class="pointer" id="main" (click)="clicked($event)" [ngStyle]="getScaleCSS()" [ngClass]="{'selectable': isSelectable()}" >
 
     <div class="" *ngIf="cards && cards.length > 0">
         <app-single-card [scale]="scale" [card]="cards[cards.length-1]" [clickable]="false"></app-single-card>
@@ -36,4 +36,8 @@
         <button class="flex-grow-1 noBorderRadius topButtonFont p-0" (click)="bottomHalfClicked($event)"><span class="d-block topButtonInnerText">Bottom</span></button>
     </div>
 
+    <div id="tooltip" *ngIf="this.cardLocation=='Deck' && showingTooltip && ownerType == 'Mine'" (click)="hideTooltip($event)" class="d-flex flex-row tip">
+        <!-- <button>x</button> -->
+        <p class="mb-0">Click to import deck</p>
+    </div>
 </div>

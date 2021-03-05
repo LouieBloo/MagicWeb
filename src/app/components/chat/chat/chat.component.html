@@ -1,5 +1,5 @@
-<div id="main" class="d-flex flex-column">
-    <div class="">
+<div id="main" class="d-flex flex-column ">
+    <div>
         <div *ngIf="toggled" class="d-flex justify-content-end">
             <button (click)="toggleSize()" mat-raised-button color="primary" class="noBorderRadius p-0" id="minus">-</button>
         </div>
@@ -9,7 +9,7 @@
 
     </div>
 
-    <div *ngIf="toggled" class="flex-grow-1" id="messageWindow" #messageWindow>
+    <div *ngIf="toggled" class="flex-grow-1 " id="messageWindow" #messageWindow>
         <ng-template ngFor let-item [ngForOf]="allMessages" let-i="index">
             <app-chat-message [message]="item"></app-chat-message>
         </ng-template>
