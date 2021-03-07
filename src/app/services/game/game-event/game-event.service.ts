@@ -43,7 +43,7 @@ export class GameEventService {
 
 
   drawCard() {
-    this.drawCardEvent.next(null);
+    this.drawCardEvent.next(1);
   }
 
   moveCard(card: Card, newLocation: CardLocation, battlefieldRowType: BattlefieldRowType = null, player: Player,deckFromLocation:DeckFromLocation = null) {

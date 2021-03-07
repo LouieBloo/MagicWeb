@@ -39,7 +39,7 @@ export class CardContainerComponent implements OnInit,OnDestroy, Selectable {
 
   ngOnInit(): void {
     if(this.ownerType == BattlefieldOwnerType.Mine && this.cardLocation == CardLocation.Deck){
-      this.scryEventSubscription = this.gameEventService.scryClickedEvent.subscribe(()=>{this.scryClicked(null)})
+      this.scryEventSubscription = this.gameEventService.scryClickedEvent.subscribe((amount)=>{this.scryClicked(null,amount)})
       this.findInDeckEventSubscription = this.gameEventService.findInDeckClickedEvent.subscribe(()=>{this.findInDeckClicked()})
     }
   }
@@ -127,13 +127,15 @@ export class CardContainerComponent implements OnInit,OnDestroy, Selectable {
   //   this.clickService.findCards(this.cards, this.cardLocation,CardContainerManipulation.Insert);
   // }
 
-  scryClicked = (event)=>{
+  scryClicked = (event,amount = null)=>{
     if(event){event.stopPropagation();}
     
     if(!this.cards || this.cards.length < 1){return;}
     let scryCards:Card[] = [];
+
+    let amountToScry = amount || this.amountToPutCard;
     
-    for(let x = 0;x<this.amountToPutCard;x++){
+    for(let x = 0;x<amountToScry;x++){
       if(x < this.cards.length){
         scryCards.push(this.cards[x]);
       }

@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, OnDestroy, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
-import { Card, CardLocation, CardContainerManipulation } from 'src/app/models/game';
+import { Component, OnInit, Input, OnDestroy, SimpleChanges, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Card, CardLocation, CardContainerManipulation, KEY_CODES } from 'src/app/models/game';
 import { GameEventService } from 'src/app/services/game/game-event/game-event.service';
 import { ClickService } from 'src/app/services/game/click/click.service';
 import { Subscription } from 'rxjs';
@@ -54,6 +54,20 @@ export class CardFinderComponent implements OnInit, OnDestroy {
 
     if (this.moveCardSubscription) {
       this.moveCardSubscription.unsubscribe();
+    }
+  }
+
+  @HostListener('window:keyup', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+
+    if(this.cardContainerManipulation == CardContainerManipulation.Find || this.cardContainerManipulation == CardContainerManipulation.RevealFind){
+      if (event.keyCode == KEY_CODES.F) {
+        this.done();
+      }
+    }else if(this.cardContainerManipulation == CardContainerManipulation.Scry){
+      if (event.keyCode == KEY_CODES.R) {
+        this.done();
+      }
     }
   }
 

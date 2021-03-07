@@ -34,8 +34,8 @@ export class ImportDeckModalComponent implements OnInit, OnDestroy {
   validate = async () => {
     this.loading = true;
     let response = await this.authService.request('post', '/validate', {
-      deck: this.cardList,
-      commander: this.commander
+      deck: this.cardList
+      // commander: this.commander
     }).subscribe(data => {
       this.loading = false;
       if(data && data.errors && data.errors.length > 0){
