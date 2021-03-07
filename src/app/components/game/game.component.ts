@@ -20,6 +20,8 @@ export class GameComponent implements OnInit {
   opponents: Player[] = [];
   stack: Stack;
 
+  previousNumberPress:number = 0;
+
   constructor(private gameEventService: GameEventService, public clickService: ClickService) { }
 
   ngOnInit(): void {
@@ -126,7 +128,7 @@ export class GameComponent implements OnInit {
     if (!this.clickService.isRespondingToKeyboardPresses()) { return; }
     console.log(event.keyCode);
     if (event.keyCode == KEY_CODES.D) {
-      this.cardDrawEventFired();
+      this.cardDrawEventFired(this.previousNumberPress > 0 ? this.previousNumberPress : 1);
     }else if(event.keyCode == KEY_CODES.I){
       this.gameEventService.findCards(null,CardLocation.Inserting,CardContainerManipulation.Insert)
     }else if(event.keyCode == KEY_CODES.U){
@@ -136,7 +138,7 @@ export class GameComponent implements OnInit {
     }else if(event.keyCode == KEY_CODES.M){
       this.gameEventService.mulligan();
     }else if(event.keyCode == KEY_CODES.R){
-      this.gameEventService.scryClickedEvent.next(1);
+      this.gameEventService.scryClickedEvent.next(this.previousNumberPress > 0 ? this.previousNumberPress : 1);
     }else if(event.keyCode == KEY_CODES.F){
       this.gameEventService.findInDeckClickedEvent.next(1);
     }else if(event.keyCode == KEY_CODES.Z){
@@ -146,11 +148,37 @@ export class GameComponent implements OnInit {
     }else if(event.keyCode == KEY_CODES.S){
       this.gameEventService.shuffleDeck();
     }
+
+    this.setPreviousNumberPress(event);
   }
 
-  cardDrawEventFired = () => {
+  setPreviousNumberPress(event:KeyboardEvent){
+    if (event.keyCode == 49 || event.keyCode == 97) {
+      this.previousNumberPress = 1;
+    }else if(event.keyCode == 50 || event.keyCode == 98){
+      this.previousNumberPress = 2;
+    }else if(event.keyCode == 51 || event.keyCode == 99){
+      this.previousNumberPress = 3;
+    }else if(event.keyCode == 52 || event.keyCode == 100){
+      this.previousNumberPress = 4;
+    }else if(event.keyCode == 53 || event.keyCode == 101){
+      this.previousNumberPress = 5;
+    }else if(event.keyCode == 54 || event.keyCode == 102){
+      this.previousNumberPress = 6;
+    }else if(event.keyCode == 55 || event.keyCode == 103){
+      this.previousNumberPress = 7;
+    }else if(event.keyCode == 56 || event.keyCode == 104){
+      this.previousNumberPress = 8;
+    }else if(event.keyCode == 57 || event.keyCode == 105){
+      this.previousNumberPress = 9;
+    }else{
+      this.previousNumberPress = 0;
+    }
+  }
+
+  cardDrawEventFired = (amount = 1) => {
     if (this.room) {
-      this.room.send("cardDraw", { amount: 1 })
+      this.room.send("cardDraw", { amount: amount })
     }
   }
 

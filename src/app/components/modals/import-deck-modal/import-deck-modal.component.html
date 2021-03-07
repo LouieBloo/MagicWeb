@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Import Deck</h1>
 <div mat-dialog-content>
-    <div class="row">
+    <!-- <div class="row">
         <div class="col">
             <h6>Commander (optional):</h6>
             <mat-form-field appearance="fill" id="textArea">
@@ -8,10 +8,10 @@
                 <textarea matInput [(ngModel)]="commander" rows="2" [disabled]="loading"></textarea>
             </mat-form-field>
         </div>
-    </div>
+    </div> -->
     <div class="row">
         <div class="col">
-                <h6>Deck:</h6>
+            <h6 id="hint">Put a * next to your comander(s)</h6>
             <mat-form-field appearance="fill" id="textArea">
                 <mat-label>1 Card Per Line Ex: 3 island</mat-label>
                 <textarea matInput [(ngModel)]="cardList" rows="12" [disabled]="loading"></textarea>
