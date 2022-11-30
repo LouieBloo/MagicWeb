@@ -4,8 +4,10 @@
 
 export const environment = {
   production: false,
-  apiUrl:'http://localhost:2567',
-  webSocketUrl:"ws://localhost:2567"
+  // apiUrl:'http://localhost:2567',
+  // webSocketUrl:"ws://localhost:2567"
+  apiUrl:'https://lukeweb.loca.lt',
+  webSocketUrl:"ws://lukeweb.loca.lt"
 };
 
 /*
